@@ -1,4 +1,4 @@
-Nibiru Mobile is a framework for developing portable mobile applications created at Oxen.
+Nibiru Mobile is a framework for developing portable mobile applications. It was originally created at Oxen and is currently developed and improved by AAJ Technologies.
 
 You can use it in order to create portable HTML-based (GWT) application and/or native Android/iOS applications reusing most of the code.
 
