@@ -7,7 +7,7 @@ project.ext {
 
 allprojects {
 	version = '0.3-SNAPSHOT'
-	group = 'ar.com.oxen.nibiru.mobile'
+	group = 'com.aajtech.nibiru'
 
 	repositories {
 		mavenLocal()
@@ -23,6 +23,24 @@ subprojects {
 	apply plugin: 'java'
 	apply plugin: 'eclipse'
 	apply plugin: 'maven'
+	apply plugin: 'maven-publish'
+	
+	publishing {
+	    publications {
+	        mavenJava(MavenPublication) {
+	            from components.java
+	        }
+	    }
+	    repositories {
+        	maven {
+				credentials {
+					username = sonatypeUser
+					password = sonatypePassword
+				}
+	            url "https://oss.sonatype.org/content/repositories/snapshots"
+    	    }
+    	}
+	}
 
-	sourceCompatibility = 1.6
+	sourceCompatibility = 1.8
 }
