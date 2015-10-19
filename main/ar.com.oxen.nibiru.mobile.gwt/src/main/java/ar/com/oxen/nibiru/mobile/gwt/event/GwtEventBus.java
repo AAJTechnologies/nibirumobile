@@ -6,15 +6,15 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import ar.com.oxen.nibiru.mobile.core.api.event.Event;
-import ar.com.oxen.nibiru.mobile.core.api.event.EventBus;
-import ar.com.oxen.nibiru.mobile.core.api.event.EventHandler;
-import ar.com.oxen.nibiru.mobile.core.api.handler.HandlerRegistration;
-import ar.com.oxen.nibiru.mobile.gwt.handler.HandlerRegistrationAdapter;
-
+import com.aajtech.model.core.api.Registration;
+import com.aajtech.ui.gwt.widget.HandlerRegistrationAdapter;
 import com.google.common.collect.Maps;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
+
+import ar.com.oxen.nibiru.mobile.core.api.event.Event;
+import ar.com.oxen.nibiru.mobile.core.api.event.EventBus;
+import ar.com.oxen.nibiru.mobile.core.api.event.EventHandler;
 
 public class GwtEventBus implements EventBus {
 	private final com.google.web.bindery.event.shared.EventBus eventBus;
@@ -39,7 +39,7 @@ public class GwtEventBus implements EventBus {
 	}
 
 	@Override
-	public HandlerRegistration addHandler(String eventId,
+	public Registration addHandler(String eventId,
 			final EventHandler handler) {
 		checkNotNull(eventId);
 		checkNotNull(handler);
@@ -53,7 +53,7 @@ public class GwtEventBus implements EventBus {
 	}
 
 	@Override
-	public HandlerRegistration addHandler(Enum<?> eventId, EventHandler handler) {
+	public Registration addHandler(Enum<?> eventId, EventHandler handler) {
 		checkNotNull(eventId);
 		checkNotNull(handler);
 		return addHandler(eventId.toString(), handler);

@@ -1,6 +1,6 @@
 package ar.com.oxen.nibiru.mobile.core.api.event;
 
-import ar.com.oxen.nibiru.mobile.core.api.handler.HandlerRegistration;
+import com.aajtech.model.core.api.Registration;
 
 /**
  * An event bus, for implementing a publish-subscribe model.
@@ -34,7 +34,7 @@ public interface EventBus {
 	 *            The handler
 	 * @return A registration to the event
 	 */
-	HandlerRegistration addHandler(String eventId, EventHandler handler);
+	Registration addHandler(String eventId, EventHandler handler);
 
 	/**
 	 * Adds a handler for listening on an specific event.
@@ -45,5 +45,5 @@ public interface EventBus {
 	 *            The handler
 	 * @return A registration to the event
 	 */
-	HandlerRegistration addHandler(Enum<?> eventId, EventHandler handler);
+	Registration addHandler(Enum<?> eventId, EventHandler handler);
 }
