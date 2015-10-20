@@ -4,6 +4,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import javax.inject.Inject;
 
+import com.aajtech.model.core.api.Registration;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -11,14 +13,13 @@ import android.content.IntentFilter;
 import ar.com.oxen.nibiru.mobile.core.api.event.Event;
 import ar.com.oxen.nibiru.mobile.core.api.event.EventBus;
 import ar.com.oxen.nibiru.mobile.core.api.event.EventHandler;
-import ar.com.oxen.nibiru.mobile.core.api.handler.HandlerRegistration;
 
-public class BroadcasEventBus implements EventBus {
+public class BroadcastEventBus implements EventBus {
 	private static final String EVENT_PREFIX = "ar.com.oxen.nibiru.mobile.android.event.";
 	private final Context context;
 
 	@Inject
-	public BroadcasEventBus(Context context) {
+	public BroadcastEventBus(Context context) {
 		this.context = checkNotNull(context);
 	}
 
@@ -35,7 +36,7 @@ public class BroadcasEventBus implements EventBus {
 	}
 
 	@Override
-	public HandlerRegistration addHandler(String event,
+	public Registration addHandler(String event,
 			final EventHandler handler) {
 		checkNotNull(event);
 		checkNotNull(handler);
@@ -50,16 +51,16 @@ public class BroadcasEventBus implements EventBus {
 
 		context.registerReceiver(receiver, filter);
 
-		return new HandlerRegistration() {
+		return new Registration() {
 			@Override
-			public void removeHandler() {
+			public void remove() {
 				context.unregisterReceiver(receiver);
 			}
 		};
 	}
 
 	@Override
-	public HandlerRegistration addHandler(Enum<?> eventId, EventHandler handler) {
+	public Registration addHandler(Enum<?> eventId, EventHandler handler) {
 		checkNotNull(eventId);
 		checkNotNull(handler);
 		return addHandler(eventId.toString(), handler);

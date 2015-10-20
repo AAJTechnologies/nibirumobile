@@ -7,10 +7,10 @@ import java.util.Map;
 import javax.inject.Inject;
 
 import com.aajtech.model.core.api.Registration;
-import com.aajtech.ui.gwt.widget.HandlerRegistrationAdapter;
 import com.google.common.collect.Maps;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.web.bindery.event.shared.HandlerRegistration;
 
 import ar.com.oxen.nibiru.mobile.core.api.event.Event;
 import ar.com.oxen.nibiru.mobile.core.api.event.EventBus;
@@ -39,17 +39,21 @@ public class GwtEventBus implements EventBus {
 	}
 
 	@Override
-	public Registration addHandler(String eventId,
-			final EventHandler handler) {
+	public Registration addHandler(String eventId, final EventHandler handler) {
 		checkNotNull(eventId);
 		checkNotNull(handler);
-		return new HandlerRegistrationAdapter(eventBus.addHandler(
-				getType(eventId), new SimpleEventHandler() {
-					@Override
-					public void onEvent(SimpleEvent event) {
-						handler.onEvent(event);
-					}
-				}));
+		HandlerRegistration handlerReistration = eventBus.addHandler(getType(eventId), new SimpleEventHandler() {
+			@Override
+			public void onEvent(SimpleEvent event) {
+				handler.onEvent(event);
+			}
+		});
+		return new Registration() {
+			@Override
+			public void remove() {
+				handlerReistration.removeHandler();
+			}
+		};
 	}
 
 	@Override

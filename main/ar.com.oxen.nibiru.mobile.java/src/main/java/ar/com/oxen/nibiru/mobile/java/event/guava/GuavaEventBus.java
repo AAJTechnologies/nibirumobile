@@ -4,14 +4,14 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import javax.inject.Inject;
 
-import ar.com.oxen.nibiru.mobile.core.api.event.Event;
-import ar.com.oxen.nibiru.mobile.core.api.event.EventHandler;
-import ar.com.oxen.nibiru.mobile.core.api.handler.HandlerRegistration;
-
+import com.aajtech.model.core.api.Registration;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.eventbus.EventBus;
 import com.google.common.eventbus.Subscribe;
+
+import ar.com.oxen.nibiru.mobile.core.api.event.Event;
+import ar.com.oxen.nibiru.mobile.core.api.event.EventHandler;
 
 public class GuavaEventBus implements
 		ar.com.oxen.nibiru.mobile.core.api.event.EventBus {
@@ -38,19 +38,19 @@ public class GuavaEventBus implements
 	}
 
 	@Override
-	public HandlerRegistration addHandler(final String eventId,
+	public Registration addHandler(final String eventId,
 			final EventHandler handler) {
 		handlers.put(eventId, handler);
-		return new HandlerRegistration() {
+		return new Registration() {
 			@Override
-			public void removeHandler() {
+			public void remove() {
 				handlers.remove(eventId, handler);
 			}
 		};
 	}
 
 	@Override
-	public HandlerRegistration addHandler(Enum<?> eventId, EventHandler handler) {
+	public Registration addHandler(Enum<?> eventId, EventHandler handler) {
 		checkNotNull(eventId);
 		checkNotNull(handler);
 		return addHandler(eventId.toString(), handler);

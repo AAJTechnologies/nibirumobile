@@ -1,7 +1,7 @@
 package ar.com.oxen.nibiru.mobile.android.ioc;
 
 import ar.com.oxen.nibiru.mobile.android.app.AndroidBootstrap;
-import ar.com.oxen.nibiru.mobile.android.event.BroadcasEventBus;
+import ar.com.oxen.nibiru.mobile.android.event.BroadcastEventBus;
 import ar.com.oxen.nibiru.mobile.android.preferences.SharedPreferencesImpl;
 import ar.com.oxen.nibiru.mobile.android.ui.DialogAlertManager;
 import ar.com.oxen.nibiru.mobile.android.ui.HandlerLooper;
@@ -22,7 +22,7 @@ public class DefaultAndroidModule extends AbstractModule {
 		bind(AlertManager.class).to(DialogAlertManager.class);
 		bind(Looper.class).to(HandlerLooper.class);
 		bind(PlaceManager.class).to(IntentPlaceManager.class);
-		bind(EventBus.class).to(BroadcasEventBus.class);
+		bind(EventBus.class).to(BroadcastEventBus.class);
 		bind(Preferences.class).to(SharedPreferencesImpl.class);
 	}
 }

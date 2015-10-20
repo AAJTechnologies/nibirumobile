@@ -4,7 +4,6 @@ jar {
 
 dependencies {
 	compile project(":ar.com.oxen.nibiru.mobile.core")
-	compile "com.aajtech.ui:com.aajtech.ui.gwt:${aajUiVersion}"
 	compile "com.google.gwt:gwt-user:${gwtVersion}" //<scope>provided</scope>
 	compile "com.google.guava:guava-gwt:${guavaVersion}"
 	compile "com.google.gwt.inject:gin:2.1.2"
