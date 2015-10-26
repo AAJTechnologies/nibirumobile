@@ -28,9 +28,12 @@ public class RequestBuilderHttpManager implements HttpManager {
 			final HttpCallback<T> httpCallback) {
 
 		try {
+			// TODO: Method and headers are hardcode. PArameterization might be needed in the future. 
 			RequestBuilder requestBuilder = new RequestBuilder(
 					RequestBuilder.POST, baseUrl + url);
-
+			requestBuilder.setHeader(HttpManager.CONTENT_TYPE_HEADER, HttpManager.APPLICATION_JSON_MIME);
+			requestBuilder.setHeader(HttpManager.ACCEPT_HEADER, HttpManager.APPLICATION_JSON_MIME);
+			
 			requestBuilder.sendRequest(httpCallback.buildRequest(),
 					new RequestCallback() {
 

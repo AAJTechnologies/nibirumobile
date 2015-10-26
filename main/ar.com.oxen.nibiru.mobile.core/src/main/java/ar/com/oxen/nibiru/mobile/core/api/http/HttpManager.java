@@ -7,8 +7,12 @@ import ar.com.oxen.nibiru.mobile.core.api.async.Callback;
  * 
  */
 public interface HttpManager {
+	String CONTENT_TYPE_HEADER = "Content-Type";
+	String ACCEPT_HEADER = "Accept";
+	String APPLICATION_JSON_MIME = "application/json";
+
 	/**
-	 * Sends a POST reques.
+	 * Sends a POST request.
 	 * 
 	 * @param url
 	 *            The URL

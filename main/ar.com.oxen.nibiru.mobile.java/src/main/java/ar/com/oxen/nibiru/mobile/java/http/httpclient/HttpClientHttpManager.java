@@ -50,8 +50,11 @@ public class HttpClientHttpManager implements HttpManager {
 		try {
 			Closer closer = Closer.create();
 			try {
+				// TODO: Method and headers are hardcode. PArameterization might be needed in the future. 
 				HttpPost request = new HttpPost(baseUrl + url);
 				request.setEntity(new StringEntity(httpCallback.buildRequest()));
+				request.addHeader(HttpManager.CONTENT_TYPE_HEADER, HttpManager.APPLICATION_JSON_MIME);
+				request.addHeader(HttpManager.ACCEPT_HEADER, HttpManager.APPLICATION_JSON_MIME);
 				HttpResponse response = httpClient.execute(request);
 				return httpCallback.parseResponse(closer
 						.register(
