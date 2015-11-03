@@ -12,7 +12,7 @@ import android.view.View;
 /**
  * Base class for Android based views.
  */
-public abstract class BaseAndroidView<V extends View> implements AndroidView {
+public class BaseAndroidView<V extends View> implements AndroidView {
 	private V view;
 
 	protected BaseAndroidView(V view) {

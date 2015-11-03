@@ -3,7 +3,7 @@ project.ext {
 	aajUiVersion = '0.1-SNAPSHOT'
 	androidVersion = '2.1.2'
 	gwtVersion = '2.7.0'
-	guavaVersion = '17.0'
+	guavaVersion = '18.0'
 	robovmVersion = '1.0.0'
 }
 
@@ -20,6 +20,14 @@ allprojects {
 	    }
 	    maven {
 	        url "https://oss.sonatype.org/content/repositories/google-snapshots/"
+	    }
+	}
+	buildscript {
+    	repositories {
+        	mavenCentral()
+    	}
+    	dependencies {
+        	classpath 'me.tatarka:gradle-retrolambda:3.2.3'
 	    }
 	}
 }

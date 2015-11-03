@@ -1,3 +1,5 @@
+apply plugin: 'me.tatarka.retrolambda'
+
 dependencies {
 	compile project(":ar.com.oxen.nibiru.mobile.core")
 	compile "org.apache.httpcomponents:httpclient:4.1.1"

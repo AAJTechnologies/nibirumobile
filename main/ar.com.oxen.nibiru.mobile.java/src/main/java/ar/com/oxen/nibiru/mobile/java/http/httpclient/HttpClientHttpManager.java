@@ -2,6 +2,7 @@ package ar.com.oxen.nibiru.mobile.java.http.httpclient;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import java.io.Closeable;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -56,10 +57,16 @@ public class HttpClientHttpManager implements HttpManager {
 				request.addHeader(HttpManager.CONTENT_TYPE_HEADER, HttpManager.APPLICATION_JSON_MIME);
 				request.addHeader(HttpManager.ACCEPT_HEADER, HttpManager.APPLICATION_JSON_MIME);
 				HttpResponse response = httpClient.execute(request);
-				return httpCallback.parseResponse(closer
-						.register(
-								new Scanner(response.getEntity().getContent()))
-						.useDelimiter("\\A").next());
+				Scanner scanner = new Scanner(response.getEntity().getContent());
+				scanner.useDelimiter("\\A");
+				// Scanner does not implements Closeable in Android.
+				closer.register(new Closeable() {
+					@Override
+					public void close() throws IOException {
+						scanner.close();
+					}
+				});
+				return httpCallback.parseResponse(scanner.next());
 			} catch (Throwable e) {
 				throw closer.rethrow(e);
 			} finally {
