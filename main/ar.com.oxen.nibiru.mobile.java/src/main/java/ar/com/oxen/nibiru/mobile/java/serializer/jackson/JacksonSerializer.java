@@ -56,7 +56,7 @@ public class JacksonSerializer implements Serializer {
 	}
 
 	private RuntimeException exception(Object argument, Exception cause) {
-		return new IllegalArgumentException("Invalid object/json:" + argument,
+		return new IllegalArgumentException("Invalid object/json: " + argument,
 				cause);
 	}
 }
