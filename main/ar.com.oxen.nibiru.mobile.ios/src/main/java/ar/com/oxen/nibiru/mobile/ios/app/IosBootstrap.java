@@ -33,7 +33,6 @@ public class IosBootstrap implements Bootstrap {
 		UINavigationController navigationController = navigationControllerProvider
 				.get();
 		mainWindow.setRootViewController(navigationController);
-		mainWindow.addSubview(navigationController.getView());
 		entryPoint.onApplicationStart();
 	}
 }

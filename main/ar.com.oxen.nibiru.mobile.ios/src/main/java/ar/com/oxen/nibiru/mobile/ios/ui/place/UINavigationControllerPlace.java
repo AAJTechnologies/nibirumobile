@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.inject.Provider;
 
+import org.robovm.apple.coregraphics.CGRect;
 import org.robovm.apple.uikit.UINavigationController;
 import org.robovm.apple.uikit.UIView;
 import org.robovm.apple.uikit.UIViewController;
@@ -82,7 +83,11 @@ public class UINavigationControllerPlace extends BaseConfigurable<Place>
 				.getRootViewController();
 		UIViewController viewController = new UIViewController();
 		
-		viewController.setView(view);
+		double barHeight = navigationController.getNavigationBar().getFrame().getHeight() * 1.5; // TODO: Find the way to remove the navigation bar!
+		UIView container = new UIView(new CGRect(0, 0, view.getFrame().getWidth(), view.getFrame().getHeight() + barHeight)); 
+		view.setFrame(new CGRect(0, barHeight, view.getFrame().getWidth(), view.getFrame().getHeight()));
+		container.addSubview(view);
+		viewController.setView(container);
 		if (!push) {
 			navigationController.getView().removeFromSuperview();
 			navigationController = navigationControllerProvider.get();
