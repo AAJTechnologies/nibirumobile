@@ -10,11 +10,13 @@ import org.robovm.apple.coredata.NSPersistentStoreCoordinator;
 import org.robovm.apple.coredata.NSPersistentStoreType;
 import org.robovm.apple.foundation.NSArray;
 import org.robovm.apple.foundation.NSBundle;
+import org.robovm.apple.foundation.NSErrorException;
 import org.robovm.apple.foundation.NSFileManager;
 import org.robovm.apple.foundation.NSSearchPathDirectory;
 import org.robovm.apple.foundation.NSSearchPathDomainMask;
 import org.robovm.apple.foundation.NSURL;
 
+import com.google.common.base.Throwables;
 import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 
@@ -33,19 +35,19 @@ public class DefaultCoreDataModule extends AbstractModule {
 
 	@Provides
 	@Singleton
-	public NSPersistentStoreCoordinator getNSPersistentStoreCoordinator(
-			NSManagedObjectModel managedObjectModel) {
+	public NSPersistentStoreCoordinator getNSPersistentStoreCoordinator(NSManagedObjectModel managedObjectModel) {
 		checkNotNull(managedObjectModel);
-		NSPersistentStoreCoordinator persistentStoreCoordinator = new NSPersistentStoreCoordinator(
-				managedObjectModel);
-		NSArray<NSURL> nsa = NSFileManager.getDefaultManager()
-				.getURLsForDirectory(NSSearchPathDirectory.DocumentDirectory,
-						NSSearchPathDomainMask.UserDomainMask);
-		NSURL nsu = nsa.get(0).newURLByAppendingPathComponent(
-				"dataStore.sqlite");
-		persistentStoreCoordinator.addPersistentStore(
-				NSPersistentStoreType.SQLite, null, nsu, null);
-		return persistentStoreCoordinator;
+		try {
+			NSPersistentStoreCoordinator persistentStoreCoordinator = new NSPersistentStoreCoordinator(
+					managedObjectModel);
+			NSArray<NSURL> nsa = NSFileManager.getDefaultManager().getURLsForDirectory(
+					NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask);
+			NSURL nsu = nsa.get(0).newURLByAppendingPathComponent("dataStore.sqlite");
+			persistentStoreCoordinator.addPersistentStore(NSPersistentStoreType.SQLite, null, nsu, null);
+			return persistentStoreCoordinator;
+		} catch (NSErrorException e) {
+			throw Throwables.propagate(e);
+		}
 	}
 
 	@Provides
