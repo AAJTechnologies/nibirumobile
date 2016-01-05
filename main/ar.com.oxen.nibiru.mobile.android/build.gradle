@@ -6,7 +6,7 @@ dependencies {
 	compile ("org.roboguice:roboguice:2.0") {
 		exclude group: 'com.google.inject', module: 'guice'
 	}
-	compile "com.google.inject:guice:4.0:no_aop"
+	compile "com.google.inject:guice:3.0:no_aop"
 	compile "com.j256.ormlite:ormlite-core:4.47"
 	compile "com.j256.ormlite:ormlite-android:4.47"
 }
