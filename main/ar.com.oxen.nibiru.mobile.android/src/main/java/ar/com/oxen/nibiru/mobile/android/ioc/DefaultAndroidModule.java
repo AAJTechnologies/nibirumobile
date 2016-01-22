@@ -12,6 +12,8 @@ import ar.com.oxen.nibiru.mobile.core.api.preferences.Preferences;
 import ar.com.oxen.nibiru.mobile.core.api.ui.AlertManager;
 import ar.com.oxen.nibiru.mobile.core.api.ui.Looper;
 import ar.com.oxen.nibiru.mobile.core.api.ui.place.PlaceManager;
+import ar.com.oxen.nibiru.mobile.java.async.AsyncManager;
+import ar.com.oxen.nibiru.mobile.java.async.ThreadAsyncManager;
 
 import com.google.inject.AbstractModule;
 
@@ -24,5 +26,6 @@ public class DefaultAndroidModule extends AbstractModule {
 		bind(PlaceManager.class).to(IntentPlaceManager.class);
 		bind(EventBus.class).to(BroadcastEventBus.class);
 		bind(Preferences.class).to(SharedPreferencesImpl.class);
+		bind(AsyncManager.class).to(ThreadAsyncManager.class);
 	}
 }

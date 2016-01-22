@@ -17,6 +17,8 @@ import ar.com.oxen.nibiru.mobile.ios.preferences.DummyPreferences;
 import ar.com.oxen.nibiru.mobile.ios.ui.NSThreadLooper;
 import ar.com.oxen.nibiru.mobile.ios.ui.UIAlertViewAlertManager;
 import ar.com.oxen.nibiru.mobile.ios.ui.place.UINavigationControllerPlaceManager;
+import ar.com.oxen.nibiru.mobile.java.async.AsyncManager;
+import ar.com.oxen.nibiru.mobile.java.async.ThreadAsyncManager;
 import ar.com.oxen.nibiru.mobile.java.event.guava.GuavaEventBus;
 
 import com.google.inject.AbstractModule;
@@ -32,6 +34,7 @@ public class DefaultIosModule extends AbstractModule {
 				.in(Singleton.class);
 		bind(EventBus.class).to(GuavaEventBus.class);
 		bind(Preferences.class).to(DummyPreferences.class);
+		bind(AsyncManager.class).to(ThreadAsyncManager.class);
 
 		bind(UIWindow.class).toInstance(
 				new UIWindow(UIScreen.getMainScreen().getBounds()));

@@ -13,33 +13,33 @@ import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 
-import ar.com.oxen.nibiru.mobile.core.api.async.Callback;
-import ar.com.oxen.nibiru.mobile.core.api.config.BaseUrl;
-import ar.com.oxen.nibiru.mobile.core.api.http.HttpCallback;
-import ar.com.oxen.nibiru.mobile.core.api.http.HttpManager;
-import ar.com.oxen.nibiru.mobile.java.thread.ThreadHelper;
-
 import com.google.common.base.Supplier;
 import com.google.common.base.Throwables;
 import com.google.common.io.Closer;
 
+import ar.com.oxen.nibiru.mobile.core.api.async.Callback;
+import ar.com.oxen.nibiru.mobile.core.api.config.BaseUrl;
+import ar.com.oxen.nibiru.mobile.core.api.http.HttpCallback;
+import ar.com.oxen.nibiru.mobile.core.api.http.HttpManager;
+import ar.com.oxen.nibiru.mobile.java.async.AsyncManager;
+
 public class HttpClientHttpManager implements HttpManager {
 	private final String baseUrl;
 	private final HttpClient httpClient;
-	private final ThreadHelper threadHelper;
+	private final AsyncManager asyncManager;
 
 	@Inject
 	public HttpClientHttpManager(@BaseUrl String baseUrl,
-			HttpClient httpClient, ThreadHelper threadHelper) {
+			HttpClient httpClient, AsyncManager asyncManager) {
 		this.baseUrl = checkNotNull(baseUrl);
 		this.httpClient = checkNotNull(httpClient);
-		this.threadHelper = checkNotNull(threadHelper);
+		this.asyncManager = checkNotNull(asyncManager);
 	}
 
 	@Override
 	public <T> void send(final String url, final Callback<T> callback,
 			final HttpCallback<T> httpCallback) {
-		threadHelper.runOnNewThread(new Supplier<T>() {
+		asyncManager.runAsync(new Supplier<T>() {
 			@Override
 			public T get() {
 				return runAsync(url, httpCallback);
@@ -57,7 +57,7 @@ public class HttpClientHttpManager implements HttpManager {
 				request.addHeader(HttpManager.CONTENT_TYPE_HEADER, HttpManager.APPLICATION_JSON_MIME);
 				request.addHeader(HttpManager.ACCEPT_HEADER, HttpManager.APPLICATION_JSON_MIME);
 				HttpResponse response = httpClient.execute(request);
-				Scanner scanner = new Scanner(response.getEntity().getContent());
+				final Scanner scanner = new Scanner(response.getEntity().getContent());
 				scanner.useDelimiter("\\A");
 				// Scanner does not implements Closeable in Android.
 				closer.register(new Closeable() {

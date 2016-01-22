@@ -5,6 +5,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import javax.annotation.Nullable;
 
 import com.google.common.base.Strings;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Component;
@@ -37,7 +38,7 @@ public class ModalWindowAlertManager implements AlertManager {
 		checkNotNull(title);
 		checkNotNull(message);
 		checkNotNull(callback);
-		TextField textField = new TextField();
+		final TextField textField = new TextField();
 		showDialog(title, message, textField, new Button("Ok", new Button.ClickListener() {
 			public void buttonClick(ClickEvent event) {
 				callback.onSuccess(Strings.nullToEmpty(textField.getValue()));
@@ -68,12 +69,15 @@ public class ModalWindowAlertManager implements AlertManager {
 	}
 
 	private void showDialog(String title, String message, @Nullable Component extraComponent, Button... buttons) {
-		UI ui = UI.getCurrent();
-		final Window dialog = new Window(title);
-		dialog.setModal(true);
+		final UI ui = UI.getCurrent();
+		final Window dialog = new Window(Strings.isNullOrEmpty(title) ? "Message" : title);
 		ui.addWindow(dialog);
+		dialog.setResizable(false);
+		dialog.setModal(true);
+		dialog.setClosable(false);
 
 		VerticalLayout content = new VerticalLayout();
+		content.setMargin(true);
 		dialog.setContent(content);
 
 		content.addComponent(new Label(message));
@@ -82,7 +86,9 @@ public class ModalWindowAlertManager implements AlertManager {
 		}
 		HorizontalLayout buttonPannel = new HorizontalLayout();
 		content.addComponent(buttonPannel);
+		content.setComponentAlignment(buttonPannel, Alignment.MIDDLE_CENTER);
 		for (Button button : buttons) {
+			buttonPannel.addComponent(button);
 			button.addClickListener(new Button.ClickListener() {
 				public void buttonClick(ClickEvent event) {
 					ui.removeWindow(dialog);

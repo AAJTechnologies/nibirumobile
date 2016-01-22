@@ -4,7 +4,6 @@ import javax.inject.Singleton;
 
 import com.google.inject.AbstractModule;
 import com.vaadin.server.UIProvider;
-import com.vaadin.ui.UI;
 
 import ar.com.oxen.nibiru.mobile.core.api.app.Bootstrap;
 import ar.com.oxen.nibiru.mobile.core.api.event.EventBus;
@@ -12,8 +11,9 @@ import ar.com.oxen.nibiru.mobile.core.api.preferences.Preferences;
 import ar.com.oxen.nibiru.mobile.core.api.ui.AlertManager;
 import ar.com.oxen.nibiru.mobile.core.api.ui.Looper;
 import ar.com.oxen.nibiru.mobile.core.api.ui.place.PlaceManager;
+import ar.com.oxen.nibiru.mobile.java.async.AsyncManager;
+import ar.com.oxen.nibiru.mobile.java.async.SequentialAsyncManager;
 import ar.com.oxen.nibiru.mobile.java.event.guava.GuavaEventBus;
-import ar.com.oxen.nibiru.mobile.vaadin.app.NibiruUi;
 import ar.com.oxen.nibiru.mobile.vaadin.app.NibiruUiProvider;
 import ar.com.oxen.nibiru.mobile.vaadin.app.VaadinBootstrap;
 import ar.com.oxen.nibiru.mobile.vaadin.preferences.DummyPreferences;
@@ -30,7 +30,7 @@ public class DefaultVaadinModule extends AbstractModule {
 		bind(PlaceManager.class).to(UIPlaceManager.class).in(Singleton.class);
 		bind(EventBus.class).to(GuavaEventBus.class);
 		bind(Preferences.class).to(DummyPreferences.class);
-
+		bind(AsyncManager.class).to(SequentialAsyncManager.class);
 		bind(UIProvider.class).to(NibiruUiProvider.class);
 	}
 }
