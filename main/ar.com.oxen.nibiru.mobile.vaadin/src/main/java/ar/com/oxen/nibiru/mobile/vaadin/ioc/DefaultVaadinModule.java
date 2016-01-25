@@ -1,7 +1,5 @@
 package ar.com.oxen.nibiru.mobile.vaadin.ioc;
 
-import javax.inject.Singleton;
-
 import com.google.inject.AbstractModule;
 import com.vaadin.server.UIProvider;
 
@@ -27,7 +25,7 @@ public class DefaultVaadinModule extends AbstractModule {
 		bind(Bootstrap.class).to(VaadinBootstrap.class);
 		bind(AlertManager.class).to(ModalWindowAlertManager.class);
 		bind(Looper.class).to(DummyLooper.class);
-		bind(PlaceManager.class).to(UIPlaceManager.class).in(Singleton.class);
+		bind(PlaceManager.class).to(UIPlaceManager.class);
 		bind(EventBus.class).to(GuavaEventBus.class);
 		bind(Preferences.class).to(DummyPreferences.class);
 		bind(AsyncManager.class).to(SequentialAsyncManager.class);
