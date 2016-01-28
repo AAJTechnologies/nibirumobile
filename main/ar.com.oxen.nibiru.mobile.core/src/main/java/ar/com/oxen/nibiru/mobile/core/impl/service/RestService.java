@@ -1,6 +1,9 @@
 package ar.com.oxen.nibiru.mobile.core.impl.service;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+
+import javax.annotation.Nullable;
+
 import ar.com.oxen.nibiru.mobile.core.api.async.Callback;
 import ar.com.oxen.nibiru.mobile.core.api.http.HttpCallback;
 import ar.com.oxen.nibiru.mobile.core.api.http.HttpManager;
@@ -13,10 +16,9 @@ public class RestService extends BaseService {
 	}
 
 	@Override
-	public <T> void invoke(String method, final Object requestDto,
+	public <T> void invoke(String method, final @Nullable Object requestDto,
 			final Class<T> responseClass, Callback<T> callback) {
 		checkNotNull(method);
-		checkNotNull(requestDto);
 		checkNotNull(responseClass);
 		checkNotNull(callback);
 		getHttpManager().send(getServiceName() + "/" + method,
@@ -24,7 +26,7 @@ public class RestService extends BaseService {
 
 					@Override
 					public String buildRequest() {
-						return getSerializer().serialize(requestDto);
+						return requestDto != null ? getSerializer().serialize(requestDto) : "";
 					}
 
 					@Override

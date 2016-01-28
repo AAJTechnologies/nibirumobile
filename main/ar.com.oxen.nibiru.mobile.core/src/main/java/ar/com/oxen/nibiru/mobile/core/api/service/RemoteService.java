@@ -1,5 +1,7 @@
 package ar.com.oxen.nibiru.mobile.core.api.service;
 
+import javax.annotation.Nullable;
+
 import ar.com.oxen.nibiru.mobile.core.api.async.Callback;
 
 /**
@@ -18,6 +20,6 @@ public interface RemoteService {
 	 * @param callback
 	 *            A callback for receiving the response
 	 */
-	<T> void invoke(String method, Object requestDto, Class<T> responseClass,
+	<T> void invoke(String method, @Nullable Object requestDto, Class<T> responseClass,
 			Callback<T> callback);
 }
