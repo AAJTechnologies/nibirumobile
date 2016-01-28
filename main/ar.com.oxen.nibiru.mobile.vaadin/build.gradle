@@ -6,4 +6,7 @@ dependencies {
 	compile "com.vaadin:vaadin-server:${vaadinVersion}"
 	compile "com.vaadin:vaadin-themes:7.5.4"
 	compile "javax.servlet:servlet-api:2.5"
+	compile('com.google.inject.extensions:guice-servlet:3.0') {
+		exclude module: 'guice'
+	}
 }

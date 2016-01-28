@@ -1,6 +1,7 @@
 package ar.com.oxen.nibiru.mobile.vaadin.ioc;
 
 import com.google.inject.AbstractModule;
+import com.google.inject.servlet.SessionScoped;
 import com.vaadin.server.UIProvider;
 
 import ar.com.oxen.nibiru.mobile.core.api.app.Bootstrap;
@@ -25,8 +26,8 @@ public class DefaultVaadinModule extends AbstractModule {
 		bind(Bootstrap.class).to(VaadinBootstrap.class);
 		bind(AlertManager.class).to(ModalWindowAlertManager.class);
 		bind(Looper.class).to(DummyLooper.class);
-		bind(PlaceManager.class).to(UIPlaceManager.class);
-		bind(EventBus.class).to(GuavaEventBus.class);
+		bind(PlaceManager.class).to(UIPlaceManager.class).in(SessionScoped.class);
+		bind(EventBus.class).to(GuavaEventBus.class).in(SessionScoped.class);
 		bind(Preferences.class).to(DummyPreferences.class);
 		bind(AsyncManager.class).to(SequentialAsyncManager.class);
 		bind(UIProvider.class).to(NibiruUiProvider.class);
