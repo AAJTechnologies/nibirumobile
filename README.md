@@ -20,7 +20,7 @@ The components are based on JSR330 dependency injection, but implementations are
 just to name the main ones.
 
 Please check the reference documentation and demo:
- * [Nibiru_Mobile_Reference_en.pdf](https://github.com/AAJTechnologies/nibirumobile/raw/master/main/docs/Nibiru_Mobile_Reference_en.pdf) (English)
+ * [Nibiru_Mobile_Reference_en.pdf](https://github.com/AAJTechnologies/nibirumobile/raw/master/main/docs/Nibiru_Mobile_Reference_en.pdf) - [Reference Wiki (WIP)](https://github.com/AAJTechnologies/nibirumobile/wiki/reference)
  * [Online demo](http://nibiru.oxen.com.ar) (Chrome and Safari only, since it is based on [MGWT](http://www.m-gwt.com/))
  * [Android demo](https://github.com/AAJTechnologies/nibirumobile/raw/master/sample/dist/NibiruMobileDemo.apk) (Android 2.2 required)
  * [Demo app screenshots](https://github.com/AAJTechnologies/nibirumobile/wiki/SampleAppScreenshots)
