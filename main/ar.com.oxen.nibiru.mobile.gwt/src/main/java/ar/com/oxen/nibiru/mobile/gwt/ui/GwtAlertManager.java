@@ -5,12 +5,21 @@ import ar.com.oxen.nibiru.mobile.core.api.async.Callback;
 import ar.com.oxen.nibiru.mobile.core.api.ui.AlertManager;
 
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.NotificationMole;
 
 public class GwtAlertManager implements AlertManager {
 	@Override
 	public void showMessage(String message) {
 		checkNotNull(message);
 		Window.alert(message);
+	}
+
+	@Override
+	public void showNotification(String message) {
+		NotificationMole nm = new NotificationMole();
+		nm.setAnimationDuration(2000);
+		nm.setMessage(message);
+		nm.show();
 	}
 
 	@Override

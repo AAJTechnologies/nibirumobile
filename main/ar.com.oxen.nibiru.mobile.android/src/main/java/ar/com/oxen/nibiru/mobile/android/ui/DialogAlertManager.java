@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.widget.EditText;
+import android.widget.Toast;
 import ar.com.oxen.nibiru.mobile.core.api.async.Callback;
 import ar.com.oxen.nibiru.mobile.core.api.ui.AlertManager;
 
@@ -24,6 +25,11 @@ public class DialogAlertManager implements AlertManager {
 	public void showMessage(String message) {
 		checkNotNull(message);
 		builder(null, message).show();
+	}
+
+	@Override
+	public void showNotification(String message) {
+		Toast.makeText(context, message, Toast.LENGTH_LONG).show();
 	}
 
 	@Override

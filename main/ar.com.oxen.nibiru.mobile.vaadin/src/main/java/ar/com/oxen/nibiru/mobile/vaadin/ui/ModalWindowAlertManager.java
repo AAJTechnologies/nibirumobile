@@ -5,12 +5,14 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import javax.annotation.Nullable;
 
 import com.google.common.base.Strings;
+import com.vaadin.server.Page;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
@@ -25,6 +27,11 @@ public class ModalWindowAlertManager implements AlertManager {
 	public void showMessage(String message) {
 		checkNotNull(message);
 		showDialog(null, message, null, new Button("Ok"));
+	}
+
+	@Override
+	public void showNotification(String message) {
+		new Notification("", message).show(Page.getCurrent());
 	}
 
 	@Override

@@ -20,6 +20,11 @@ public class UIAlertViewAlertManager implements AlertManager {
 	}
 
 	@Override
+	public void showNotification(String message) {
+		showMessage(message);
+	}
+
+	@Override
 	public void showException(Exception exception) {
 		checkNotNull(exception);
 		alertView(exception.getClass().getName(), exception.getMessage())

@@ -3,6 +3,7 @@ package ar.com.oxen.nibiru.mobile.wp.ui;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.NotificationMole;
 
 import ar.com.oxen.nibiru.mobile.core.api.async.Callback;
 import ar.com.oxen.nibiru.mobile.core.api.ui.AlertManager;
@@ -12,6 +13,14 @@ public class WindowsPhoneAlertManager implements AlertManager {
 	public void showMessage(String message) {
 		checkNotNull(message);
 		alert(message);
+	}
+
+	@Override
+	public void showNotification(String message) {
+		NotificationMole nm = new NotificationMole();
+		nm.setAnimationDuration(2000);
+		nm.setMessage(message);
+		nm.show();
 	}
 
 	@Override

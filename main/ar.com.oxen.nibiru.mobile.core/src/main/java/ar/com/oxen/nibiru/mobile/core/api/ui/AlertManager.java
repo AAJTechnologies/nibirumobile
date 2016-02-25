@@ -15,6 +15,15 @@ public interface AlertManager {
 	void showMessage(String message);
 
 	/**
+	 * Shows a non-blocking notification.
+	 * Some platforms might not support it and show a blocking message.
+	 * 
+	 * @param message
+	 *            The message
+	 */
+	void showNotification(String message);
+
+	/**
 	 * Shows an error message.
 	 * 
 	 * @param exception
