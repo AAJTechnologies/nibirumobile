@@ -15,7 +15,7 @@ import ar.com.oxen.nibiru.mobile.core.api.ui.place.PlaceManager;
 import ar.com.oxen.nibiru.mobile.ios.app.IosBootstrap;
 import ar.com.oxen.nibiru.mobile.ios.preferences.DummyPreferences;
 import ar.com.oxen.nibiru.mobile.ios.ui.NSThreadLooper;
-import ar.com.oxen.nibiru.mobile.ios.ui.UIAlertViewAlertManager;
+import ar.com.oxen.nibiru.mobile.ios.ui.UIAlertControllerAlertManager;
 import ar.com.oxen.nibiru.mobile.ios.ui.place.UINavigationControllerPlaceManager;
 import ar.com.oxen.nibiru.mobile.java.async.AsyncManager;
 import ar.com.oxen.nibiru.mobile.java.async.ThreadAsyncManager;
@@ -28,7 +28,7 @@ public class DefaultIosModule extends AbstractModule {
 	@Override
 	protected void configure() {
 		bind(Bootstrap.class).to(IosBootstrap.class);
-		bind(AlertManager.class).to(UIAlertViewAlertManager.class);
+		bind(AlertManager.class).to(UIAlertControllerAlertManager.class);
 		bind(Looper.class).to(NSThreadLooper.class);
 		bind(PlaceManager.class).to(UINavigationControllerPlaceManager.class)
 				.in(Singleton.class);
