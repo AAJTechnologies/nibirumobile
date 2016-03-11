@@ -8,6 +8,7 @@ import javax.inject.Provider;
 import org.robovm.apple.uikit.UIAlertAction;
 import org.robovm.apple.uikit.UIAlertActionStyle;
 import org.robovm.apple.uikit.UIAlertController;
+import org.robovm.apple.uikit.UIApplication;
 import org.robovm.apple.uikit.UINavigationController;
 import org.robovm.apple.uikit.UITextView;
 
@@ -87,7 +88,8 @@ public class UIAlertControllerAlertManager implements AlertManager {
 	}
 
 	private void show(UIAlertController alertController) {
-		navigationControllerProvider.get().presentViewController(alertController, true, null);
+		UIApplication.getSharedApplication().getKeyWindow().getRootViewController().presentViewController(alertController, true, null);
+		//navigationControllerProvider.get().presentViewController(alertController, true, null);
 	}
 
 	private void close() {
