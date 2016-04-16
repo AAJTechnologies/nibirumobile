@@ -1,5 +1,6 @@
 rootProject.name = 'nibiruMobile'
 
+include ':ar.com.oxen.nibiru.mobile.aaj.ui'
 include ':ar.com.oxen.nibiru.mobile.android'
 include ':ar.com.oxen.nibiru.mobile.core'
 include ':ar.com.oxen.nibiru.mobile.gwt'

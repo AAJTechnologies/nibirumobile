@@ -1,0 +1,8 @@
+jar {
+   from sourceSets.main.java.srcDirs 
+}
+
+dependencies {
+	compile project(":ar.com.oxen.nibiru.mobile.core")
+	compile "com.aajtech.ui:com.aajtech.ui.core:0.1-SNAPSHOT"
+}

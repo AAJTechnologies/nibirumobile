@@ -42,7 +42,7 @@ public class GwtEventBus implements EventBus {
 	public Registration addHandler(String eventId, final EventHandler handler) {
 		checkNotNull(eventId);
 		checkNotNull(handler);
-		HandlerRegistration handlerReistration = eventBus.addHandler(getType(eventId), new SimpleEventHandler() {
+		final HandlerRegistration handlerRegistration = eventBus.addHandler(getType(eventId), new SimpleEventHandler() {
 			@Override
 			public void onEvent(SimpleEvent event) {
 				handler.onEvent(event);
@@ -51,7 +51,7 @@ public class GwtEventBus implements EventBus {
 		return new Registration() {
 			@Override
 			public void remove() {
-				handlerReistration.removeHandler();
+				handlerRegistration.removeHandler();
 			}
 		};
 	}

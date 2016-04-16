@@ -9,14 +9,13 @@ import com.google.common.collect.Maps;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.UI;
 
-import ar.com.oxen.nibiru.mobile.core.api.common.Identifiable;
 import ar.com.oxen.nibiru.mobile.core.api.ui.mvp.Presenter;
 import ar.com.oxen.nibiru.mobile.core.api.ui.mvp.PresenterMapper;
 import ar.com.oxen.nibiru.mobile.core.api.ui.mvp.View;
 import ar.com.oxen.nibiru.mobile.core.api.ui.place.Place;
 import ar.com.oxen.nibiru.mobile.core.impl.common.BaseConfigurable;
 
-public class UIPlace extends BaseConfigurable<Place>implements Place, Identifiable<String> {
+public class UIPlace extends BaseConfigurable<Place> implements Place {
 	private final PresenterMapper presenterMapper;
 	private final Deque<Presenter<?>> presenterStack;
 	private final String id;
