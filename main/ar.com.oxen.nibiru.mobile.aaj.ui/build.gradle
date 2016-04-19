@@ -1,3 +1,5 @@
+apply plugin: 'me.tatarka.retrolambda'
+
 jar {
    from sourceSets.main.java.srcDirs 
 }
