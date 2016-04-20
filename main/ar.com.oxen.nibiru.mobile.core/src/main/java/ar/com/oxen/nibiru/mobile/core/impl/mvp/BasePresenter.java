@@ -1,6 +1,8 @@
 package ar.com.oxen.nibiru.mobile.core.impl.mvp;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+
+import ar.com.oxen.nibiru.mobile.core.api.async.Callback;
 import ar.com.oxen.nibiru.mobile.core.api.ui.AlertManager;
 import ar.com.oxen.nibiru.mobile.core.api.ui.mvp.Presenter;
 import ar.com.oxen.nibiru.mobile.core.api.ui.mvp.View;
@@ -39,14 +41,22 @@ abstract public class BasePresenter<V extends View> implements Presenter<V> {
 	}
 
 	/**
-	 * Utility class for creating internal callbacks.
+	 * Utility method for creating internal callbacks.
+	 * It calls creates a {@link BaseCallback} instance, which uses {@link AlertManager} to show errors.
 	 * 
 	 * @param <T>
 	 *            The callback return type
 	 */
-	protected abstract class Cbk<T> extends BaseCallback<T> {
-		public Cbk() {
-			super(alertManager);
-		}
+	protected <T> Callback<T> callback(Consumer<T> func) {
+		return new BaseCallback<T>(alertManager) {
+			@Override
+			public void onSuccess(T result) {
+				func.accept(result);
+			}
+		};
+	}
+
+	public interface Consumer<T> {
+		void accept(T result);
 	}
 }
