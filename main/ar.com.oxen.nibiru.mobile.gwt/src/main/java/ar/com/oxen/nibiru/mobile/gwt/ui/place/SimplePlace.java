@@ -64,13 +64,13 @@ public class SimplePlace extends com.google.gwt.place.shared.Place implements
 	}
 
 	@Override
-	public void go(boolean push) {
+	public void go(boolean push, boolean animated) {
 		placeController.goTo(this);
 	}
 
 	@Override
 	public void go() {
-		go(false);
+		go(false, true);
 	}
 
 	public static class Tokenizer implements PlaceTokenizer<SimplePlace> {

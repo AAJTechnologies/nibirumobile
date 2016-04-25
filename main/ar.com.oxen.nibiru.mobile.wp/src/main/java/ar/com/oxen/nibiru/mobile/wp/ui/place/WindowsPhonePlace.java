@@ -69,7 +69,7 @@ public class WindowsPhonePlace extends BaseConfigurable<Place> implements
 	}
 
 	@Override
-	public void go(boolean push) {
+	public void go(boolean push, boolean animated) {
 		if (!presenterStack.isEmpty()) {
 			presenterStack.peek().onDeactivate();
 		}
@@ -82,7 +82,7 @@ public class WindowsPhonePlace extends BaseConfigurable<Place> implements
 
 	@Override
 	public void go() {
-		go(false);
+		go(false, true);
 	}
 
 	public boolean forwardFrom(WindowsPhonePlace other) {

@@ -67,11 +67,11 @@ public class UINavigationControllerPlace extends BaseConfigurable<Place>
 
 	@Override
 	public void go() {
-		this.go(false);
+		this.go(false, true);
 	}
 
 	@Override
-	public void go(boolean push) {
+	public void go(boolean push, boolean animated) {
 		Presenter<? extends View> presenter = presenterMapper.getPresenter(id);
 		UIView view = (UIView) presenter.getView().asNative();
 

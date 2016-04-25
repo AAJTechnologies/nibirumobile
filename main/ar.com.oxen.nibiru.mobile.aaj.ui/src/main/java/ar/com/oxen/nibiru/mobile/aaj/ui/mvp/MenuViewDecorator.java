@@ -29,7 +29,7 @@ public abstract class MenuViewDecorator extends UiModule implements View {
 			menu.add(button(item.getTitle(), new ClickHandler() {
 				@Override
 				public void onClick() {
-					item.getPlace().go(true);
+					item.getPlace().go(true, false);
 				}
 			}));
 		}

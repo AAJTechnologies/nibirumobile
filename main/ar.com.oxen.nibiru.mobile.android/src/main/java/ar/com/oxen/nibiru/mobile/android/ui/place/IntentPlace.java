@@ -20,8 +20,12 @@ public class IntentPlace extends BaseIntentAdapter<Place> implements Place {
 	}
 
 	@Override
-	public void go(boolean push) {
-		activity.startActivity(getIntent());
+	public void go(boolean push, boolean animated) {
+		Intent intent = getIntent();
+		if (!animated) {
+			intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+		}
+		activity.startActivity(intent);
 		if (!push) {
 			activity.finish();
 		}
@@ -29,6 +33,6 @@ public class IntentPlace extends BaseIntentAdapter<Place> implements Place {
 
 	@Override
 	public void go() {
-		go(false);
+		go(false, true);
 	}
 }

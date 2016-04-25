@@ -50,11 +50,11 @@ public class UIPlace extends BaseConfigurable<Place> implements Place {
 
 	@Override
 	public void go() {
-		this.go(false);
+		this.go(false, true);
 	}
 
 	@Override
-	public void go(boolean push) {
+	public void go(boolean push, boolean animated) {
 		Presenter<? extends View> presenter = presenterMapper.getPresenter(id);
 
 		if (!presenterStack.isEmpty()) {
