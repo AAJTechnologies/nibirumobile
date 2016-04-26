@@ -7,7 +7,9 @@ jar {
 dependencies {
 	compile "com.aajtech.model:com.aajtech.model.core:${aajModelVersion}"
 	compile "javax.inject:javax.inject:1"
-	compile "com.google.inject:guice:3.0:no_aop"
+	compile("com.google.inject:guice:${guiceVersion}:no_aop") {
+		exclude group: 'org.sonatype.sisu.inject', module: 'cglib'
+	}
 	compile "com.google.guava:guava:${guavaVersion}"
 	compile "com.google.code.findbugs:jsr305:2.0.3"
 }
