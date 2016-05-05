@@ -6,7 +6,7 @@ It provides:
  * A common API for components typically used on mobile development.
  * Implementations of these APIs for GWT, Android and iOS.
 
-It was built with the same philosophy used in [Nibiru Framework](https://github.com/AAJTechnologies/nibiru): creating a common API and structure for typical projects. But it is a completely different framework.
+It was built with the same philosophy used in [Nibiru Framework](https://github.com/lbrasseur/nibiru): creating a common API and structure for typical projects. But it is a completely different framework.
 
 The components are based on JSR330 dependency injection, but implementations are based on many technologies, such as:
 
