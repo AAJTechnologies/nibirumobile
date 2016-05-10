@@ -1,21 +1,22 @@
 package ar.com.oxen.nibiru.mobile.aaj.ui.mvp;
 
+import static com.aajtech.ui.core.impl.builder.ButtonBuilder.button;
+import static com.aajtech.ui.core.impl.builder.HorizontalPanelBuilder.horizontalPanel;
+import static com.aajtech.ui.core.impl.builder.VerticalPanelBuilder.verticalPanel;
+
 import com.aajtech.ui.core.api.ClickHandler;
 import com.aajtech.ui.core.api.Container;
 import com.aajtech.ui.core.api.VerticalPanel;
 import com.aajtech.ui.core.api.Widget;
-import com.aajtech.ui.core.impl.builder.UiBuilder;
-import com.aajtech.ui.core.impl.builder.UiModule;
 
 import ar.com.oxen.nibiru.mobile.core.api.ui.mvp.View;
 
-public abstract class MenuViewDecorator extends UiModule implements View {
+public abstract class MenuViewDecorator implements View {
 	private final Widget navigationWidget;
 	private final Container titleContainer;
 	private final Container contentContainer;
 
-	protected MenuViewDecorator(UiBuilder uiBuilder, Iterable<MenuItem> items) {
-		super(uiBuilder);
+	protected MenuViewDecorator(Iterable<MenuItem> items) {
 		VerticalPanel menu;
 		navigationWidget = verticalPanel()
 				.add(titleContainer = verticalPanel().build())
