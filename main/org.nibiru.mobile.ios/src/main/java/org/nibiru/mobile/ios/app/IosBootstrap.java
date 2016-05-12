@@ -7,9 +7,10 @@ import javax.inject.Provider;
 
 import org.nibiru.mobile.core.api.app.Bootstrap;
 import org.nibiru.mobile.core.api.app.EntryPoint;
-import org.robovm.apple.uikit.UIColor;
-import org.robovm.apple.uikit.UINavigationController;
-import org.robovm.apple.uikit.UIWindow;
+
+import ios.uikit.UIColor;
+import ios.uikit.UINavigationController;
+import ios.uikit.UIWindow;
 
 public class IosBootstrap implements Bootstrap {
 	private final EntryPoint entryPoint;
@@ -27,7 +28,7 @@ public class IosBootstrap implements Bootstrap {
 	@Override
 	public void onBootstrap() {
 		// TODO: Background color should be application-specific?
-		mainWindow.setBackgroundColor(UIColor.lightGray());
+		mainWindow.setBackgroundColor(UIColor.lightGrayColor());
 		mainWindow.makeKeyAndVisible();
 		UINavigationController navigationController = navigationControllerProvider
 				.get();

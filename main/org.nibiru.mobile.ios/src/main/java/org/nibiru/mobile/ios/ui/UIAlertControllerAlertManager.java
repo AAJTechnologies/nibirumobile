@@ -7,14 +7,15 @@ import javax.inject.Provider;
 
 import org.nibiru.mobile.core.api.async.Callback;
 import org.nibiru.mobile.core.api.ui.AlertManager;
-import org.robovm.apple.uikit.UIAlertAction;
-import org.robovm.apple.uikit.UIAlertActionStyle;
-import org.robovm.apple.uikit.UIAlertController;
-import org.robovm.apple.uikit.UIApplication;
-import org.robovm.apple.uikit.UINavigationController;
-import org.robovm.apple.uikit.UITextView;
 
 import com.google.common.base.Strings;
+
+import ios.uikit.UIAlertAction;
+import ios.uikit.UIAlertController;
+import ios.uikit.UIApplication;
+import ios.uikit.UINavigationController;
+import ios.uikit.UITextView;
+import ios.uikit.enums.UIAlertActionStyle;
 
 // TODO: Internationalization.
 public class UIAlertControllerAlertManager implements AlertManager {
@@ -45,13 +46,13 @@ public class UIAlertControllerAlertManager implements AlertManager {
 	@Override
 	public void prompt(String title, String message, final Callback<String> callback) {
 		UIAlertController alertController = alertController(title, message);
-		final UITextView textView = new UITextView();
-		alertController.getView().addSubview(textView);
-		alertController.addAction(new UIAlertAction("Ok", UIAlertActionStyle.Default, (UIAlertAction action) -> {
+		final UITextView textView = UITextView.alloc().init();
+		alertController.view().addSubview(textView);
+		alertController.addAction(UIAlertAction.actionWithTitleStyleHandler("Ok", UIAlertActionStyle.Default, (UIAlertAction action) -> {
 			close();
-			callback.onSuccess(Strings.nullToEmpty(textView.getText()));
+			callback.onSuccess(Strings.nullToEmpty(textView.text()));
 		}));
-		alertController.addAction(new UIAlertAction("Cancel", UIAlertActionStyle.Cancel, (UIAlertAction action) -> {
+		alertController.addAction(UIAlertAction.actionWithTitleStyleHandler("Cancel", UIAlertActionStyle.Cancel, (UIAlertAction action) -> {
 			close();
 		}));
 		show(alertController);
@@ -60,11 +61,11 @@ public class UIAlertControllerAlertManager implements AlertManager {
 	@Override
 	public void confirm(String title, String message, final Callback<Boolean> callback) {
 		UIAlertController alertController = alertController(title, message);
-		alertController.addAction(new UIAlertAction("Ok", UIAlertActionStyle.Default, (UIAlertAction action) -> {
+		alertController.addAction(UIAlertAction.actionWithTitleStyleHandler("Ok", UIAlertActionStyle.Default, (UIAlertAction action) -> {
 			close();
 			callback.onSuccess(true);
 		}));
-		alertController.addAction(new UIAlertAction("Cancel", UIAlertActionStyle.Cancel, (UIAlertAction action) -> {
+		alertController.addAction(UIAlertAction.actionWithTitleStyleHandler("Cancel", UIAlertActionStyle.Cancel, (UIAlertAction action) -> {
 			close();
 			callback.onSuccess(false);
 		}));
@@ -73,25 +74,25 @@ public class UIAlertControllerAlertManager implements AlertManager {
 
 	private UIAlertController messageAlertController(String title, String message) {
 		UIAlertController alertController = alertController(title, message);
-		alertController.addAction(new UIAlertAction("Ok", UIAlertActionStyle.Default, (UIAlertAction action) -> {
+		alertController.addAction(UIAlertAction.actionWithTitleStyleHandler("Ok", UIAlertActionStyle.Default, (UIAlertAction action) -> {
 			close();
 		}));
 		return alertController;
 	}
 
 	private UIAlertController alertController(String title, String message) {
-		UIAlertController alertController = new UIAlertController();
+		UIAlertController alertController = UIAlertController.alloc().init();
 		alertController.setTitle(title);
 		alertController.setMessage(message);
 		return alertController;
 	}
 
 	private void show(UIAlertController alertController) {
-		UIApplication.getSharedApplication().getKeyWindow().getRootViewController().presentViewController(alertController, true, null);
+		UIApplication.sharedApplication().keyWindow().rootViewController().presentViewControllerAnimatedCompletion(alertController, true, null);
 		//navigationControllerProvider.get().presentViewController(alertController, true, null);
 	}
 
 	private void close() {
-		navigationControllerProvider.get().popViewController(true);
+		navigationControllerProvider.get().popViewControllerAnimated(true);
 	}
 }

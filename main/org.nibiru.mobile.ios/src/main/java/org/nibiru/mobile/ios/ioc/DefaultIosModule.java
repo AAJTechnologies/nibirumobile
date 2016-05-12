@@ -18,12 +18,12 @@ import org.nibiru.mobile.ios.ui.place.UINavigationControllerPlaceManager;
 import org.nibiru.mobile.java.async.AsyncManager;
 import org.nibiru.mobile.java.async.ThreadAsyncManager;
 import org.nibiru.mobile.java.event.guava.GuavaEventBus;
-import org.robovm.apple.uikit.UINavigationController;
-import org.robovm.apple.uikit.UIScreen;
-import org.robovm.apple.uikit.UIWindow;
 
 import dagger.Module;
 import dagger.Provides;
+import ios.uikit.UINavigationController;
+import ios.uikit.UIScreen;
+import ios.uikit.UIWindow;
 
 @Module
 public class DefaultIosModule {
@@ -72,12 +72,14 @@ public class DefaultIosModule {
 	@Provides
 	@Singleton
 	public UIWindow getWindow() {
-		return new UIWindow(UIScreen.getMainScreen().getBounds());
+		UIWindow mainWindow = UIWindow.alloc().init();
+		mainWindow.setBounds(UIScreen.mainScreen().bounds());
+		return mainWindow;
 	}
 
 	@Provides
 	public UINavigationController getUINavigationController() {
-		UINavigationController controller = new UINavigationController();
+		UINavigationController controller = UINavigationController.alloc().init();
 		controller.setTitle("CHANGE ME");
 		return controller;
 	}

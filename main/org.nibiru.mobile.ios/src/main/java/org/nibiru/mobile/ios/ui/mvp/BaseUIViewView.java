@@ -1,12 +1,11 @@
 package org.nibiru.mobile.ios.ui.mvp;
 
-import org.robovm.apple.foundation.NSObject;
-import org.robovm.apple.uikit.UITextFieldDelegate;
+import ios.uikit.protocol.UITextFieldDelegate;
 
-public abstract class BaseUIViewView extends NSObject implements UIViewView {
-	private final UITextFieldDelegate textFieldDelegate = new TextFieldDelegate();
+public abstract class BaseUIViewView implements UIViewView {
+    private final UITextFieldDelegate textFieldDelegate = new TextFieldDelegate();
 
-	protected UITextFieldDelegate getTextFieldDelegate() {
-		return textFieldDelegate;
-	}
+    protected UITextFieldDelegate getTextFieldDelegate() {
+        return textFieldDelegate;
+    }
 }

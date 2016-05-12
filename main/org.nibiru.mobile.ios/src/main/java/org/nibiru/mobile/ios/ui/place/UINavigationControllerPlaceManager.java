@@ -11,10 +11,11 @@ import org.nibiru.mobile.core.api.ui.mvp.Presenter;
 import org.nibiru.mobile.core.api.ui.mvp.PresenterMapper;
 import org.nibiru.mobile.core.api.ui.place.Place;
 import org.nibiru.mobile.core.api.ui.place.PlaceManager;
-import org.robovm.apple.uikit.UINavigationController;
-import org.robovm.apple.uikit.UIWindow;
 
 import com.google.common.collect.Queues;
+
+import ios.uikit.UINavigationController;
+import ios.uikit.UIWindow;
 
 public class UINavigationControllerPlaceManager implements PlaceManager {
 	private final UIWindow mainWindow;
@@ -48,8 +49,8 @@ public class UINavigationControllerPlaceManager implements PlaceManager {
 	public void back() {
 		presenterStack.pop().onDeactivate();
 		UINavigationController navigationController = (UINavigationController) mainWindow
-				.getRootViewController();
-		navigationController.popViewController(true);
+				.rootViewController();
+		navigationController.popViewControllerAnimated(true);
 		if (!presenterStack.isEmpty()) {
 			presenterStack.peek().onActivate();
 		}

@@ -13,13 +13,16 @@ import org.nibiru.mobile.core.api.ui.mvp.PresenterMapper;
 import org.nibiru.mobile.core.api.ui.mvp.View;
 import org.nibiru.mobile.core.api.ui.place.Place;
 import org.nibiru.mobile.core.impl.common.BaseConfigurable;
-import org.robovm.apple.coregraphics.CGRect;
-import org.robovm.apple.uikit.UINavigationController;
-import org.robovm.apple.uikit.UIView;
-import org.robovm.apple.uikit.UIViewController;
-import org.robovm.apple.uikit.UIWindow;
 
 import com.google.common.collect.Maps;
+
+import ios.coregraphics.struct.CGPoint;
+import ios.coregraphics.struct.CGRect;
+import ios.coregraphics.struct.CGSize;
+import ios.uikit.UINavigationController;
+import ios.uikit.UIView;
+import ios.uikit.UIViewController;
+import ios.uikit.UIWindow;
 
 public class UINavigationControllerPlace extends BaseConfigurable<Place>
 		implements Place, Identifiable<String> {
@@ -79,25 +82,26 @@ public class UINavigationControllerPlace extends BaseConfigurable<Place>
 		}
 
 		UINavigationController navigationController = (UINavigationController) mainWindow
-				.getRootViewController();
-		UIViewController viewController = new UIViewController();
+				.rootViewController();
+		UIViewController viewController = UIViewController.alloc().init();
 		
-		double barHeight = navigationController.getNavigationBar().getFrame().getHeight() * 1.5; // TODO: Find the way to remove the navigation bar!
-		UIView container = new UIView(new CGRect(0, 0, view.getFrame().getWidth(), view.getFrame().getHeight() + barHeight)); 
-		view.setFrame(new CGRect(0, barHeight, view.getFrame().getWidth(), view.getFrame().getHeight()));
+		double barHeight = navigationController.navigationBar().frame().size().height() * 1.5; // TODO: Find the way to remove the navigation bar!
+		UIView container = UIView.alloc().init();
+		container.setFrame(new CGRect(new CGPoint(0, 0), new CGSize(view.frame().size().width(), view.frame().size().height() + barHeight)));
+		view.setFrame(new CGRect(new CGPoint(0, barHeight), new CGSize(view.frame().size().width(), view.frame().size().height())));
 		container.addSubview(view);
 		viewController.setView(container);
 		if (!push) {
-			navigationController.getView().removeFromSuperview();
+			navigationController.view().removeFromSuperview();
 			navigationController = navigationControllerProvider.get();
 			mainWindow
 					.setRootViewController(navigationController);
-			mainWindow.addSubview(navigationController.getView());
+			mainWindow.addSubview(navigationController.view());
 			
 			presenterStack.clear();
 		}
 		
-		navigationController.pushViewController(viewController, true);
+		navigationController.pushViewControllerAnimated(viewController, true);
 		presenterStack.push(presenter);
 		presenter.go(this);
 		presenter.onActivate();

@@ -2,22 +2,29 @@ package org.nibiru.mobile.ios.ui;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
+import javax.inject.Inject;
+
 import org.nibiru.mobile.core.api.ui.Looper;
-import org.robovm.apple.foundation.NSObject;
-import org.robovm.objc.Selector;
-import org.robovm.objc.annotation.Method;
+
+import com.intel.moe.natj.objc.SEL;
+
+import ios.NSObject;
 
 public class NSThreadLooper extends NSObject implements Looper {
-	private static final Selector run = Selector.register("run:");
+	private static final SEL run = new SEL("run:");
+
+	@Inject
+	public NSThreadLooper() {
+		super(NSObject.alloc().init().getPeer());
+	}
 
 	@Override
 	public void post(Runnable runnable) {
 		checkNotNull(runnable);
-		performSelectorOnMainThread(run, new NSRunnableDecorator(runnable),
+		performSelectorOnMainThreadWithObjectWaitUntilDone(run, new NSRunnableDecorator(runnable),
 				false);
 	}
 
-	@Method
 	public void run(NSRunnableDecorator runnable) {
 		runnable.run();
 	}
@@ -27,6 +34,7 @@ public class NSThreadLooper extends NSObject implements Looper {
 		private final Runnable decorated;
 
 		private NSRunnableDecorator(Runnable decorated) {
+			super(NSObject.alloc().init().getPeer());
 			this.decorated = decorated;
 		}
 
