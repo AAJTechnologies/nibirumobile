@@ -10,17 +10,29 @@ import ar.com.oxen.nibiru.mobile.gwt.ui.SchedulerLooper;
 import ar.com.oxen.nibiru.mobile.wp.app.WindowsPhoneBootstrap;
 import ar.com.oxen.nibiru.mobile.wp.ui.WindowsPhoneAlertManager;
 import ar.com.oxen.nibiru.mobile.wp.ui.place.WindowsPhonePlaceManager;
+import dagger.Module;
+import dagger.Provides;
 
-import com.google.gwt.inject.client.AbstractGinModule;
+@Module
+public class DefaultWindowsPhoneUiModule {
+	@Provides
+	public AlertManager getAlertManager(WindowsPhoneAlertManager manager) {
+		return manager;
+	}
 
-public class DefaultWindowsPhoneUiModule extends AbstractGinModule {
-	@Override
-	protected void configure() {
-		bind(AlertManager.class).to(WindowsPhoneAlertManager.class);
-		bind(Looper.class).to(SchedulerLooper.class);
+	@Provides
+	public Looper getLooper(SchedulerLooper looper) {
+		return looper;
+	}
 
-		bind(Bootstrap.class).to(WindowsPhoneBootstrap.class);
-		bind(PlaceManager.class).to(WindowsPhonePlaceManager.class).in(
-				Singleton.class);
+	@Provides
+	public Bootstrap getBootstrap(WindowsPhoneBootstrap bootstrap) {
+		return bootstrap;
+	}
+
+	@Provides
+	@Singleton
+	public PlaceManager getPlaceManager(WindowsPhonePlaceManager manager) {
+		return manager;
 	}
 }

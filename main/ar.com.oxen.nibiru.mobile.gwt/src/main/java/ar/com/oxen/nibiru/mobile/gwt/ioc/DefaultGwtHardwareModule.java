@@ -2,13 +2,13 @@ package ar.com.oxen.nibiru.mobile.gwt.ioc;
 
 import ar.com.oxen.nibiru.mobile.core.api.geolocation.GeolocationManager;
 import ar.com.oxen.nibiru.mobile.gwt.geolocation.PhoneGapGeolocationManager;
+import dagger.Module;
+import dagger.Provides;
 
-import com.google.gwt.inject.client.AbstractGinModule;
-
-public class DefaultGwtHardwareModule extends AbstractGinModule {
-
-	@Override
-	protected void configure() {
-		bind(GeolocationManager.class).to(PhoneGapGeolocationManager.class);
+@Module
+public class DefaultGwtHardwareModule {
+	@Provides
+	public GeolocationManager getBootstrap(PhoneGapGeolocationManager manager) {
+		return manager;
 	}
 }

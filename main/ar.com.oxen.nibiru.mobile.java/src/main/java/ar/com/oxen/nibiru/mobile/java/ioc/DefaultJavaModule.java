@@ -1,20 +1,27 @@
 package ar.com.oxen.nibiru.mobile.java.ioc;
 
-import org.apache.http.client.HttpClient;
-import org.apache.http.impl.client.DefaultHttpClient;
-
-import com.google.inject.AbstractModule;
-
 import ar.com.oxen.nibiru.mobile.core.api.http.HttpManager;
 import ar.com.oxen.nibiru.mobile.core.api.serializer.Serializer;
-import ar.com.oxen.nibiru.mobile.java.http.httpclient.HttpClientHttpManager;
+import ar.com.oxen.nibiru.mobile.java.http.okhttp.OkHttpHttpManager;
 import ar.com.oxen.nibiru.mobile.java.serializer.jackson.JacksonSerializer;
+import dagger.Module;
+import dagger.Provides;
+import okhttp3.OkHttpClient;
 
-public class DefaultJavaModule extends AbstractModule {
-	@Override
-	protected void configure() {
-		bind(HttpClient.class).to(DefaultHttpClient.class);
-		bind(HttpManager.class).to(HttpClientHttpManager.class);
-		bind(Serializer.class).to(JacksonSerializer.class);
+@Module
+public class DefaultJavaModule {
+	@Provides
+	public OkHttpClient  getOkHttpClient () {
+		return new OkHttpClient();
+	}
+
+	@Provides
+	public HttpManager getHttpManager(OkHttpHttpManager manager) {
+		return manager;
+	}
+
+	@Provides
+	public Serializer getSerializer(JacksonSerializer serializer) {
+		return serializer;
 	}
 }

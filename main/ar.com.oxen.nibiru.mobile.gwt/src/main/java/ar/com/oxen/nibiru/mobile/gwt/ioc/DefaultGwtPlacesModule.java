@@ -3,10 +3,9 @@ package ar.com.oxen.nibiru.mobile.gwt.ioc;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import com.google.gwt.activity.shared.ActivityMapper;
-import com.google.gwt.inject.client.AbstractGinModule;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryMapper;
-import com.google.inject.Provides;
 
 import ar.com.oxen.nibiru.mobile.core.api.app.Bootstrap;
 import ar.com.oxen.nibiru.mobile.core.api.ui.place.PlaceManager;
@@ -14,16 +13,29 @@ import ar.com.oxen.nibiru.mobile.gwt.app.GwtPlacesBootstrap;
 import ar.com.oxen.nibiru.mobile.gwt.ui.place.DefaultActivityMapper;
 import ar.com.oxen.nibiru.mobile.gwt.ui.place.DefaultPlaceHistoryMapper;
 import ar.com.oxen.nibiru.mobile.gwt.ui.place.GwtPlaceManager;
+import dagger.Module;
+import dagger.Provides;
 
-public class DefaultGwtPlacesModule extends AbstractGinModule {
+@Module
+public class DefaultGwtPlacesModule {
+	@Provides
+	public Bootstrap getBootstrap(GwtPlacesBootstrap bootstrap) {
+		return bootstrap;
+	}
 
-	@Override
-	protected void configure() {
-		bind(Bootstrap.class).to(GwtPlacesBootstrap.class);
-		bind(PlaceManager.class).to(GwtPlaceManager.class);
+	@Provides
+	public PlaceManager getPlaceManager(GwtPlaceManager manager) {
+		return manager;
+	}
 
-		bind(ActivityMapper.class).to(DefaultActivityMapper.class);
-		bind(PlaceHistoryMapper.class).to(DefaultPlaceHistoryMapper.class);
+	@Provides
+	public ActivityMapper getActivityMapper(DefaultActivityMapper mapper) {
+		return mapper;
+	}
+
+	@Provides
+	public PlaceHistoryMapper getPlaceHistoryMapper() {
+		return GWT.create(DefaultPlaceHistoryMapper.class);
 	}
 
 	@Provides

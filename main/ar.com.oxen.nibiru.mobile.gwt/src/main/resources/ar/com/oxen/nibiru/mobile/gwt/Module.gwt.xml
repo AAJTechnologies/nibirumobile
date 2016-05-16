@@ -4,7 +4,6 @@
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name='com.google.gwt.activity.Activity' />
 	<inherits name='com.google.gwt.place.Place' />
-	<inherits name="com.google.gwt.inject.Inject" />
 	<inherits name='com.gwtmobile.persistence.gwtmobile_persistence' />
 	<inherits name='com.googlecode.gwtphonegap.PhoneGap' />
 	<inherits name="com.google.gwt.http.HTTP" />

@@ -1,7 +1,5 @@
 package ar.com.oxen.nibiru.mobile.android.ioc;
 
-import com.google.inject.AbstractModule;
-
 import ar.com.oxen.nibiru.mobile.android.app.AndroidBootstrap;
 import ar.com.oxen.nibiru.mobile.android.event.BroadcastEventBus;
 import ar.com.oxen.nibiru.mobile.android.preferences.SharedPreferencesImpl;
@@ -18,17 +16,48 @@ import ar.com.oxen.nibiru.mobile.core.api.ui.Looper;
 import ar.com.oxen.nibiru.mobile.core.api.ui.place.PlaceManager;
 import ar.com.oxen.nibiru.mobile.java.async.AsyncManager;
 import ar.com.oxen.nibiru.mobile.java.async.ThreadAsyncManager;
+import dagger.Module;
+import dagger.Provides;
 
-public class DefaultAndroidModule extends AbstractModule {
-	@Override
-	protected void configure() {
-		bind(Bootstrap.class).to(AndroidBootstrap.class);
-		bind(AlertManager.class).to(DialogAlertManager.class);
-		bind(Looper.class).to(HandlerLooper.class);
-		bind(PlaceManager.class).to(IntentPlaceManager.class);
-		bind(EventBus.class).to(BroadcastEventBus.class);
-		bind(Preferences.class).to(SharedPreferencesImpl.class);
-		bind(AsyncManager.class).to(ThreadAsyncManager.class);
-		bind(DisplayInfo.class).to(AndroidDisplayInfo.class);
+@Module
+public class DefaultAndroidModule {
+	@Provides
+	public Bootstrap getBootstrap(AndroidBootstrap bootstrap) {
+		return bootstrap;
+	}
+
+	@Provides
+	public AlertManager getAlertManager(DialogAlertManager manager) {
+		return manager;
+	}
+
+	@Provides
+	public Looper getLooper(HandlerLooper looper) {
+		return looper;
+	}
+
+	@Provides
+	public PlaceManager getPlaceManager(IntentPlaceManager manager) {
+		return manager;
+	}
+
+	@Provides
+	public EventBus getEventBus(BroadcastEventBus eventBus) {
+		return eventBus;
+	}
+
+	@Provides
+	public Preferences getPreferences(SharedPreferencesImpl preferences) {
+		return preferences;
+	}
+
+	@Provides
+	public AsyncManager getAsyncManager(ThreadAsyncManager manager) {
+		return manager;
+	}
+
+	@Provides
+	public DisplayInfo getDisplayInfo(AndroidDisplayInfo info) {
+		return info;
 	}
 }

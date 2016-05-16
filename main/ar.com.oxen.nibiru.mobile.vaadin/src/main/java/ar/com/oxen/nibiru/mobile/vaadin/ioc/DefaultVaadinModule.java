@@ -1,7 +1,5 @@
 package ar.com.oxen.nibiru.mobile.vaadin.ioc;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.servlet.SessionScoped;
 import com.vaadin.server.UIProvider;
 
 import ar.com.oxen.nibiru.mobile.core.api.app.Bootstrap;
@@ -19,17 +17,50 @@ import ar.com.oxen.nibiru.mobile.vaadin.preferences.DummyPreferences;
 import ar.com.oxen.nibiru.mobile.vaadin.ui.DummyLooper;
 import ar.com.oxen.nibiru.mobile.vaadin.ui.ModalWindowAlertManager;
 import ar.com.oxen.nibiru.mobile.vaadin.ui.place.UIPlaceManager;
+import dagger.Module;
+import dagger.Provides;
 
-public class DefaultVaadinModule extends AbstractModule {
-	@Override
-	protected void configure() {
-		bind(Bootstrap.class).to(VaadinBootstrap.class);
-		bind(AlertManager.class).to(ModalWindowAlertManager.class);
-		bind(Looper.class).to(DummyLooper.class);
-		bind(PlaceManager.class).to(UIPlaceManager.class).in(SessionScoped.class);
-		bind(EventBus.class).to(GuavaEventBus.class).in(SessionScoped.class);
-		bind(Preferences.class).to(DummyPreferences.class);
-		bind(AsyncManager.class).to(SequentialAsyncManager.class);
-		bind(UIProvider.class).to(NibiruUiProvider.class);
+@Module
+public class DefaultVaadinModule {
+	@Provides
+	public Bootstrap getBootstrap(VaadinBootstrap bootsrap) {
+		return bootsrap;
+	}
+
+	@Provides
+	public AlertManager getAlertManager(ModalWindowAlertManager manager) {
+		return manager;
+	}
+
+	@Provides
+	public Looper getLooper(DummyLooper looper) {
+		return looper;
+	}
+
+	@Provides
+	// Session scoped?
+	public PlaceManager getPlaceManager(UIPlaceManager manager) {
+		return manager;
+	}
+
+	@Provides
+	// Session scoped?
+	public EventBus getEventBus(GuavaEventBus eventBus) {
+		return eventBus;
+	}
+
+	@Provides
+	public Preferences getPreferences(DummyPreferences preferences) {
+		return preferences;
+	}
+
+	@Provides
+	public AsyncManager getAsyncManager(SequentialAsyncManager manager) {
+		return manager;
+	}
+
+	@Provides
+	public UIProvider getUIProvider(NibiruUiProvider uiProvider) {
+		return uiProvider;
 	}
 }

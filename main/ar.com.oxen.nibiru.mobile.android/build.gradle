@@ -3,9 +3,6 @@ apply plugin: 'me.tatarka.retrolambda'
 dependencies {
     compile project(":ar.com.oxen.nibiru.mobile.java")
     compile "com.google.android:android:${androidVersion}"
-	compile ("org.roboguice:roboguice:2.0") {
-		exclude group: 'com.google.inject', module: 'guice'
-	}
 	compile "com.j256.ormlite:ormlite-core:4.47"
 	compile "com.j256.ormlite:ormlite-android:4.47"
 }

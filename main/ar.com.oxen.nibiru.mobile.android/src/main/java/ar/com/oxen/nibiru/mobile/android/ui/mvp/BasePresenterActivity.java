@@ -1,8 +1,8 @@
 package ar.com.oxen.nibiru.mobile.android.ui.mvp;
 
 import javax.annotation.Nullable;
-import javax.inject.Inject;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.ContextMenu;
@@ -14,20 +14,12 @@ import ar.com.oxen.nibiru.mobile.core.api.ui.mvp.Presenter;
 import ar.com.oxen.nibiru.mobile.core.api.ui.mvp.PresenterMapper;
 import ar.com.oxen.nibiru.mobile.core.api.ui.mvp.View;
 import ar.com.oxen.nibiru.mobile.core.api.ui.place.Place;
-import roboguice.activity.RoboActivity;
-import roboguice.inject.ContextScope;
 
 
 /**
  * An activity that delegates logic to a presenter.
  */
-public class PresenterActivity extends RoboActivity {
-	@Inject
-	private PresenterMapper presenterMapper;
-
-	@Inject
-	protected ContextScope scope;
-
+public abstract class BasePresenterActivity extends Activity {
 	private Presenter<?> presenter;
 	private AndroidView androidView;
 
@@ -37,14 +29,7 @@ public class PresenterActivity extends RoboActivity {
 
 		Place place = new IntentPlace(getIntent(), this);
 
-		synchronized (ContextScope.class) {
-			scope.enter(this);
-			try {
-				presenter = presenterMapper.getPresenter(place.getId());
-			} finally {
-				scope.exit(this);
-			}
-		}
+		presenter = getPresenterMapper().getPresenter(place.getId());
 
 		View view = presenter.getView();
 		if (view instanceof AndroidView) {
@@ -56,6 +41,8 @@ public class PresenterActivity extends RoboActivity {
 		setContentView(androidView.asNative());
 		presenter.go(place);
 	}
+
+	protected abstract PresenterMapper getPresenterMapper();
 
 	@Override
 	protected void onStop() {

@@ -6,9 +6,6 @@ import org.robovm.apple.uikit.UINavigationController;
 import org.robovm.apple.uikit.UIScreen;
 import org.robovm.apple.uikit.UIWindow;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Provides;
-
 import ar.com.oxen.nibiru.mobile.core.api.app.Bootstrap;
 import ar.com.oxen.nibiru.mobile.core.api.event.EventBus;
 import ar.com.oxen.nibiru.mobile.core.api.preferences.Preferences;
@@ -25,22 +22,57 @@ import ar.com.oxen.nibiru.mobile.ios.ui.place.UINavigationControllerPlaceManager
 import ar.com.oxen.nibiru.mobile.java.async.AsyncManager;
 import ar.com.oxen.nibiru.mobile.java.async.ThreadAsyncManager;
 import ar.com.oxen.nibiru.mobile.java.event.guava.GuavaEventBus;
+import dagger.Module;
+import dagger.Provides;
 
-public class DefaultIosModule extends AbstractModule {
-	@Override
-	protected void configure() {
-		bind(Bootstrap.class).to(IosBootstrap.class);
-		bind(AlertManager.class).to(UIAlertControllerAlertManager.class);
-		bind(Looper.class).to(NSThreadLooper.class);
-		bind(PlaceManager.class).to(UINavigationControllerPlaceManager.class)
-				.in(Singleton.class);
-		bind(EventBus.class).to(GuavaEventBus.class);
-		bind(Preferences.class).to(DummyPreferences.class);
-		bind(AsyncManager.class).to(ThreadAsyncManager.class);
-		bind(DisplayInfo.class).to(IOSDisplayInfo.class);
+@Module
+public class DefaultIosModule {
+	@Provides
+	public Bootstrap getBootstrap(IosBootstrap bootstrap) {
+		return bootstrap;
+	}
 
-		bind(UIWindow.class).toInstance(
-				new UIWindow(UIScreen.getMainScreen().getBounds()));
+	@Provides
+	public AlertManager getAlertManager(UIAlertControllerAlertManager manager) {
+		return manager;
+	}
+
+	@Provides
+	public Looper getLooper(NSThreadLooper looper) {
+		return looper;
+	}
+
+	@Provides
+	@Singleton
+	public PlaceManager getPlaceManager(UINavigationControllerPlaceManager manager) {
+		return manager;
+	}
+
+	@Provides
+	@Singleton
+	public EventBus getEventBus(GuavaEventBus eventBus) {
+		return eventBus;
+	}
+
+	@Provides
+	public Preferences getPreferences(DummyPreferences preferences) {
+		return preferences;
+	}
+
+	@Provides
+	public AsyncManager getAsyncManager(ThreadAsyncManager manager) {
+		return manager;
+	}
+
+	@Provides
+	public DisplayInfo getDisplayInfo(IOSDisplayInfo displayInfo) {
+		return displayInfo;
+	}
+
+	@Provides
+	@Singleton
+	public UIWindow getWindow() {
+		return new UIWindow(UIScreen.getMainScreen().getBounds());
 	}
 
 	@Provides

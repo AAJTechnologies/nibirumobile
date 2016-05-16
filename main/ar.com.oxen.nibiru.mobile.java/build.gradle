@@ -2,6 +2,6 @@ apply plugin: 'me.tatarka.retrolambda'
 
 dependencies {
 	compile project(":ar.com.oxen.nibiru.mobile.core")
-	compile "org.apache.httpcomponents:httpclient:4.1.1"
+	compile "com.squareup.okhttp3:okhttp:3.3.1"
 	compile "org.codehaus.jackson:jackson-mapper-asl:1.9.8"
 }

@@ -6,15 +6,23 @@ import ar.com.oxen.nibiru.mobile.gwt.app.AppWidgetBootstrap;
 import ar.com.oxen.nibiru.mobile.gwt.app.GwtAppWidgetBootstrap;
 import ar.com.oxen.nibiru.mobile.gwt.ui.GwtAlertManager;
 import ar.com.oxen.nibiru.mobile.gwt.ui.SchedulerLooper;
+import dagger.Module;
+import dagger.Provides;
 
-import com.google.gwt.inject.client.AbstractGinModule;
+@Module
+public class DefaultGwtUiModule {
+	@Provides
+	public AlertManager getAlertManager(GwtAlertManager manager) {
+		return manager;
+	}
 
-public class DefaultGwtUiModule extends AbstractGinModule {
+	@Provides
+	public Looper getLooper(SchedulerLooper looper) {
+		return looper;
+	}
 
-	@Override
-	protected void configure() {
-		bind(AlertManager.class).to(GwtAlertManager.class);
-		bind(Looper.class).to(SchedulerLooper.class);
-		bind(AppWidgetBootstrap.class).to(GwtAppWidgetBootstrap.class);
+	@Provides
+	public AppWidgetBootstrap getAppWidgetBootstrap(GwtAppWidgetBootstrap appWidgetBootstrap) {
+		return appWidgetBootstrap;
 	}
 }

@@ -16,15 +16,11 @@ import org.robovm.apple.foundation.NSSearchPathDirectory;
 import org.robovm.apple.foundation.NSSearchPathDomainMask;
 import org.robovm.apple.foundation.NSURL;
 
-import com.google.common.base.Throwables;
-import com.google.inject.AbstractModule;
-import com.google.inject.Provides;
+import dagger.Module;
+import dagger.Provides;
 
-public class DefaultCoreDataModule extends AbstractModule {
-
-	@Override
-	protected void configure() {
-	}
+@Module
+public class DefaultCoreDataModule {
 
 	@Provides
 	@Singleton
@@ -46,7 +42,7 @@ public class DefaultCoreDataModule extends AbstractModule {
 			persistentStoreCoordinator.addPersistentStore(NSPersistentStoreType.SQLite, null, nsu, null);
 			return persistentStoreCoordinator;
 		} catch (NSErrorException e) {
-			throw Throwables.propagate(e);
+			throw new RuntimeException(e);
 		}
 	}
 

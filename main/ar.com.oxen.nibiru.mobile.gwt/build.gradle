@@ -6,9 +6,6 @@ dependencies {
 	compile project(":ar.com.oxen.nibiru.mobile.core")
 	compile "com.google.gwt:gwt-user:${gwtVersion}"
 	compile "com.google.guava:guava-gwt:${guavaVersion}"
-	compile("com.google.gwt.inject:gin:2.1.2") {
-		exclude group: 'com.google.inject', module: 'guice'
-	}
 	compile "com.aajtech.gwtmobile:persistence:1.0-SNAPSHOT"
 	compile "org.json:json:20090211"
 	compile "com.googlecode.gwtphonegap:gwtphonegap:3.5.0.1"
