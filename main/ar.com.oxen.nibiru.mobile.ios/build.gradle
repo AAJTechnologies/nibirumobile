@@ -1,5 +1,0 @@
-dependencies {
-    compile project(":ar.com.oxen.nibiru.mobile.java")
-	compile "org.robovm:robovm-cocoatouch:${robovmVersion}"
-	compile "org.robovm:robovm-rt:${robovmVersion}"
-}
