@@ -1,0 +1,5 @@
+dependencies {
+    compile project(":org.nibiru.mobile.java")
+	compile "org.robovm:robovm-cocoatouch:${robovmVersion}"
+	compile "org.robovm:robovm-rt:${robovmVersion}"
+}

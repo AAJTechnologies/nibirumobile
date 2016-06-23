@@ -1,0 +1,10 @@
+apply plugin: 'me.tatarka.retrolambda'
+
+jar {
+   from sourceSets.main.java.srcDirs 
+}
+
+dependencies {
+	compile project(":org.nibiru.mobile.core")
+	compile "com.aajtech.nibiru.ui:org.nibiru.ui.core:0.1-SNAPSHOT"
+}

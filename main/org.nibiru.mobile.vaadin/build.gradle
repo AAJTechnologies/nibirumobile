@@ -1,7 +1,7 @@
 def vaadinVersion = "7.5.5"
 
 dependencies {
-    compile project(":ar.com.oxen.nibiru.mobile.java")
+    compile project(":org.nibiru.mobile.java")
 	compile "com.vaadin:vaadin-client-compiled:${vaadinVersion}"
 	compile "com.vaadin:vaadin-server:${vaadinVersion}"
 	compile "com.vaadin:vaadin-themes:7.5.4"
