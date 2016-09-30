@@ -2,8 +2,9 @@ project.ext {
 	nibiruModelVersion = '0.1-SNAPSHOT'
 	nibiruUiVersion = '0.1-SNAPSHOT'
 	androidVersion = '2.1.2'
-	gwtVersion = '2.8.0-beta1'
+	gwtVersion = '2.8.0-rc3'
 	guavaVersion = '20.0-SNAPSHOT'
+	daggerVersion = '2.7'
 }
 
 allprojects {
@@ -68,7 +69,7 @@ subprojects {
 
 	dependencies {
 		testCompile "junit:junit:4.12"
-		compile 'com.google.dagger:dagger:2.4'
-		provided 'com.google.dagger:dagger-compiler:2.4'
+		compile "com.google.dagger:dagger:${daggerVersion}"
+		provided "com.google.dagger:dagger-compiler:${daggerVersion}"
 	}
 }
