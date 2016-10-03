@@ -6,39 +6,44 @@ import javax.inject.Inject;
 
 import org.nibiru.mobile.core.api.ui.Looper;
 
-import com.intel.moe.natj.objc.SEL;
+import com.intel.moe.natj.general.Pointer;
+import com.intel.moe.natj.objc.ann.Selector;
 
 import ios.NSObject;
+import ios.foundation.c.Foundation;
 
-public class NSThreadLooper extends NSObject implements Looper {
-	private static final SEL run = new SEL("run:");
-
+public class NSThreadLooper implements Looper {
 	@Inject
 	public NSThreadLooper() {
-		super(NSObject.alloc().init().getPeer());
 	}
 
 	@Override
 	public void post(Runnable runnable) {
 		checkNotNull(runnable);
-		performSelectorOnMainThreadWithObjectWaitUntilDone(run, new NSRunnableDecorator(runnable),
-				false);
+		NSRunnableDecorator.alloc().initWithRunnable(runnable).performSelectorOnMainThreadWithObjectWaitUntilDone(
+				Foundation.NSSelectorFromString(NSRunnableDecorator.RUN_SELECTOR), null, false);
 	}
 
-	public void run(NSRunnableDecorator runnable) {
-		runnable.run();
-	}
+	private static class NSRunnableDecorator extends NSObject implements Runnable {
+		private static final String RUN_SELECTOR = "run";
 
-	private static class NSRunnableDecorator extends NSObject implements
-			Runnable {
-		private final Runnable decorated;
+		@Selector("alloc")
+		public static native NSRunnableDecorator alloc();
 
-		private NSRunnableDecorator(Runnable decorated) {
-			super(NSObject.alloc().init().getPeer());
+		private Runnable decorated;
+
+		protected NSRunnableDecorator(Pointer peer) {
+			super(peer);
+		}
+
+		public NSRunnableDecorator initWithRunnable(Runnable decorated) {
+			init();
 			this.decorated = decorated;
+			return this;
 		}
 
 		@Override
+		@Selector(RUN_SELECTOR)
 		public void run() {
 			decorated.run();
 		}
