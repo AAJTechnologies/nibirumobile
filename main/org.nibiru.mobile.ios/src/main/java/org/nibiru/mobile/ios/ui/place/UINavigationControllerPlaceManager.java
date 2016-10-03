@@ -14,8 +14,8 @@ import org.nibiru.mobile.core.api.ui.place.PlaceManager;
 
 import com.google.common.collect.Queues;
 
-import ios.uikit.UINavigationController;
-import ios.uikit.UIWindow;
+import apple.uikit.UINavigationController;
+import apple.uikit.UIWindow;
 
 public class UINavigationControllerPlaceManager implements PlaceManager {
 	private final UIWindow mainWindow;

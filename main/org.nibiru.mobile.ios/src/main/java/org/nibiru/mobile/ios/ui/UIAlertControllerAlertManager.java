@@ -10,12 +10,12 @@ import org.nibiru.mobile.core.api.ui.AlertManager;
 
 import com.google.common.base.Strings;
 
-import ios.uikit.UIAlertAction;
-import ios.uikit.UIAlertController;
-import ios.uikit.UIApplication;
-import ios.uikit.UINavigationController;
-import ios.uikit.UITextView;
-import ios.uikit.enums.UIAlertActionStyle;
+import apple.uikit.UIAlertAction;
+import apple.uikit.UIAlertController;
+import apple.uikit.UIApplication;
+import apple.uikit.UINavigationController;
+import apple.uikit.UITextView;
+import apple.uikit.enums.UIAlertActionStyle;
 
 // TODO: Internationalization.
 public class UIAlertControllerAlertManager implements AlertManager {

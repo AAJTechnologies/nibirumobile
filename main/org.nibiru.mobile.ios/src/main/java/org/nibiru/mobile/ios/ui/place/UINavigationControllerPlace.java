@@ -16,13 +16,13 @@ import org.nibiru.mobile.core.impl.common.BaseConfigurable;
 
 import com.google.common.collect.Maps;
 
-import ios.coregraphics.struct.CGPoint;
-import ios.coregraphics.struct.CGRect;
-import ios.coregraphics.struct.CGSize;
-import ios.uikit.UINavigationController;
-import ios.uikit.UIView;
-import ios.uikit.UIViewController;
-import ios.uikit.UIWindow;
+import apple.coregraphics.struct.CGPoint;
+import apple.coregraphics.struct.CGRect;
+import apple.coregraphics.struct.CGSize;
+import apple.uikit.UINavigationController;
+import apple.uikit.UIView;
+import apple.uikit.UIViewController;
+import apple.uikit.UIWindow;
 
 public class UINavigationControllerPlace extends BaseConfigurable<Place>
 		implements Place, Identifiable<String> {

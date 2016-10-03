@@ -8,9 +8,9 @@ import javax.inject.Provider;
 import org.nibiru.mobile.core.api.app.Bootstrap;
 import org.nibiru.mobile.core.api.app.EntryPoint;
 
-import ios.uikit.UIColor;
-import ios.uikit.UINavigationController;
-import ios.uikit.UIWindow;
+import apple.uikit.UIColor;
+import apple.uikit.UINavigationController;
+import apple.uikit.UIWindow;
 
 public class IosBootstrap implements Bootstrap {
 	private final EntryPoint entryPoint;
