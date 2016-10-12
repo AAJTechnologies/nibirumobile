@@ -1,9 +1,0 @@
-jar {
-   from sourceSets.main.java.srcDirs 
-}
-
-dependencies {
-	compile project(":ar.com.oxen.nibiru.mobile.gwt")
-	compile 'org.timepedia.exporter:gwtexporter:2.5.1'
-	compile files("../../lib/com.gwtmobile.persistence-1.0.jar")
-}

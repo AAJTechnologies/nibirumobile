@@ -1,0 +1,4 @@
+dependencies {
+    compile project(":org.nibiru.mobile.java")
+    compile fileTree(dir: 'lib', include: '*.jar')
+}
