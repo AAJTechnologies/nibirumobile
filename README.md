@@ -18,13 +18,13 @@ The components are based on [JSR330](https://jcp.org/en/jsr/detail?id=330) depen
 just to name the main ones.
 
 Please check the reference documentation and demo:
- * [Reference (WIP)](https://github.com/AAJTechnologies/nibirumobile/wiki/reference)
+ * [Reference (WIP)](../../wiki/reference)
  * [Online demo](http://nibiru.oxen.com.ar) (Chrome and Safari only, since it is based on [MGWT](http://www.m-gwt.com/))
- * [Android demo](https://github.com/AAJTechnologies/nibirumobile/raw/master/sample/dist/NibiruMobileDemo.apk) (Android 2.2 required)
- * [Demo app screenshots](https://github.com/AAJTechnologies/nibirumobile/wiki/SampleAppScreenshots)
+ * [Android demo](../../raw/master/sample/dist/NibiruMobileDemo.apk) (Android 2.2 required)
+ * [Demo app screenshots](../../wiki/SampleAppScreenshots)
 
-Look at the [Getting Started](https://github.com/AAJTechnologies/nibirumobile/wiki/GettingStarted) section for a quick start. Also check the [brainstorming](https://github.com/AAJTechnologies/nibirumobile/wiki/Brainstorming) section for ideas about the future of the framework.
+Look at the [Getting Started](../../wiki/GettingStarted) section for a quick start. Also check the [brainstorming](../../wiki/Brainstorming) section for ideas about the future of the framework.
 
-Believe it or not, there are [people using](https://github.com/AAJTechnologies/nibirumobile/wiki/WhoIsUsingThis) this framework!
+Believe it or not, there are [people using](../../wiki/WhoIsUsingThis) this framework!
 
 The API is still unstable. Wer'e working on many improvements, as you can see on the [releases page](../../wiki/Releases).
