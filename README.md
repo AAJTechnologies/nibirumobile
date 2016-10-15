@@ -1,6 +1,4 @@
-Nibiru Mobile is a framework for developing portable mobile applications. It was originally created at Oxen and is currently developed and improved by AAJ Technologies.
-
-You can use it in order to create portable HTML-based (GWT) application and/or native Android/iOS applications reusing most of the code.
+Nibiru Mobile is a framework for developing portable mobile applications. You can use it in order to create portable HTML-based (GWT) application and/or native Android/iOS applications reusing most of the code.
 
 It provides:
  * A common API for components typically used on mobile development.
@@ -29,4 +27,4 @@ Look at the [Getting Started](https://github.com/AAJTechnologies/nibirumobile/wi
 
 Believe it or not, there are [people using](https://github.com/AAJTechnologies/nibirumobile/wiki/WhoIsUsingThis) this framework!
 
-The API is still unstable. Wer'e working on many improvements, as you can see on the [releases page](https://github.com/AAJTechnologies/nibirumobile/wiki/Releases).
+The API is still unstable. Wer'e working on many improvements, as you can see on the [releases page](../../wiki/Releases).
