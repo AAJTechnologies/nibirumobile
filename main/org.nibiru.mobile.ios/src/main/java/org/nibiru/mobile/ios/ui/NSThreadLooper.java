@@ -4,13 +4,12 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import javax.inject.Inject;
 
+import org.moe.natj.general.Pointer;
+import org.moe.natj.objc.ann.Selector;
 import org.nibiru.mobile.core.api.ui.Looper;
 
-import com.intel.moe.natj.general.Pointer;
-import com.intel.moe.natj.objc.ann.Selector;
-
-import ios.NSObject;
-import ios.foundation.c.Foundation;
+import apple.NSObject;
+import apple.foundation.c.Foundation;
 
 public class NSThreadLooper implements Looper {
 	@Inject

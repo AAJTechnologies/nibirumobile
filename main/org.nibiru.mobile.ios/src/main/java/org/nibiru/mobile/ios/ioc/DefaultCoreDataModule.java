@@ -4,17 +4,17 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import javax.inject.Singleton;
 
+import apple.coredata.NSManagedObjectContext;
+import apple.coredata.NSManagedObjectModel;
+import apple.coredata.NSPersistentStoreCoordinator;
+import apple.foundation.NSArray;
+import apple.foundation.NSBundle;
+import apple.foundation.NSFileManager;
+import apple.foundation.NSURL;
+import apple.foundation.enums.NSSearchPathDirectory;
+import apple.foundation.enums.NSSearchPathDomainMask;
 import dagger.Module;
 import dagger.Provides;
-import ios.coredata.NSManagedObjectContext;
-import ios.coredata.NSManagedObjectModel;
-import ios.coredata.NSPersistentStoreCoordinator;
-import ios.foundation.NSArray;
-import ios.foundation.NSBundle;
-import ios.foundation.NSFileManager;
-import ios.foundation.NSURL;
-import ios.foundation.enums.NSSearchPathDirectory;
-import ios.foundation.enums.NSSearchPathDomainMask;
 
 @Module
 public class DefaultCoreDataModule {

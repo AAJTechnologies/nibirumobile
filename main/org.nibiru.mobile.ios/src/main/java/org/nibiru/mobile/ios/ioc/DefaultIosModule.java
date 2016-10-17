@@ -19,11 +19,12 @@ import org.nibiru.mobile.java.async.AsyncManager;
 import org.nibiru.mobile.java.async.ThreadAsyncManager;
 import org.nibiru.mobile.java.event.guava.GuavaEventBus;
 
+import apple.uikit.UINavigationController;
+import apple.uikit.UIScreen;
+import apple.uikit.UIWindow;
 import dagger.Module;
 import dagger.Provides;
-import ios.uikit.UINavigationController;
-import ios.uikit.UIScreen;
-import ios.uikit.UIWindow;
+
 
 @Module
 public class DefaultIosModule {

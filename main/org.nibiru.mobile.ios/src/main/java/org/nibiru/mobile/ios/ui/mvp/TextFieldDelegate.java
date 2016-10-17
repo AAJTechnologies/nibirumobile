@@ -1,7 +1,7 @@
 package org.nibiru.mobile.ios.ui.mvp;
 
-import ios.uikit.UITextField;
-import ios.uikit.protocol.UITextFieldDelegate;
+import apple.uikit.UITextField;
+import apple.uikit.protocol.UITextFieldDelegate;
 
 public class TextFieldDelegate implements UITextFieldDelegate {
 	@Override
