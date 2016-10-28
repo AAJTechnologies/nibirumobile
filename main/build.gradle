@@ -3,7 +3,7 @@ project.ext {
 	nibiruUiVersion = '0.1-SNAPSHOT'
 	androidVersion = '2.1.2'
 	gwtVersion = '2.8.0-rc3'
-	guavaVersion = '20.0-SNAPSHOT'
+	guavaVersion = '20.0-rc1'
 	daggerVersion = '2.7'
 }
 
