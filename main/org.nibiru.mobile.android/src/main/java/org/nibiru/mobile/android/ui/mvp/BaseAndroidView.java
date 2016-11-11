@@ -74,10 +74,6 @@ public class BaseAndroidView<V extends View> implements AndroidView {
 	}
 
 	@Override
-	public void onRestart() {
-	}
-
-	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 	}
 

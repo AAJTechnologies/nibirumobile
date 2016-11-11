@@ -13,10 +13,11 @@ import com.google.common.base.Preconditions;
 import org.nibiru.mobile.android.ui.place.IntentPlace;
 import org.nibiru.mobile.core.api.ui.mvp.Presenter;
 import org.nibiru.mobile.core.api.ui.mvp.PresenterMapper;
-import org.nibiru.mobile.core.api.ui.mvp.View;
+import android.view.View;
 import org.nibiru.mobile.core.api.ui.place.Place;
 
 import javax.annotation.Nullable;
+import javax.inject.Inject;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -26,30 +27,27 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * different activiy classes (app compat, for example)
  */
 public class PresenterAdapter {
-    private final Activity activity;
     private final PresenterMapper presenterMapper;
     private Presenter<?> presenter;
     private AndroidView androidView;
 
-    public PresenterAdapter(Activity activity, PresenterMapper presenterMapper) {
-        this.activity = checkNotNull(activity);
+    @Inject
+    public PresenterAdapter(PresenterMapper presenterMapper) {
         this.presenterMapper = checkNotNull(presenterMapper);
     }
 
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        Place place = new IntentPlace(activity.getIntent(), activity);
-
+    public View onCreate(Place place) {
         presenter = presenterMapper.getPresenter(place.getId());
 
-        View view = presenter.getView();
+        org.nibiru.mobile.core.api.ui.mvp.View view = presenter.getView();
         if (view instanceof AndroidView) {
             androidView = (AndroidView) view;
         } else {
-            androidView = new BaseAndroidView<android.view.View>((android.view.View) view.asNative());
+            androidView = new BaseAndroidView<>((View) view.asNative());
         }
         androidView.onCreate();
-        activity.setContentView(androidView.asNative());
         presenter.go(place);
+        return androidView.asNative();
     }
 
     public void onStop() {
@@ -68,7 +66,8 @@ public class PresenterAdapter {
         return androidView.onOptionsItemSelected(item);
     }
 
-    public void onCreateContextMenu(ContextMenu menu, android.view.View v,
+    public void onCreateContextMenu(ContextMenu menu,
+                                    View v,
                              ContextMenu.ContextMenuInfo menuInfo) {
         androidView.onCreateContextMenu(menu, v, menuInfo);
     }
@@ -86,10 +85,6 @@ public class PresenterAdapter {
         presenter.onDeactivate();
     }
 
-    public void onRestart() {
-        androidView.onRestart();
-    }
-
     public void onResume() {
         androidView.onResume();
         presenter.onActivate();
@@ -99,7 +94,9 @@ public class PresenterAdapter {
         androidView.onStart();
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode,
+                                 int resultCode,
+                                 Intent data) {
         androidView.onActivityResult(requestCode, resultCode, data);
     }
 }

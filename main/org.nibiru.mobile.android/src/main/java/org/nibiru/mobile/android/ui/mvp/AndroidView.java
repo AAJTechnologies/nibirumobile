@@ -39,8 +39,6 @@ public interface AndroidView extends View {
 
 	void onDestroy();
 
-	void onRestart();
-
 	void onActivityResult(int requestCode, int resultCode, Intent data);
 
 	boolean onKeyDown(int keyCode, KeyEvent event);

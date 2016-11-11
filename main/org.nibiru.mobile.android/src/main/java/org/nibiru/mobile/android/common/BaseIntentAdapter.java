@@ -11,7 +11,8 @@ import android.content.Intent;
 
 public abstract class BaseIntentAdapter<T> extends BaseConfigurable<T>
 		implements Identifiable<String> {
-	private final String ID_KEY = "nibiruPlaceId";
+	public final static String PREFIX = "org.nibiru.mobile.";
+	private final String ID_KEY = "nibiruId";
 	private final Intent intent;
 
 	public BaseIntentAdapter(Intent intent) {
