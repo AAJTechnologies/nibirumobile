@@ -7,6 +7,7 @@ import org.nibiru.ui.core.api.ClickHandler;
 import org.nibiru.ui.core.api.Container;
 import org.nibiru.ui.core.api.VerticalPanel;
 import org.nibiru.ui.core.api.Widget;
+import org.nibiru.ui.core.api.layout.Size;
 import org.nibiru.ui.core.impl.builder.ButtonBuilder;
 import org.nibiru.ui.core.impl.builder.HorizontalPanelBuilder;
 import org.nibiru.ui.core.impl.builder.VerticalPanelBuilder;
@@ -22,10 +23,14 @@ public abstract class MenuViewDecorator implements View {
 			Provider<VerticalPanelBuilder> verticalPanel) {
 		VerticalPanel menu;
 		navigationWidget = verticalPanel.get()
-				.add(titleContainer = verticalPanel.get().build())
+				.height(Size.MATCH_PARENT)
+				.width(Size.MATCH_PARENT)
+				.add(titleContainer = verticalPanel.get().height(Size.MATCH_PARENT).width(Size.MATCH_PARENT).build())
 				.add(horizontalPanel.get()
-						.add(menu = verticalPanel.get().build())
-						.add(contentContainer = verticalPanel.get().build())
+						.height(Size.MATCH_PARENT)
+						.width(Size.MATCH_PARENT)
+						.add(menu = verticalPanel.get().height(Size.MATCH_PARENT).width(Size.MATCH_PARENT).build())
+						.add(contentContainer = verticalPanel.get().height(Size.MATCH_PARENT).width(Size.MATCH_PARENT).build())
 						.build())
 				.build();
 		
