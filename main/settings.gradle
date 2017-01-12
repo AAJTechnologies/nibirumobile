@@ -1,6 +1,5 @@
 rootProject.name = 'nibiruMobile'
 
-include ':org.nibiru.mobile.ui'
 include ':org.nibiru.mobile.android'
 include ':org.nibiru.mobile.core'
 include ':org.nibiru.mobile.gwt'
