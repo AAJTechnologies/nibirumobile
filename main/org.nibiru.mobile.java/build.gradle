@@ -4,4 +4,5 @@ dependencies {
 	compile project(":org.nibiru.mobile.core")
 	compile "com.squareup.okhttp3:okhttp:3.3.1"
 	compile "org.codehaus.jackson:jackson-mapper-asl:1.9.8"
+	compile fileTree(dir: 'lib', include: '*.jar')
 }

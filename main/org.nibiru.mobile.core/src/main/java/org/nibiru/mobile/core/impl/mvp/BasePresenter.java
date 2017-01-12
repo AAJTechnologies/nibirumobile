@@ -3,6 +3,7 @@ package org.nibiru.mobile.core.impl.mvp;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import org.nibiru.mobile.core.api.async.Callback;
+import org.nibiru.mobile.core.api.common.Consumer;
 import org.nibiru.mobile.core.api.ui.AlertManager;
 import org.nibiru.mobile.core.api.ui.mvp.Presenter;
 import org.nibiru.mobile.core.api.ui.mvp.View;
@@ -54,9 +55,5 @@ abstract public class BasePresenter<V extends View> implements Presenter<V> {
 				func.accept(result);
 			}
 		};
-	}
-
-	public interface Consumer<T> {
-		void accept(T result);
 	}
 }
