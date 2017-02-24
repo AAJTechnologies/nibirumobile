@@ -4,82 +4,70 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import javax.annotation.Nullable;
 
-import org.nibiru.mobile.core.api.async.Callback;
-import org.nibiru.mobile.core.api.http.HttpCallback;
+import org.nibiru.mobile.core.api.async.Promise;
+import org.nibiru.mobile.core.api.http.HttpException;
 import org.nibiru.mobile.core.api.http.HttpManager;
 import org.nibiru.mobile.core.api.serializer.Serializer;
 
 public class JsonRpcService extends BaseService {
-	public JsonRpcService(String serviceName, HttpManager httpManager,
-			Serializer serializer) {
-		super(serviceName, httpManager, serializer);
-	}
+    public JsonRpcService(String serviceName, HttpManager httpManager,
+                          Serializer serializer) {
+        super(serviceName, httpManager, serializer);
+    }
 
-	@Override
-	public <T> void invoke(final String method, @Nullable final Object requestDto,
-			final Class<T> responseClass, Callback<T> callback) {
-		checkNotNull(method);
-		checkNotNull(requestDto);
-		checkNotNull(responseClass);
-		checkNotNull(callback);
-		getHttpManager().send(getServiceName(), callback,
-				new HttpCallback<T>() {
+    @Override
+    public <T> Promise<T, HttpException> invoke(String method,
+                                                @Nullable Object requestDto,
+                                                Class<T> responseClass) {
+        checkNotNull(method);
+        checkNotNull(requestDto);
+        checkNotNull(responseClass);
 
-					@Override
-					public String buildRequest() {
-						StringBuilder sb = new StringBuilder();
-						sb.append("{\"id\":1,\"jsonrpc\":\"jsonrpc\",\"method\":\"");
-						sb.append(method);
-						sb.append("\"");
-						if (requestDto != null) {
-							sb.append(",\"params\":[");
-							sb.append(getSerializer().serialize(requestDto));
-							sb.append("]");
-						}
-						sb.append("}");
-						return sb.toString();
-					}
+        StringBuilder request = new StringBuilder();
+        request.append("{\"id\":1,\"jsonrpc\":\"jsonrpc\",\"method\":\"");
+        request.append(method);
+        request.append("\"");
+        if (requestDto != null) {
+            request.append(",\"params\":[");
+            request.append(getSerializer().serialize(requestDto));
+            request.append("]");
+        }
+        request.append("}");
 
-					@Override
-					public T parseResponse(String responseMessage) {
-						return responseMessage != null ? getSerializer()
-								.deserialize(extractResult(responseMessage),
-										responseClass) : null;
-					}
+        return getHttpManager()
+                .send(getServiceName(), request.toString())
+                .map(parse(responseClass));
+    }
 
-				});
+    private String extractResult(String responseMessage) {
+        // TODO: no seria mas simple hacer una abstraccion de un parser de JSON?
+        String parameter = "\"result\":";
+        int start = responseMessage.indexOf(parameter);
 
-	}
+        if (start >= 0) {
+            start += parameter.length();
+            int end = start;
+            int nesting = 0;
+            char currentChar = responseMessage.charAt(end);
+            while (end <= responseMessage.length()
+                    && (nesting > 0 || (currentChar != ',' && currentChar != '}'))) {
 
-	private String extractResult(String responseMessage) {
-		// TODO: no seria mas simple hacer una abstraccion de un parser de JSON?
-		String parameter = "\"result\":";
-		int start = responseMessage.indexOf(parameter);
+                if (currentChar == '{' || currentChar == '[') {
+                    nesting++;
+                } else if (currentChar == '}' || currentChar == ']') {
+                    nesting--;
+                }
+                end++;
+                if (end <= responseMessage.length()) {
+                    currentChar = responseMessage.charAt(end);
+                } else {
+                    currentChar = ' ';
+                }
+            }
+            return responseMessage.substring(start, end);
 
-		if (start >= 0) {
-			start += parameter.length();
-			int end = start;
-			int nesting = 0;
-			char currentChar = responseMessage.charAt(end);
-			while (end <= responseMessage.length()
-					&& (nesting > 0 || (currentChar != ',' && currentChar != '}'))) {
-
-				if (currentChar == '{' || currentChar == '[') {
-					nesting++;
-				} else if (currentChar == '}' || currentChar == ']') {
-					nesting--;
-				}
-				end++;
-				if (end <= responseMessage.length()) {
-					currentChar = responseMessage.charAt(end);
-				} else {
-					currentChar = ' ';
-				}
-			}
-			return responseMessage.substring(start, end);
-
-		} else {
-			return "";
-		}
-	}
+        } else {
+            return "";
+        }
+    }
 }

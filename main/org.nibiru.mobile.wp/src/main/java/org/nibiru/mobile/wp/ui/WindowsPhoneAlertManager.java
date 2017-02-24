@@ -2,7 +2,7 @@ package org.nibiru.mobile.wp.ui;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import org.nibiru.mobile.core.api.async.Callback;
+import org.nibiru.mobile.core.api.common.Consumer;
 import org.nibiru.mobile.core.api.ui.AlertManager;
 
 import com.google.gwt.user.client.Window;
@@ -30,19 +30,19 @@ public class WindowsPhoneAlertManager implements AlertManager {
 	}
 
 	@Override
-	public void prompt(String title, String message, Callback<String> callback) {
+	public void prompt(String title, String message, Consumer<String> callback) {
 		checkNotNull(title);
 		checkNotNull(message);
 		checkNotNull(callback);
-		callback.onSuccess(Window.prompt(title + "\n" + message, ""));
+		callback.accept(Window.prompt(title + "\n" + message, ""));
 	}
 
 	@Override
-	public void confirm(String title, String message, Callback<Boolean> callback) {
+	public void confirm(String title, String message, Consumer<Boolean> callback) {
 		checkNotNull(title);
 		checkNotNull(message);
 		checkNotNull(callback);
-		callback.onSuccess(Window.confirm(title + "\n" + message));
+		callback.accept(Window.confirm(title + "\n" + message));
 	}
 
 	private static native void alert(String message) /*-{

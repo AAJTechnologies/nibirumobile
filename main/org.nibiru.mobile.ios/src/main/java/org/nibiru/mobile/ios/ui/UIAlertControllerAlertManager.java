@@ -5,7 +5,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-import org.nibiru.mobile.core.api.async.Callback;
+import org.nibiru.mobile.core.api.common.Consumer;
 import org.nibiru.mobile.core.api.ui.AlertManager;
 
 import com.google.common.base.Strings;
@@ -44,13 +44,13 @@ public class UIAlertControllerAlertManager implements AlertManager {
 	}
 
 	@Override
-	public void prompt(String title, String message, final Callback<String> callback) {
+	public void prompt(String title, String message, Consumer<String> callback) {
 		UIAlertController alertController = alertController(title, message);
 		final UITextView textView = UITextView.alloc().init();
 		alertController.view().addSubview(textView);
 		alertController.addAction(UIAlertAction.actionWithTitleStyleHandler("Ok", UIAlertActionStyle.Default, (UIAlertAction action) -> {
 			close();
-			callback.onSuccess(Strings.nullToEmpty(textView.text()));
+			callback.accept(Strings.nullToEmpty(textView.text()));
 		}));
 		alertController.addAction(UIAlertAction.actionWithTitleStyleHandler("Cancel", UIAlertActionStyle.Cancel, (UIAlertAction action) -> {
 			close();
@@ -59,15 +59,15 @@ public class UIAlertControllerAlertManager implements AlertManager {
 	}
 
 	@Override
-	public void confirm(String title, String message, final Callback<Boolean> callback) {
+	public void confirm(String title, String message, Consumer<Boolean> callback) {
 		UIAlertController alertController = alertController(title, message);
 		alertController.addAction(UIAlertAction.actionWithTitleStyleHandler("Ok", UIAlertActionStyle.Default, (UIAlertAction action) -> {
 			close();
-			callback.onSuccess(true);
+			callback.accept(true);
 		}));
 		alertController.addAction(UIAlertAction.actionWithTitleStyleHandler("Cancel", UIAlertActionStyle.Cancel, (UIAlertAction action) -> {
 			close();
-			callback.onSuccess(false);
+			callback.accept(false);
 		}));
 		show(alertController);
 	}

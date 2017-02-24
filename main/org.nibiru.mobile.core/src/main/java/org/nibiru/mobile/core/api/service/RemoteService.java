@@ -1,25 +1,20 @@
 package org.nibiru.mobile.core.api.service;
 
-import javax.annotation.Nullable;
+import org.nibiru.mobile.core.api.async.Promise;
+import org.nibiru.mobile.core.api.http.HttpException;
 
-import org.nibiru.mobile.core.api.async.Callback;
+import javax.annotation.Nullable;
 
 /**
  * A remote service.
  */
 public interface RemoteService {
-	/**
-	 * Invokes a method on a remote service
-	 * 
-	 * @param method
-	 *            The name of the method
-	 * @param requestDto
-	 *            The DTO used for creating request data
-	 * @param responseClass
-	 *            The expected response class
-	 * @param callback
-	 *            A callback for receiving the response
-	 */
-	<T> void invoke(String method, @Nullable Object requestDto, Class<T> responseClass,
-			Callback<T> callback);
+    /**
+     * Invokes a method on a remote service
+     *
+     * @param method        The name of the method
+     * @param requestDto    The DTO used for creating request data
+     * @param responseClass The expected response class
+     */
+    <T> Promise<T, HttpException> invoke(String method, @Nullable Object requestDto, Class<T> responseClass);
 }

@@ -1,6 +1,6 @@
 package org.nibiru.mobile.core.api.ui;
 
-import org.nibiru.mobile.core.api.async.Callback;
+import org.nibiru.mobile.core.api.common.Consumer;
 
 /**
  * A manager for showing messages to user.
@@ -39,7 +39,7 @@ public interface AlertManager {
 	 * @param message
 	 *            The message
 	 */
-	void prompt(String title, String message, Callback<String> callback);
+	void prompt(String title, String message, Consumer<String> callback);
 
 	/**
 	 * Asks the user for a confirmation.
@@ -49,5 +49,5 @@ public interface AlertManager {
 	 * @param message
 	 *            The message
 	 */
-	void confirm(String title, String message, Callback<Boolean> callback);
+	void confirm(String title, String message, Consumer<Boolean> callback);
 }

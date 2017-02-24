@@ -4,6 +4,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import javax.inject.Inject;
 
+import org.nibiru.mobile.core.api.async.Deferred;
+import org.nibiru.mobile.core.api.async.Promise;
 import org.nibiru.mobile.core.api.config.AppName;
 import org.nibiru.mobile.gwt.app.DatabaseBootstrap;
 
@@ -19,15 +21,14 @@ public class GwtMobileDatabaseBootstrap implements DatabaseBootstrap {
 	}
 
 	@Override
-	public void createDatabase(
-			final org.nibiru.mobile.core.api.async.Callback<Void> callback) {
-		checkNotNull(callback);
+	public Promise<Void, Exception> createDatabase() {
+		Deferred<Void, Exception> deferred = Deferred.defer();
+
 		Persistence.connect(appName, appName + " database", 5 * 1024 * 1024);
 
-		Persistence.schemaSync(new Callback() {
-			public void onSuccess() {
-				callback.onSuccess(null);
-			}
-		});
+		Persistence.schemaSync(() -> {
+            deferred.resolve(null);
+        });
+		return deferred.promise();
 	}
 }

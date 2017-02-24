@@ -2,7 +2,7 @@ package org.nibiru.mobile.java.async;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import org.nibiru.mobile.core.api.async.Callback;
+import org.nibiru.mobile.core.api.async.Deferred;
 import org.nibiru.mobile.core.api.ui.Looper;
 
 import com.google.common.base.Supplier;
@@ -14,22 +14,13 @@ abstract class BaseAsyncmanager implements AsyncManager {
 		this.looper = checkNotNull(looper);
 	}
 
-	<T> void runCallable(Supplier<T> callable, final Callback<T> callback) {
+	<V, E extends Exception> void runCallable(Supplier<V> callable,
+                                              Deferred<V, E> deferred) {
 		try {
-			final T result = callable.get();
-			looper.post(new Runnable() {
-				@Override
-				public void run() {
-					callback.onSuccess(result);
-				}
-			});
-		} catch (final Exception e) {
-			looper.post(new Runnable() {
-				@Override
-				public void run() {
-					callback.onFailure(e);
-				}
-			});
+			V result = callable.get();
+			looper.post(() -> deferred.resolve(result));
+		} catch (Exception e) {
+			looper.post(() -> deferred.reject((E) e));
 		}
 	}
 }

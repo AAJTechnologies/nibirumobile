@@ -1,8 +1,8 @@
 package org.nibiru.mobile.java.async;
 
-import org.nibiru.mobile.core.api.async.Callback;
-
 import com.google.common.base.Supplier;
+
+import org.nibiru.mobile.core.api.async.Promise;
 
 /**
  * Component responsible for performing async tasks (HTTP calls for example).
@@ -12,5 +12,5 @@ import com.google.common.base.Supplier;
  * caller.
  */
 public interface AsyncManager {
-	<T> void runAsync(Supplier<T> callable, Callback<T> callback);
+	<T, E extends Exception> Promise<T, E> runAsync(Supplier<T> callable);
 }

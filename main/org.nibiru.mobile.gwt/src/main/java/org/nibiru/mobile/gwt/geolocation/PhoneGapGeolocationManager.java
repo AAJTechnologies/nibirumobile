@@ -1,45 +1,48 @@
 package org.nibiru.mobile.gwt.geolocation;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import javax.inject.Inject;
-
-import org.nibiru.mobile.core.api.async.Callback;
-import org.nibiru.mobile.core.api.geolocation.GeolocationManager;
-import org.nibiru.mobile.core.api.geolocation.Position;
-
 import com.googlecode.gwtphonegap.client.PhoneGap;
 import com.googlecode.gwtphonegap.client.geolocation.Geolocation;
 import com.googlecode.gwtphonegap.client.geolocation.GeolocationCallback;
 import com.googlecode.gwtphonegap.client.geolocation.GeolocationOptions;
 import com.googlecode.gwtphonegap.client.geolocation.PositionError;
 
+import org.nibiru.mobile.core.api.async.Deferred;
+import org.nibiru.mobile.core.api.async.Promise;
+import org.nibiru.mobile.core.api.geolocation.GeolocationManager;
+import org.nibiru.mobile.core.api.geolocation.Position;
+
+import javax.inject.Inject;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+
 public class PhoneGapGeolocationManager implements GeolocationManager {
-	private final Geolocation geolocation;
+    private final Geolocation geolocation;
 
-	@Inject
-	public PhoneGapGeolocationManager(PhoneGap phoneGap) {
-		checkNotNull(phoneGap);
-		this.geolocation = phoneGap.getGeolocation();
-	}
+    @Inject
+    public PhoneGapGeolocationManager(PhoneGap phoneGap) {
+        checkNotNull(phoneGap);
+        this.geolocation = phoneGap.getGeolocation();
+    }
 
-	@Override
-	public void watchPosition(final Callback<Position> callback) {
-		checkNotNull(callback);
-		GeolocationOptions options = new GeolocationOptions();
-		options.setTimeout(1000);
+    @Override
+    public Promise<Position, Exception> watchPosition() {
+        Deferred<Position, Exception> deferred = Deferred.defer();
 
-		geolocation.watchPosition(options, new GeolocationCallback() {
-			@Override
-			public void onSuccess(
-					com.googlecode.gwtphonegap.client.geolocation.Position position) {
-				callback.onSuccess(new PositionAdapter(position));
-			}
+        GeolocationOptions options = new GeolocationOptions();
+        options.setTimeout(1000);
 
-			@Override
-			public void onFailure(PositionError error) {
-				callback.onFailure(new PositionException(error));
-			}
-		});
-	}
+        geolocation.watchPosition(options, new GeolocationCallback() {
+            @Override
+            public void onSuccess(
+                    com.googlecode.gwtphonegap.client.geolocation.Position position) {
+                deferred.resolve(new PositionAdapter(position));
+            }
+
+            @Override
+            public void onFailure(PositionError error) {
+                deferred.reject(new PositionException(error));
+            }
+        });
+        return deferred.promise();
+    }
 }

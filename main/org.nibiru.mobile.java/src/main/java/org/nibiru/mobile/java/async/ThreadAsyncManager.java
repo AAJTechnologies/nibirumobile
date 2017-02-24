@@ -4,7 +4,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 import javax.inject.Inject;
 
-import org.nibiru.mobile.core.api.async.Callback;
+import org.nibiru.mobile.core.api.async.Deferred;
+import org.nibiru.mobile.core.api.async.Promise;
 import org.nibiru.mobile.core.api.ui.Looper;
 
 import com.google.common.base.Supplier;
@@ -16,14 +17,13 @@ public class ThreadAsyncManager extends BaseAsyncmanager {
 	}
 	
 	@Override
-	public <T> void runAsync(final Supplier<T> callable, final Callback<T> callback) {
+	public <T, E extends Exception> Promise<T, E> runAsync(Supplier<T> callable) {
 		checkNotNull(callable);
-		checkNotNull(callback);
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				runCallable(callable, callback);
-			}
-		}).start();
+
+		Deferred <T, E> deferred = Deferred.defer();
+		new Thread(() -> {
+            runCallable(callable, deferred);
+        }).start();
+		return deferred.promise();
 	}
 }

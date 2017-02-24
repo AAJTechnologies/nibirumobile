@@ -1,13 +1,11 @@
 package org.nibiru.mobile.core.impl.mvp;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import org.nibiru.mobile.core.api.async.Callback;
-import org.nibiru.mobile.core.api.common.Consumer;
+import org.nibiru.mobile.core.api.async.Promise;
 import org.nibiru.mobile.core.api.ui.AlertManager;
 import org.nibiru.mobile.core.api.ui.mvp.Presenter;
 import org.nibiru.mobile.core.api.ui.mvp.View;
-import org.nibiru.mobile.core.impl.async.BaseCallback;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Base class for presenters
@@ -41,19 +39,7 @@ abstract public class BasePresenter<V extends View> implements Presenter<V> {
 		return alertManager;
 	}
 
-	/**
-	 * Utility method for creating internal callbacks.
-	 * It calls creates a {@link BaseCallback} instance, which uses {@link AlertManager} to show errors.
-	 * 
-	 * @param <T>
-	 *            The callback return type
-	 */
-	protected <T> Callback<T> callback(Consumer<T> func) {
-		return new BaseCallback<T>(alertManager) {
-			@Override
-			public void onSuccess(T result) {
-				func.accept(result);
-			}
-		};
+	public void showException(Exception error) {
+		alertManager.showException(error);
 	}
 }

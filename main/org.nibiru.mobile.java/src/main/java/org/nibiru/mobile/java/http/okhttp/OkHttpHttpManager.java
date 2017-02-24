@@ -6,10 +6,11 @@ import java.io.IOException;
 
 import javax.inject.Inject;
 
-import org.nibiru.mobile.core.api.async.Callback;
+import org.nibiru.mobile.core.api.async.Promise;
 import org.nibiru.mobile.core.api.config.BaseUrl;
-import org.nibiru.mobile.core.api.http.HttpCallback;
+import org.nibiru.mobile.core.api.http.HttpException;
 import org.nibiru.mobile.core.api.http.HttpManager;
+import org.nibiru.mobile.core.api.http.HttpStatus;
 import org.nibiru.mobile.java.async.AsyncManager;
 
 import com.google.common.base.Supplier;
@@ -36,24 +37,21 @@ public class OkHttpHttpManager implements HttpManager {
 	}
 
 	@Override
-	public <T> void send(final String url, final Callback<T> callback,
-			final HttpCallback<T> httpCallback) {
-		asyncManager.runAsync(new Supplier<T>() {
-			@Override
-			public T get() {
-				return runAsync(url, httpCallback);
-			}
-		}, callback);
+	public Promise<String, HttpException> send(String url, String request) {
+		return asyncManager.runAsync(() -> runAsync(url, request));
 	}
 
-	private <T> T runAsync(String url, HttpCallback<T> httpCallback) {
+	private String runAsync(String url, String requestBody ) {
 		try {
-			RequestBody body = RequestBody.create(JSON, httpCallback.buildRequest());
+			RequestBody body = RequestBody.create(JSON, requestBody);
 			Request request = new Request.Builder().url(baseUrl + url).post(body).build();
 			Response response = okHttpClient.newCall(request).execute();
-			return httpCallback.parseResponse(response.body().string());
+			if (!response.isSuccessful()) {
+				throw new HttpException(HttpStatus.valueOf(response.code()), response.message());
+			}
+			return response.body().string();
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+			throw new HttpException(e);
 		}
 	}
 }

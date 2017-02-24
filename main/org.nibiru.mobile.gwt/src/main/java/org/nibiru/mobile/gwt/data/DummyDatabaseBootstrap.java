@@ -1,20 +1,27 @@
 package org.nibiru.mobile.gwt.data;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import org.nibiru.mobile.core.api.async.Deferred;
+import org.nibiru.mobile.core.api.async.Promise;
+import org.nibiru.mobile.core.api.ui.Looper;
+import org.nibiru.mobile.gwt.app.DatabaseBootstrap;
 
 import javax.inject.Inject;
 
-import org.nibiru.mobile.core.api.async.Callback;
-import org.nibiru.mobile.gwt.app.DatabaseBootstrap;
+import static com.google.common.base.Preconditions.checkNotNull;
+
 
 public class DummyDatabaseBootstrap implements DatabaseBootstrap {
-	@Inject
-	public DummyDatabaseBootstrap() {
-	}
+    private final Looper looper;
 
-	@Override
-	public void createDatabase(Callback<Void> callback) {
-		checkNotNull(callback);
-		callback.onSuccess(null);
-	}
+    @Inject
+    public DummyDatabaseBootstrap(Looper looper) {
+        this.looper = checkNotNull(looper);
+    }
+
+    @Override
+    public Promise<Void, Exception> createDatabase() {
+        Deferred<Void, Exception> deferred = Deferred.defer();
+        looper.post(() -> deferred.resolve(null));
+        return deferred.promise();
+    }
 }
