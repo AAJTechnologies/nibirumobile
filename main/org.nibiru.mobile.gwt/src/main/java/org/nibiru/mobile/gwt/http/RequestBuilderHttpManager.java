@@ -40,13 +40,18 @@ public class RequestBuilderHttpManager implements HttpManager {
                         @Override
                         public void onResponseReceived(Request request,
                                                        Response response) {
-                            String text = response.getText();
+                            HttpStatus status = HttpStatus.valueOf(response.getStatusCode());
+                            if (status.is4xxClientError() || status.is5xxServerError()) {
+                                deferred.reject(new HttpException(status, response.getStatusText()));
+                            } else {
+                                String text = response.getText();
 
-                            if (text != null && text.length() == 0) {
-                                text = null;
+                                if (text != null && text.length() == 0) {
+                                    text = null;
+                                }
+
+                                deferred.resolve(text);
                             }
-
-                            deferred.resolve(text);
                         }
 
                         @Override
@@ -55,7 +60,7 @@ public class RequestBuilderHttpManager implements HttpManager {
                         }
                     });
         } catch (RequestException e) {
-            throw new RuntimeException(e);
+            deferred.reject(new HttpException(e));
         }
         return deferred.promise();
     }
