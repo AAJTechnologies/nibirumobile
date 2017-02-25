@@ -1,5 +1,7 @@
 package org.nibiru.mobile.core.impl.service;
 
+import com.google.common.net.MediaType;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 import javax.annotation.Nullable;
@@ -7,6 +9,9 @@ import javax.annotation.Nullable;
 import org.nibiru.mobile.core.api.async.Promise;
 import org.nibiru.mobile.core.api.http.HttpException;
 import org.nibiru.mobile.core.api.http.HttpManager;
+import org.nibiru.mobile.core.api.http.HttpMethod;
+import org.nibiru.mobile.core.api.http.HttpRequest;
+import org.nibiru.mobile.core.api.http.HttpRequest.Builder;
 import org.nibiru.mobile.core.api.serializer.Serializer;
 
 public class RestService extends BaseService {
@@ -17,16 +22,16 @@ public class RestService extends BaseService {
     }
 
     @Override
-    public <T> Promise<T, HttpException> invoke(String method, final @Nullable Object requestDto,
-                                                final Class<T> responseClass) {
-        checkNotNull(method);
-        checkNotNull(responseClass);
+    protected Builder builder(String method,
+                              @Nullable Object requestDto) {
+        return HttpRequest.builder(getServiceName() + "/" + method)
+                .body(requestDto != null
+                        ? getSerializer().serialize(requestDto)
+                        : "");
+    }
 
-        return getHttpManager()
-                .send(getServiceName() + "/" + method,
-                        requestDto != null
-                                ? getSerializer().serialize(requestDto)
-                                : "")
-                .map(parse(responseClass));
+    @Override
+    protected String extractResult(String responseMessage) {
+        return responseMessage;
     }
 }

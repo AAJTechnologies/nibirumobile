@@ -8,15 +8,10 @@ import java.util.function.Supplier;
  * Manager for performing requests over HTTP.
  */
 public interface HttpManager {
-    String CONTENT_TYPE_HEADER = "Content-Type";
-    String ACCEPT_HEADER = "Accept";
-    String APPLICATION_JSON_MIME = "application/json";
-
     /**
-     * Sends a POST request.
+     * Sends an HTTP request.
      *
-     * @param url     The URL
-     * @param request the request body
+     * @param request The request
      */
-    Promise<String, HttpException> send(String url, String request);
+    Promise<String, HttpException> send(HttpRequest request);
 }

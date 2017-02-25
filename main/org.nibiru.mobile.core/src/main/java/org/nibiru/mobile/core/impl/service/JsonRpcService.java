@@ -1,13 +1,10 @@
 package org.nibiru.mobile.core.impl.service;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import org.nibiru.mobile.core.api.http.HttpManager;
+import org.nibiru.mobile.core.api.http.HttpRequest;
+import org.nibiru.mobile.core.api.serializer.Serializer;
 
 import javax.annotation.Nullable;
-
-import org.nibiru.mobile.core.api.async.Promise;
-import org.nibiru.mobile.core.api.http.HttpException;
-import org.nibiru.mobile.core.api.http.HttpManager;
-import org.nibiru.mobile.core.api.serializer.Serializer;
 
 public class JsonRpcService extends BaseService {
     public JsonRpcService(String serviceName, HttpManager httpManager,
@@ -16,13 +13,8 @@ public class JsonRpcService extends BaseService {
     }
 
     @Override
-    public <T> Promise<T, HttpException> invoke(String method,
-                                                @Nullable Object requestDto,
-                                                Class<T> responseClass) {
-        checkNotNull(method);
-        checkNotNull(requestDto);
-        checkNotNull(responseClass);
-
+    protected HttpRequest.Builder builder(String method,
+                                          @Nullable Object requestDto) {
         StringBuilder request = new StringBuilder();
         request.append("{\"id\":1,\"jsonrpc\":\"jsonrpc\",\"method\":\"");
         request.append(method);
@@ -34,13 +26,13 @@ public class JsonRpcService extends BaseService {
         }
         request.append("}");
 
-        return getHttpManager()
-                .send(getServiceName(), request.toString())
-                .map(parse(responseClass));
+        return HttpRequest.builder(getServiceName())
+                .body(request.toString());
     }
 
-    private String extractResult(String responseMessage) {
-        // TODO: no seria mas simple hacer una abstraccion de un parser de JSON?
+    @Override
+    protected String extractResult(String responseMessage) {
+        // TODO: A JSON parser abstraction woudl be helpful?
         String parameter = "\"result\":";
         int start = responseMessage.indexOf(parameter);
 
@@ -71,3 +63,4 @@ public class JsonRpcService extends BaseService {
         }
     }
 }
+
