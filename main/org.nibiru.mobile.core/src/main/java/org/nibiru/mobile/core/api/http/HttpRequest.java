@@ -1,6 +1,5 @@
 package org.nibiru.mobile.core.api.http;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 import com.google.common.net.HttpHeaders;

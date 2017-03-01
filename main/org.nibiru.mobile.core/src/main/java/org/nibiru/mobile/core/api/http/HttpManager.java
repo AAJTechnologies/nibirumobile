@@ -13,5 +13,5 @@ public interface HttpManager {
      *
      * @param request The request
      */
-    Promise<String, HttpException> send(HttpRequest request);
+    Promise<HttpResponse, HttpException> send(HttpRequest request);
 }

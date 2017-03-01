@@ -3,26 +3,30 @@ package org.nibiru.mobile.core.impl.service;
 import com.google.common.base.Function;
 import com.google.common.net.MediaType;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import org.nibiru.mobile.core.api.async.Promise;
 import org.nibiru.mobile.core.api.http.HttpException;
 import org.nibiru.mobile.core.api.http.HttpManager;
 import org.nibiru.mobile.core.api.http.HttpMethod;
-import org.nibiru.mobile.core.api.http.HttpRequest;
 import org.nibiru.mobile.core.api.http.HttpRequest.Builder;
+import org.nibiru.mobile.core.api.http.HttpResponse;
 import org.nibiru.mobile.core.api.serializer.Serializer;
 import org.nibiru.mobile.core.api.service.RemoteService;
 
 import javax.annotation.Nullable;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 abstract class BaseService implements RemoteService {
+    private final String baseUrl;
     private final String serviceName;
     private final HttpManager httpManager;
     private final Serializer serializer;
 
-    public BaseService(String serviceName, HttpManager httpManager,
+    public BaseService(String baseUrl,
+                       String serviceName,
+                       HttpManager httpManager,
                        Serializer serializer) {
+        this.baseUrl = checkNotNull(baseUrl);
         this.serviceName = checkNotNull(serviceName);
         this.httpManager = checkNotNull(httpManager);
         this.serializer = checkNotNull(serializer);
@@ -50,7 +54,7 @@ abstract class BaseService implements RemoteService {
         checkNotNull(httpMethod);
         checkNotNull(mediaType);
 
-        return getHttpManager()
+        return httpManager
                 .send(builder(method, requestDto)
                         .method(httpMethod)
                         .accept(mediaType)
@@ -63,14 +67,14 @@ abstract class BaseService implements RemoteService {
     protected abstract Builder builder(String method,
                                        @Nullable Object requestDto);
 
-    protected abstract String extractResult(String responseMessage);
+    protected abstract String extractResult(HttpResponse response);
 
     protected String getServiceName() {
         return serviceName;
     }
 
-    protected HttpManager getHttpManager() {
-        return httpManager;
+    protected String getBaseUrl() {
+        return baseUrl;
     }
 
     protected Serializer getSerializer() {

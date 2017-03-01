@@ -11,8 +11,10 @@ import org.nibiru.mobile.core.api.http.HttpException;
 import org.nibiru.mobile.core.api.http.HttpManager;
 import org.nibiru.mobile.core.api.http.HttpMethod;
 import org.nibiru.mobile.core.api.http.HttpRequest;
+import org.nibiru.mobile.core.api.http.HttpResponse;
 import org.nibiru.mobile.core.api.http.HttpStatus;
 
+import com.google.gwt.http.client.Header;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestBuilder.Method;
@@ -20,28 +22,26 @@ import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
 
+import java.util.List;
 import java.util.Map;
 
 public class RequestBuilderHttpManager implements HttpManager {
-    private final String baseUrl;
-
     @Inject
-    public RequestBuilderHttpManager(@BaseUrl String baseUrl) {
-        this.baseUrl = checkNotNull(baseUrl);
+    public RequestBuilderHttpManager() {
     }
 
     @Override
-    public Promise<String, HttpException> send(HttpRequest request) {
-        Deferred<String, HttpException> deferred = Deferred.defer();
+    public Promise<HttpResponse, HttpException> send(HttpRequest request) {
+        Deferred<HttpResponse, HttpException> deferred = Deferred.defer();
         try {
-            RequestBuilder builder = new RequestBuilder(method(request.getMethod()),
-                    baseUrl + request.getUrl());
+            RequestBuilder requestBuilder = new RequestBuilder(method(request.getMethod()),
+                    request.getUrl());
 
             for (Map.Entry<String, String> entry : request.getHeaders().entrySet()) {
-                builder.setHeader(entry.getKey(), entry.getValue());
+                requestBuilder.setHeader(entry.getKey(), entry.getValue());
             }
 
-            builder.sendRequest(request.getBody(),
+            requestBuilder.sendRequest(request.getBody(),
                     new RequestCallback() {
                         @Override
                         public void onResponseReceived(Request request,
@@ -56,7 +56,14 @@ public class RequestBuilderHttpManager implements HttpManager {
                                     text = null;
                                 }
 
-                                deferred.resolve(text);
+                                HttpResponse.Builder responseBuilder = HttpResponse.builder(HttpStatus.valueOf(response.getStatusCode()))
+                                        .body(text);
+
+                                for (Header header: response.getHeaders()) {
+                                    responseBuilder.header(header.getName(), header.getValue());
+                                }
+
+                                deferred.resolve(responseBuilder.build());
                             }
                         }
 

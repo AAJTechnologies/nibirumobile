@@ -2,14 +2,18 @@ package org.nibiru.mobile.core.impl.service;
 
 import org.nibiru.mobile.core.api.http.HttpManager;
 import org.nibiru.mobile.core.api.http.HttpRequest;
+import org.nibiru.mobile.core.api.http.HttpResponse;
 import org.nibiru.mobile.core.api.serializer.Serializer;
 
 import javax.annotation.Nullable;
+import javax.inject.Inject;
 
 public class JsonRpcService extends BaseService {
-    public JsonRpcService(String serviceName, HttpManager httpManager,
+    public JsonRpcService(String baseUrl,
+                          String serviceName,
+                          HttpManager httpManager,
                           Serializer serializer) {
-        super(serviceName, httpManager, serializer);
+        super(baseUrl, serviceName, httpManager, serializer);
     }
 
     @Override
@@ -26,13 +30,14 @@ public class JsonRpcService extends BaseService {
         }
         request.append("}");
 
-        return HttpRequest.builder(getServiceName())
+        return HttpRequest.builder(getBaseUrl() + getServiceName())
                 .body(request.toString());
     }
 
     @Override
-    protected String extractResult(String responseMessage) {
+    protected String extractResult(HttpResponse response) {
         // TODO: A JSON parser abstraction woudl be helpful?
+        String responseMessage = response.getBody();
         String parameter = "\"result\":";
         int start = responseMessage.indexOf(parameter);
 
