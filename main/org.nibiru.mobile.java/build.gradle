@@ -3,6 +3,6 @@ apply plugin: 'me.tatarka.retrolambda'
 dependencies {
 	compile project(":org.nibiru.mobile.core")
 	compile "com.squareup.okhttp3:okhttp:3.3.1"
-	compile "org.codehaus.jackson:jackson-mapper-asl:1.9.8"
+	compile "com.fasterxml.jackson.core:jackson-databind:2.8.7"
 	compile fileTree(dir: 'lib', include: '*.jar')
 }

@@ -1,16 +1,15 @@
 package org.nibiru.mobile.java.serializer.jackson;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.nibiru.mobile.core.api.serializer.Serializer;
 
 import java.io.IOException;
 
 import javax.inject.Inject;
 
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.nibiru.mobile.core.api.serializer.Serializer;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class JacksonSerializer implements Serializer {
 	private final ObjectMapper mapper;
@@ -25,11 +24,7 @@ public class JacksonSerializer implements Serializer {
 		checkNotNull(object);
 		try {
 			return mapper.writeValueAsString(object);
-		} catch (JsonGenerationException e) {
-			throw exception(object, e);
-		} catch (JsonMappingException e) {
-			throw exception(object, e);
-		} catch (IOException e) {
+		} catch (JsonProcessingException e) {
 			throw exception(object, e);
 		}
 	}
@@ -40,10 +35,6 @@ public class JacksonSerializer implements Serializer {
 		checkNotNull(returnType);
 		try {
 			return mapper.readValue(data, returnType);
-		} catch (JsonParseException e) {
-			throw exception(data, e);
-		} catch (JsonMappingException e) {
-			throw exception(data, e);
 		} catch (IOException e) {
 			throw exception(data, e);
 		}
