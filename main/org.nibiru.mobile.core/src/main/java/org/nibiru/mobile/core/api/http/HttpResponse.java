@@ -2,8 +2,6 @@ package org.nibiru.mobile.core.api.http;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
-import com.google.common.net.HttpHeaders;
-import com.google.common.net.MediaType;
 
 import java.util.Map;
 
@@ -12,7 +10,7 @@ import javax.annotation.Nullable;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Created by lbrasseur on 3/1/17.
+ * An HTTP response.
  */
 public class HttpResponse {
    private final HttpStatus status;
