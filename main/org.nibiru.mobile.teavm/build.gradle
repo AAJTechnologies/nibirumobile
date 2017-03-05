@@ -1,0 +1,9 @@
+jar {
+   from sourceSets.main.java.srcDirs 
+}
+
+dependencies {
+	compile project(":org.nibiru.mobile.core")
+	compile "org.teavm:teavm-classlib:${teaVmVersion}"
+	compile "org.teavm:teavm-jso-apis:${teaVmVersion}"
+}
