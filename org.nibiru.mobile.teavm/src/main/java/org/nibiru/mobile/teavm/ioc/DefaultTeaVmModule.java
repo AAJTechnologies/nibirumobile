@@ -6,7 +6,6 @@ import org.nibiru.mobile.core.api.preferences.Preferences;
 import org.nibiru.mobile.core.api.service.BasicPushServiceFactory;
 import org.nibiru.mobile.core.api.ui.AlertManager;
 import org.nibiru.mobile.core.api.ui.DisplayInfo;
-import org.nibiru.mobile.core.api.ui.Looper;
 import org.nibiru.mobile.core.api.ui.place.PlaceManager;
 import org.nibiru.mobile.teavm.app.TeaVmBootstrap;
 import org.nibiru.mobile.teavm.http.XMLHttpRequestHttpManager;
@@ -14,7 +13,6 @@ import org.nibiru.mobile.teavm.preferences.CookiesPreferences;
 import org.nibiru.mobile.teavm.service.WebSocketPushServiceFactory;
 import org.nibiru.mobile.teavm.ui.TeaVmAlertManager;
 import org.nibiru.mobile.teavm.ui.TeaVmDisplayInfo;
-import org.nibiru.mobile.teavm.ui.TeaVmLooper;
 import org.nibiru.mobile.teavm.ui.place.TeaVmPlaceManager;
 import org.teavm.jso.ajax.XMLHttpRequest;
 import org.teavm.jso.browser.Window;
@@ -65,11 +63,6 @@ public class DefaultTeaVmModule {
     @Provides
     public AlertManager getAlertManager(TeaVmAlertManager manager) {
         return manager;
-    }
-
-    @Provides
-    public Looper getLooper(TeaVmLooper looper) {
-        return looper;
     }
 
     @Provides

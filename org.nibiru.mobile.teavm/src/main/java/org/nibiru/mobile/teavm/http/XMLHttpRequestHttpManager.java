@@ -1,7 +1,7 @@
 package org.nibiru.mobile.teavm.http;
 
-import org.nibiru.mobile.core.api.async.Deferred;
-import org.nibiru.mobile.core.api.async.Promise;
+import org.nibiru.async.core.api.promise.Deferred;
+import org.nibiru.async.core.api.promise.Promise;
 import org.nibiru.mobile.core.api.http.HttpException;
 import org.nibiru.mobile.core.api.http.HttpManager;
 import org.nibiru.mobile.core.api.http.HttpRequest;
