@@ -1,4 +1,0 @@
-dependencies {
-    compile project(":ar.com.oxen.nibiru.mobile.security.core")
-	compile "ar.com.oxen.nibiru.mobile:ar.com.oxen.nibiru.mobile.java:${version}"
-}

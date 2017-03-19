@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <color name="button">@android:color/white</color>
-    <color name="button_pressed">@android:color/black</color>
-    <color name="disabled">#999999</color>
-    <color name="default_background">@android:color/white</color>
-    <color name="text_color">@android:color/black</color>
-</resources>

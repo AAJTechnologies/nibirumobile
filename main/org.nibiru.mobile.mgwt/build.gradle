@@ -1,8 +1,0 @@
-jar {
-   from sourceSets.main.java.srcDirs 
-}
-
-dependencies {
-	compile project(":org.nibiru.mobile.gwt")
-	compile "com.googlecode.mgwt:mgwt:2.0.0"
-}
