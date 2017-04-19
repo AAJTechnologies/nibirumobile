@@ -1,11 +1,5 @@
 package org.nibiru.mobile.mgwt.app;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import javax.inject.Inject;
-
-import org.nibiru.mobile.gwt.app.AppWidgetBootstrap;
-
 import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.web.bindery.event.shared.EventBus;
@@ -15,6 +9,12 @@ import com.googlecode.mgwt.ui.client.MGWT;
 import com.googlecode.mgwt.ui.client.MGWTSettings;
 import com.googlecode.mgwt.ui.client.widget.animation.AnimatableDisplay;
 import com.googlecode.mgwt.ui.client.widget.animation.AnimationWidget;
+
+import org.nibiru.mobile.gwt.app.AppWidgetBootstrap;
+
+import javax.inject.Inject;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class MgwtAppWidgetBootstrap implements AppWidgetBootstrap {
 	private final EventBus eventBus;

@@ -1,9 +1,6 @@
 package org.nibiru.mobile.wp.ui.place;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.Deque;
-import java.util.Map;
+import com.google.common.collect.Maps;
 
 import org.nibiru.mobile.core.api.common.Identifiable;
 import org.nibiru.mobile.core.api.ui.mvp.Presenter;
@@ -11,7 +8,10 @@ import org.nibiru.mobile.core.api.ui.mvp.PresenterMapper;
 import org.nibiru.mobile.core.api.ui.place.Place;
 import org.nibiru.mobile.core.impl.common.BaseConfigurable;
 
-import com.google.common.collect.Maps;
+import java.util.Deque;
+import java.util.Map;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class WindowsPhonePlace extends BaseConfigurable<Place> implements
 		Place, Identifiable<String> {

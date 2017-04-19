@@ -1,14 +1,14 @@
 package org.nibiru.mobile.gwt.event;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.Map;
-
-import org.nibiru.mobile.core.api.event.Event;
-
 import com.google.common.collect.Maps;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.web.bindery.event.shared.EventBus;
+
+import org.nibiru.mobile.core.api.event.Event;
+
+import java.util.Map;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class SimpleEvent extends GwtEvent<SimpleEventHandler> implements Event {
 	private final String id;

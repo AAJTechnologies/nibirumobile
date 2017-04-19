@@ -1,15 +1,15 @@
 package org.nibiru.mobile.gwt.ui.mvp;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import com.google.gwt.activity.shared.AbstractActivity;
+import com.google.gwt.event.shared.EventBus;
+import com.google.gwt.user.client.ui.AcceptsOneWidget;
+import com.google.gwt.user.client.ui.IsWidget;
 
 import org.nibiru.mobile.core.api.ui.mvp.Presenter;
 import org.nibiru.mobile.core.api.ui.mvp.View;
 import org.nibiru.mobile.core.api.ui.place.Place;
 
-import com.google.gwt.activity.shared.AbstractActivity;
-import com.google.gwt.event.shared.EventBus;
-import com.google.gwt.user.client.ui.AcceptsOneWidget;
-import com.google.gwt.user.client.ui.IsWidget;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Presenter-based activity.

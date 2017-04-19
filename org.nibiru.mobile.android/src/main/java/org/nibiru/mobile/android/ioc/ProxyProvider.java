@@ -1,12 +1,12 @@
 package org.nibiru.mobile.android.ioc;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class ProxyProvider<T, I extends InvocationHandler> implements
 		Provider<T> {

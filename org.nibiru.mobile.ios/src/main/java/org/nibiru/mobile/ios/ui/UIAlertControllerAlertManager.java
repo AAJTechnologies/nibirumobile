@@ -1,14 +1,12 @@
 package org.nibiru.mobile.ios.ui;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import javax.inject.Inject;
-import javax.inject.Provider;
+import com.google.common.base.Strings;
 
 import org.nibiru.mobile.core.api.common.Consumer;
 import org.nibiru.mobile.core.api.ui.AlertManager;
 
-import com.google.common.base.Strings;
+import javax.inject.Inject;
+import javax.inject.Provider;
 
 import apple.uikit.UIAlertAction;
 import apple.uikit.UIAlertController;
@@ -16,6 +14,8 @@ import apple.uikit.UIApplication;
 import apple.uikit.UINavigationController;
 import apple.uikit.UITextView;
 import apple.uikit.enums.UIAlertActionStyle;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 // TODO: Internationalization.
 public class UIAlertControllerAlertManager implements AlertManager {

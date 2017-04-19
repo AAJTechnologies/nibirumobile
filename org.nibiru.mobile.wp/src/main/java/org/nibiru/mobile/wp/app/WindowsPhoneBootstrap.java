@@ -1,11 +1,11 @@
 package org.nibiru.mobile.wp.app;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import org.nibiru.mobile.core.api.app.Bootstrap;
+import org.nibiru.mobile.core.api.app.EntryPoint;
 
 import javax.inject.Inject;
 
-import org.nibiru.mobile.core.api.app.Bootstrap;
-import org.nibiru.mobile.core.api.app.EntryPoint;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class WindowsPhoneBootstrap implements Bootstrap {
 	private final EntryPoint entryPoint;

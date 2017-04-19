@@ -1,8 +1,9 @@
 package org.nibiru.mobile.gwt.data;
 
-import org.nibiru.mobile.core.api.async.Deferred;
-import org.nibiru.mobile.core.api.async.Promise;
-import org.nibiru.mobile.core.api.ui.Looper;
+
+import org.nibiru.async.core.api.loop.Looper;
+import org.nibiru.async.core.api.promise.Deferred;
+import org.nibiru.async.core.api.promise.Promise;
 import org.nibiru.mobile.gwt.app.DatabaseBootstrap;
 
 import javax.inject.Inject;

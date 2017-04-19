@@ -1,12 +1,12 @@
 package org.nibiru.mobile.gwt.serializer;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import org.nibiru.mobile.core.api.serializer.Serializer;
-
 import com.google.web.bindery.autobean.shared.AutoBeanCodex;
 import com.google.web.bindery.autobean.shared.AutoBeanFactory;
 import com.google.web.bindery.autobean.shared.AutoBeanUtils;
+
+import org.nibiru.mobile.core.api.serializer.Serializer;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class AutoBeanSerializer implements Serializer {
 	private final AutoBeanFactory autoBeanFactory;

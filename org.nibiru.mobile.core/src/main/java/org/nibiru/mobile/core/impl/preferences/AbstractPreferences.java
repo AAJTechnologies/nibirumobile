@@ -1,9 +1,9 @@
 package org.nibiru.mobile.core.impl.preferences;
 
-import javax.annotation.Nullable;
-
 import org.nibiru.mobile.core.api.preferences.Preferences;
 import org.nibiru.mobile.core.impl.common.BaseConfigurable;
+
+import javax.annotation.Nullable;
 
 
 public abstract class AbstractPreferences extends

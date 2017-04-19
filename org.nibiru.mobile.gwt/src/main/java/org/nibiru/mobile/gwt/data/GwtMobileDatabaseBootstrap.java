@@ -1,16 +1,15 @@
 package org.nibiru.mobile.gwt.data;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import com.gwtmobile.persistence.client.Persistence;
 
-import javax.inject.Inject;
-
-import org.nibiru.mobile.core.api.async.Deferred;
-import org.nibiru.mobile.core.api.async.Promise;
+import org.nibiru.async.core.api.promise.Deferred;
+import org.nibiru.async.core.api.promise.Promise;
 import org.nibiru.mobile.core.api.config.AppName;
 import org.nibiru.mobile.gwt.app.DatabaseBootstrap;
 
-import com.gwtmobile.persistence.client.Callback;
-import com.gwtmobile.persistence.client.Persistence;
+import javax.inject.Inject;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class GwtMobileDatabaseBootstrap implements DatabaseBootstrap {
 	private final String appName;

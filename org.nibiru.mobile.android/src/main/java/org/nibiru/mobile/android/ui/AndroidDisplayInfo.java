@@ -1,13 +1,13 @@
 package org.nibiru.mobile.android.ui;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import javax.inject.Inject;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 
 import org.nibiru.mobile.core.api.ui.DisplayInfo;
 
-import android.content.res.Configuration;
-import android.content.res.Resources;
+import javax.inject.Inject;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class AndroidDisplayInfo implements DisplayInfo {
 	private final Resources resources;

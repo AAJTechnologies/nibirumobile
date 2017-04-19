@@ -6,6 +6,7 @@ jar {
 
 dependencies {
 	compile "com.aajtech.nibiru.model:org.nibiru.model.core:${nibiruModelVersion}"
+	compile "com.aajtech.nibiru.async:org.nibiru.async.core:${nibiruAsyncVersion}"
 	compile "javax.inject:javax.inject:1"
 	compile "com.google.guava:guava:${guavaVersion}"
 	compile "com.google.code.findbugs:jsr305:2.0.3"

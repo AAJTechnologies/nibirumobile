@@ -1,16 +1,14 @@
 package org.nibiru.mobile.android.ui.place;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-import static com.google.common.base.Preconditions.checkState;
-
-import org.nibiru.mobile.android.common.BaseIntentAdapter;
-import org.nibiru.mobile.core.api.ui.place.Place;
-
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 
-import javax.annotation.Nullable;
+import org.nibiru.mobile.android.common.BaseIntentAdapter;
+import org.nibiru.mobile.core.api.ui.place.Place;
+
+import static com.google.common.base.Preconditions.checkNotNull;
+import static com.google.common.base.Preconditions.checkState;
 
 public class IntentPlace extends BaseIntentAdapter<Place> implements Place {
     private final Activity activity;

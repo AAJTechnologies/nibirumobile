@@ -1,13 +1,13 @@
 package org.nibiru.mobile.android.ui.mvp;
 
-import org.nibiru.mobile.core.api.ui.mvp.View;
-
 import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import org.nibiru.mobile.core.api.ui.mvp.View;
 
 /**
  * {@link View} specialization that adds Android events.

@@ -1,6 +1,6 @@
 package org.nibiru.mobile.gwt.ioc;
 
-import javax.inject.Singleton;
+import com.google.web.bindery.event.shared.SimpleEventBus;
 
 import org.nibiru.mobile.core.api.event.EventBus;
 import org.nibiru.mobile.core.api.http.HttpManager;
@@ -13,7 +13,7 @@ import org.nibiru.mobile.gwt.preferences.CookiesPreferences;
 import org.nibiru.mobile.gwt.service.WebSocketPushServiceFactory;
 import org.nibiru.mobile.gwt.ui.GwtDisplayInfo;
 
-import com.google.web.bindery.event.shared.SimpleEventBus;
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;

@@ -1,23 +1,21 @@
 package org.nibiru.mobile.ios.ioc;
 
-import javax.inject.Singleton;
-
 import org.nibiru.mobile.core.api.app.Bootstrap;
 import org.nibiru.mobile.core.api.event.EventBus;
 import org.nibiru.mobile.core.api.preferences.Preferences;
 import org.nibiru.mobile.core.api.ui.AlertManager;
 import org.nibiru.mobile.core.api.ui.DisplayInfo;
-import org.nibiru.mobile.core.api.ui.Looper;
 import org.nibiru.mobile.core.api.ui.place.PlaceManager;
 import org.nibiru.mobile.ios.app.IosBootstrap;
 import org.nibiru.mobile.ios.preferences.DummyPreferences;
 import org.nibiru.mobile.ios.ui.IOSDisplayInfo;
-import org.nibiru.mobile.ios.ui.NSThreadLooper;
 import org.nibiru.mobile.ios.ui.UIAlertControllerAlertManager;
 import org.nibiru.mobile.ios.ui.place.UINavigationControllerPlaceManager;
 import org.nibiru.mobile.java.async.AsyncManager;
 import org.nibiru.mobile.java.async.ThreadAsyncManager;
 import org.nibiru.mobile.java.event.guava.GuavaEventBus;
+
+import javax.inject.Singleton;
 
 import apple.uikit.UINavigationController;
 import apple.uikit.UIScreen;
@@ -36,11 +34,6 @@ public class DefaultIosModule {
 	@Provides
 	public AlertManager getAlertManager(UIAlertControllerAlertManager manager) {
 		return manager;
-	}
-
-	@Provides
-	public Looper getLooper(NSThreadLooper looper) {
-		return looper;
 	}
 
 	@Provides

@@ -1,7 +1,5 @@
 package org.nibiru.mobile.core.api.http;
 
-import com.google.common.base.Preconditions;
-
 import javax.annotation.Nullable;
 
 import static com.google.common.base.Preconditions.checkNotNull;

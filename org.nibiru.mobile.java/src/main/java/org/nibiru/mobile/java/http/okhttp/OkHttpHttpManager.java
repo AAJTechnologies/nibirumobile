@@ -3,8 +3,7 @@ package org.nibiru.mobile.java.http.okhttp;
 import com.google.common.base.MoreObjects;
 import com.google.common.net.HttpHeaders;
 
-import org.nibiru.mobile.core.api.async.Promise;
-import org.nibiru.mobile.core.api.config.BaseUrl;
+import org.nibiru.async.core.api.promise.Promise;
 import org.nibiru.mobile.core.api.http.HttpException;
 import org.nibiru.mobile.core.api.http.HttpManager;
 import org.nibiru.mobile.core.api.http.HttpRequest;

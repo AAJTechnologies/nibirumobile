@@ -1,22 +1,15 @@
 package org.nibiru.mobile.android.ui.mvp;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
-import com.google.common.base.Preconditions;
-
-import org.nibiru.mobile.android.ui.place.IntentPlace;
 import org.nibiru.mobile.core.api.ui.mvp.Presenter;
 import org.nibiru.mobile.core.api.ui.mvp.PresenterMapper;
-import android.view.View;
 import org.nibiru.mobile.core.api.ui.place.Place;
 
-import javax.annotation.Nullable;
 import javax.inject.Inject;
 
 import static com.google.common.base.Preconditions.checkNotNull;

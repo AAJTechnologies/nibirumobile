@@ -1,20 +1,20 @@
 package org.nibiru.mobile.gwt.event;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.Map;
-
-import javax.inject.Inject;
+import com.google.common.collect.Maps;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.web.bindery.event.shared.HandlerRegistration;
 
 import org.nibiru.mobile.core.api.event.Event;
 import org.nibiru.mobile.core.api.event.EventBus;
 import org.nibiru.mobile.core.api.event.EventHandler;
 import org.nibiru.model.core.api.Registration;
 
-import com.google.common.collect.Maps;
-import com.google.gwt.event.shared.GwtEvent;
-import com.google.gwt.event.shared.GwtEvent.Type;
-import com.google.web.bindery.event.shared.HandlerRegistration;
+import java.util.Map;
+
+import javax.inject.Inject;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class GwtEventBus implements EventBus {
 	private final com.google.web.bindery.event.shared.EventBus eventBus;

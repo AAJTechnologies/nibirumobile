@@ -1,16 +1,16 @@
 package org.nibiru.mobile.gwt.ui.place;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import javax.annotation.Nullable;
-import javax.inject.Inject;
+import com.google.gwt.activity.shared.Activity;
+import com.google.gwt.activity.shared.ActivityMapper;
+import com.google.gwt.place.shared.Place;
 
 import org.nibiru.mobile.core.api.ui.mvp.PresenterMapper;
 import org.nibiru.mobile.gwt.ui.mvp.PresenterActivity;
 
-import com.google.gwt.activity.shared.Activity;
-import com.google.gwt.activity.shared.ActivityMapper;
-import com.google.gwt.place.shared.Place;
+import javax.annotation.Nullable;
+import javax.inject.Inject;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class DefaultActivityMapper implements ActivityMapper {
 	private final PresenterMapper presenterMapper;

@@ -1,10 +1,8 @@
 package org.nibiru.mobile.java.service;
 
-import com.google.common.base.Preconditions;
-
+import org.nibiru.async.core.api.loop.Looper;
 import org.nibiru.mobile.core.api.service.BasicPushServiceFactory;
 import org.nibiru.mobile.core.api.service.PushService;
-import org.nibiru.mobile.core.api.ui.Looper;
 
 import javax.inject.Inject;
 

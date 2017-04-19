@@ -6,7 +6,6 @@ import org.nibiru.mobile.core.api.http.HttpResponse;
 import org.nibiru.mobile.core.api.serializer.Serializer;
 
 import javax.annotation.Nullable;
-import javax.inject.Inject;
 
 public class JsonRpcService extends BaseService {
     public JsonRpcService(String baseUrl,

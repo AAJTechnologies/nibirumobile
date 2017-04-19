@@ -1,7 +1,5 @@
 package org.nibiru.mobile.ios.ioc;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import javax.inject.Singleton;
 
 import apple.coredata.NSManagedObjectContext;
@@ -15,6 +13,8 @@ import apple.foundation.enums.NSSearchPathDirectory;
 import apple.foundation.enums.NSSearchPathDomainMask;
 import dagger.Module;
 import dagger.Provides;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 @Module
 public class DefaultCoreDataModule {

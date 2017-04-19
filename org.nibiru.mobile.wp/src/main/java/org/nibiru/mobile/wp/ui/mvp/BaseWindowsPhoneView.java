@@ -1,13 +1,13 @@
 package org.nibiru.mobile.wp.ui.mvp;
 
-import org.nibiru.mobile.core.api.ui.mvp.View;
-
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Image;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
+
+import org.nibiru.mobile.core.api.ui.mvp.View;
 
 /**
  * Base class for Windows Phone views.

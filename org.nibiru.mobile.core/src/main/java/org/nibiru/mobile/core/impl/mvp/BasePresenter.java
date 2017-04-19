@@ -1,6 +1,5 @@
 package org.nibiru.mobile.core.impl.mvp;
 
-import org.nibiru.mobile.core.api.async.Promise;
 import org.nibiru.mobile.core.api.ui.AlertManager;
 import org.nibiru.mobile.core.api.ui.mvp.Presenter;
 import org.nibiru.mobile.core.api.ui.mvp.View;

@@ -1,6 +1,7 @@
 package org.nibiru.mobile.core.api.geolocation;
 
-import org.nibiru.mobile.core.api.async.Promise;
+
+import org.nibiru.async.core.api.promise.Promise;
 
 /**
  * Manager for accessing geolocation information.

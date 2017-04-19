@@ -1,13 +1,13 @@
 package org.nibiru.mobile.android.common;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.io.Serializable;
+import android.content.Intent;
 
 import org.nibiru.mobile.core.api.common.Identifiable;
 import org.nibiru.mobile.core.impl.common.BaseConfigurable;
 
-import android.content.Intent;
+import java.io.Serializable;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public abstract class BaseIntentAdapter<T> extends BaseConfigurable<T>
 		implements Identifiable<String> {

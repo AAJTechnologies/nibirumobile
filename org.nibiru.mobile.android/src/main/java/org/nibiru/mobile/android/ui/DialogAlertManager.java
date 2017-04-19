@@ -1,18 +1,16 @@
 package org.nibiru.mobile.android.ui;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import javax.inject.Inject;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import org.nibiru.mobile.core.api.common.Consumer;
 import org.nibiru.mobile.core.api.ui.AlertManager;
 
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnClickListener;
-import android.widget.EditText;
-import android.widget.Toast;
+import javax.inject.Inject;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class DialogAlertManager implements AlertManager {
     private final Context context;

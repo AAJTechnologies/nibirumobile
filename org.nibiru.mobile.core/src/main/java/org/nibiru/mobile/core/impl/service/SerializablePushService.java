@@ -1,7 +1,5 @@
 package org.nibiru.mobile.core.impl.service;
 
-import com.google.common.base.Preconditions;
-
 import org.nibiru.mobile.core.api.common.Consumer;
 import org.nibiru.mobile.core.api.serializer.Serializer;
 import org.nibiru.mobile.core.api.service.PushService;

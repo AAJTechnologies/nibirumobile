@@ -1,21 +1,19 @@
 package org.nibiru.mobile.java.service;
 
-import com.google.common.base.Throwables;
 import com.google.common.collect.Sets;
 
+import org.eclipse.jetty.websocket.WebSocket;
+import org.eclipse.jetty.websocket.WebSocketClient;
+import org.eclipse.jetty.websocket.WebSocketClientFactory;
+import org.nibiru.async.core.api.loop.Looper;
 import org.nibiru.mobile.core.api.common.Consumer;
 import org.nibiru.mobile.core.api.service.PushService;
-import org.nibiru.mobile.core.api.ui.Looper;
 import org.nibiru.model.core.api.Registration;
 
 import java.io.IOException;
 import java.net.URI;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
-
-import org.eclipse.jetty.websocket.WebSocket;
-import org.eclipse.jetty.websocket.WebSocketClient;
-import org.eclipse.jetty.websocket.WebSocketClientFactory;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

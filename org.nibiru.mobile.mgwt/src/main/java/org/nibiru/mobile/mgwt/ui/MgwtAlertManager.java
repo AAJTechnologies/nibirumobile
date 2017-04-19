@@ -1,14 +1,14 @@
 package org.nibiru.mobile.mgwt.ui;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import org.nibiru.mobile.core.api.common.Consumer;
-import org.nibiru.mobile.core.api.ui.AlertManager;
-
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.NotificationMole;
 import com.googlecode.mgwt.ui.client.widget.dialog.ConfirmDialog.ConfirmCallback;
 import com.googlecode.mgwt.ui.client.widget.dialog.Dialogs;
+
+import org.nibiru.mobile.core.api.common.Consumer;
+import org.nibiru.mobile.core.api.ui.AlertManager;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class MgwtAlertManager implements AlertManager {
     @Override

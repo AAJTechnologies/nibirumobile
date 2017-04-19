@@ -1,6 +1,9 @@
 package org.nibiru.mobile.gwt.ioc;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import com.google.gwt.activity.shared.ActivityMapper;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.place.shared.PlaceController;
+import com.google.gwt.place.shared.PlaceHistoryMapper;
 
 import org.nibiru.mobile.core.api.app.Bootstrap;
 import org.nibiru.mobile.core.api.ui.place.PlaceManager;
@@ -9,13 +12,10 @@ import org.nibiru.mobile.gwt.ui.place.DefaultActivityMapper;
 import org.nibiru.mobile.gwt.ui.place.DefaultPlaceHistoryMapper;
 import org.nibiru.mobile.gwt.ui.place.GwtPlaceManager;
 
-import com.google.gwt.activity.shared.ActivityMapper;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.place.shared.PlaceController;
-import com.google.gwt.place.shared.PlaceHistoryMapper;
-
 import dagger.Module;
 import dagger.Provides;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 @Module
 public class DefaultGwtPlacesModule {

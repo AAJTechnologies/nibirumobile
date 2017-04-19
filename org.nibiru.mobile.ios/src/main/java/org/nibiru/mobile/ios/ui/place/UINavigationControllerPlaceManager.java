@@ -1,21 +1,21 @@
 package org.nibiru.mobile.ios.ui.place;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.Deque;
-
-import javax.inject.Inject;
-import javax.inject.Provider;
+import com.google.common.collect.Queues;
 
 import org.nibiru.mobile.core.api.ui.mvp.Presenter;
 import org.nibiru.mobile.core.api.ui.mvp.PresenterMapper;
 import org.nibiru.mobile.core.api.ui.place.Place;
 import org.nibiru.mobile.core.api.ui.place.PlaceManager;
 
-import com.google.common.collect.Queues;
+import java.util.Deque;
+
+import javax.inject.Inject;
+import javax.inject.Provider;
 
 import apple.uikit.UINavigationController;
 import apple.uikit.UIWindow;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class UINavigationControllerPlaceManager implements PlaceManager {
 	private final UIWindow mainWindow;

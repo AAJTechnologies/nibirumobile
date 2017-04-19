@@ -1,17 +1,17 @@
 package org.nibiru.mobile.java.event.guava;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import javax.inject.Inject;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+import com.google.common.eventbus.EventBus;
+import com.google.common.eventbus.Subscribe;
 
 import org.nibiru.mobile.core.api.event.Event;
 import org.nibiru.mobile.core.api.event.EventHandler;
 import org.nibiru.model.core.api.Registration;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
-import com.google.common.eventbus.EventBus;
-import com.google.common.eventbus.Subscribe;
+import javax.inject.Inject;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class GuavaEventBus implements
 		org.nibiru.mobile.core.api.event.EventBus {

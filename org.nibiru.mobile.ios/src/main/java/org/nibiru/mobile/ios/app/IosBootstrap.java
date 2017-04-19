@@ -1,16 +1,16 @@
 package org.nibiru.mobile.ios.app;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import org.nibiru.mobile.core.api.app.Bootstrap;
+import org.nibiru.mobile.core.api.app.EntryPoint;
 
 import javax.inject.Inject;
 import javax.inject.Provider;
 
-import org.nibiru.mobile.core.api.app.Bootstrap;
-import org.nibiru.mobile.core.api.app.EntryPoint;
-
 import apple.uikit.UIColor;
 import apple.uikit.UINavigationController;
 import apple.uikit.UIWindow;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class IosBootstrap implements Bootstrap {
 	private final EntryPoint entryPoint;

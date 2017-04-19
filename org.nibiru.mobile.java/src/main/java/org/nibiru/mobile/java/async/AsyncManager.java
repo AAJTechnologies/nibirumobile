@@ -2,7 +2,8 @@ package org.nibiru.mobile.java.async;
 
 import com.google.common.base.Supplier;
 
-import org.nibiru.mobile.core.api.async.Promise;
+import org.nibiru.async.core.api.promise.Promise;
+
 
 /**
  * Component responsible for performing async tasks (HTTP calls for example).

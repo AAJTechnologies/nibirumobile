@@ -1,18 +1,18 @@
 package org.nibiru.mobile.android.event;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import javax.inject.Inject;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 
 import org.nibiru.mobile.core.api.event.Event;
 import org.nibiru.mobile.core.api.event.EventBus;
 import org.nibiru.mobile.core.api.event.EventHandler;
 import org.nibiru.model.core.api.Registration;
 
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
+import javax.inject.Inject;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class BroadcastEventBus implements EventBus {
 	private static final String EVENT_PREFIX = "org.nibiru.mobile.android.event.";

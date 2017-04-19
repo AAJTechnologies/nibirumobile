@@ -1,19 +1,5 @@
 package org.nibiru.mobile.gwt.http;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import javax.inject.Inject;
-
-import org.nibiru.mobile.core.api.async.Deferred;
-import org.nibiru.mobile.core.api.async.Promise;
-import org.nibiru.mobile.core.api.config.BaseUrl;
-import org.nibiru.mobile.core.api.http.HttpException;
-import org.nibiru.mobile.core.api.http.HttpManager;
-import org.nibiru.mobile.core.api.http.HttpMethod;
-import org.nibiru.mobile.core.api.http.HttpRequest;
-import org.nibiru.mobile.core.api.http.HttpResponse;
-import org.nibiru.mobile.core.api.http.HttpStatus;
-
 import com.google.gwt.http.client.Header;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
@@ -22,8 +8,18 @@ import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
 
-import java.util.List;
+import org.nibiru.async.core.api.promise.Deferred;
+import org.nibiru.async.core.api.promise.Promise;
+import org.nibiru.mobile.core.api.http.HttpException;
+import org.nibiru.mobile.core.api.http.HttpManager;
+import org.nibiru.mobile.core.api.http.HttpMethod;
+import org.nibiru.mobile.core.api.http.HttpRequest;
+import org.nibiru.mobile.core.api.http.HttpResponse;
+import org.nibiru.mobile.core.api.http.HttpStatus;
+
 import java.util.Map;
+
+import javax.inject.Inject;
 
 public class RequestBuilderHttpManager implements HttpManager {
     @Inject

@@ -1,10 +1,10 @@
 package org.nibiru.mobile.mgwt.ui.mvp;
 
-import org.nibiru.mobile.gwt.ui.mvp.BaseGwtView;
-
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.googlecode.mgwt.ui.client.widget.form.Form;
 import com.googlecode.mgwt.ui.client.widget.panel.scroll.ScrollPanel;
+
+import org.nibiru.mobile.gwt.ui.mvp.BaseGwtView;
 
 public abstract class BaseFormView extends BaseGwtView {
 	private final Form formPanel;

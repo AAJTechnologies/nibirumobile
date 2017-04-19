@@ -1,11 +1,11 @@
 package org.nibiru.mobile.android.geolocation;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import android.location.Location;
 
 import org.nibiru.mobile.core.api.geolocation.Coordinates;
 import org.nibiru.mobile.core.api.geolocation.Position;
 
-import android.location.Location;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class LocationAdapter implements Position, Coordinates {
 	private final Location location;

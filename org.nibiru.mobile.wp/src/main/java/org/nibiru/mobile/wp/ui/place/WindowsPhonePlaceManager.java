@@ -1,19 +1,19 @@
 package org.nibiru.mobile.wp.ui.place;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.Deque;
-
-import javax.inject.Inject;
-import javax.inject.Singleton;
+import com.google.common.collect.Lists;
+import com.google.gwt.user.client.History;
 
 import org.nibiru.mobile.core.api.ui.mvp.Presenter;
 import org.nibiru.mobile.core.api.ui.mvp.PresenterMapper;
 import org.nibiru.mobile.core.api.ui.place.Place;
 import org.nibiru.mobile.core.api.ui.place.PlaceManager;
 
-import com.google.common.collect.Lists;
-import com.google.gwt.user.client.History;
+import java.util.Deque;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 @Singleton
 public class WindowsPhonePlaceManager implements PlaceManager {

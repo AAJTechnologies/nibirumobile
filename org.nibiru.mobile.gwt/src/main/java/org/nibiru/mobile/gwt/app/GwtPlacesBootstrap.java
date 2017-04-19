@@ -1,19 +1,19 @@
 package org.nibiru.mobile.gwt.app;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import javax.inject.Inject;
-
-import org.nibiru.mobile.core.api.app.Bootstrap;
-import org.nibiru.mobile.core.api.app.EntryPoint;
-import org.nibiru.mobile.gwt.ui.place.SimplePlace;
-
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.place.shared.PlaceHistoryMapper;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.web.bindery.event.shared.EventBus;
+
+import org.nibiru.mobile.core.api.app.Bootstrap;
+import org.nibiru.mobile.core.api.app.EntryPoint;
+import org.nibiru.mobile.gwt.ui.place.SimplePlace;
+
+import javax.inject.Inject;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class GwtPlacesBootstrap implements Bootstrap {
     private final EntryPoint entryPoint;

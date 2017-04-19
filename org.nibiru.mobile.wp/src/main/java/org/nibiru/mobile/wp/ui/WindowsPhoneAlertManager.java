@@ -1,12 +1,12 @@
 package org.nibiru.mobile.wp.ui;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.NotificationMole;
 
 import org.nibiru.mobile.core.api.common.Consumer;
 import org.nibiru.mobile.core.api.ui.AlertManager;
 
-import com.google.gwt.user.client.Window;
-import com.google.gwt.user.client.ui.NotificationMole;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class WindowsPhoneAlertManager implements AlertManager {
 	@Override

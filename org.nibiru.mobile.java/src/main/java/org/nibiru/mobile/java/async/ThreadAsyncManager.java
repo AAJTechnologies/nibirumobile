@@ -1,14 +1,14 @@
 package org.nibiru.mobile.java.async;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import com.google.common.base.Supplier;
+
+import org.nibiru.async.core.api.loop.Looper;
+import org.nibiru.async.core.api.promise.Deferred;
+import org.nibiru.async.core.api.promise.Promise;
 
 import javax.inject.Inject;
 
-import org.nibiru.mobile.core.api.async.Deferred;
-import org.nibiru.mobile.core.api.async.Promise;
-import org.nibiru.mobile.core.api.ui.Looper;
-
-import com.google.common.base.Supplier;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class ThreadAsyncManager extends BaseAsyncmanager {
 	@Inject

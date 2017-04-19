@@ -1,8 +1,8 @@
 package org.nibiru.mobile.core.impl.common;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import org.nibiru.mobile.core.api.common.Configurable;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public abstract class BaseConfigurable<C> implements Configurable<C> {
 	@Override

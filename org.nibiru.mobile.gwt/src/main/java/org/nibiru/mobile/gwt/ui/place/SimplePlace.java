@@ -1,17 +1,17 @@
 package org.nibiru.mobile.gwt.ui.place;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import com.google.common.collect.Maps;
+import com.google.gwt.http.client.URL;
+import com.google.gwt.place.shared.PlaceController;
+import com.google.gwt.place.shared.PlaceTokenizer;
+
+import org.nibiru.mobile.core.api.ui.place.Place;
 
 import java.util.Map;
 
 import javax.annotation.Nullable;
 
-import org.nibiru.mobile.core.api.ui.place.Place;
-
-import com.google.common.collect.Maps;
-import com.google.gwt.http.client.URL;
-import com.google.gwt.place.shared.PlaceController;
-import com.google.gwt.place.shared.PlaceTokenizer;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class SimplePlace extends com.google.gwt.place.shared.Place implements
 		Place {

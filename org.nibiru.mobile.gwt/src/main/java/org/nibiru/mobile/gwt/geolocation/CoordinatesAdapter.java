@@ -1,8 +1,8 @@
 package org.nibiru.mobile.gwt.geolocation;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
 import org.nibiru.mobile.core.api.geolocation.Coordinates;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class CoordinatesAdapter implements Coordinates {
 	private final com.googlecode.gwtphonegap.client.geolocation.Coordinates coordinates;

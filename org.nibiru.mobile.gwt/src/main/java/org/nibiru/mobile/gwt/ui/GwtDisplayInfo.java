@@ -1,8 +1,8 @@
 package org.nibiru.mobile.gwt.ui;
 
-import javax.inject.Inject;
-
 import org.nibiru.mobile.core.api.ui.DisplayInfo;
+
+import javax.inject.Inject;
 
 public class GwtDisplayInfo implements DisplayInfo {
 	@Inject

@@ -1,11 +1,11 @@
 package org.nibiru.mobile.gwt.preferences;
 
-import java.util.Date;
+import com.google.gwt.user.client.Cookies;
 
 import org.nibiru.mobile.core.api.preferences.Preferences;
 import org.nibiru.mobile.core.impl.preferences.AbstractPreferences;
 
-import com.google.gwt.user.client.Cookies;
+import java.util.Date;
 
 public class CookiesPreferences extends AbstractPreferences {
 

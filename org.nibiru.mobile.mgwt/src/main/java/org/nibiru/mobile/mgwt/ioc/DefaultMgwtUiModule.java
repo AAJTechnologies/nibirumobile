@@ -1,12 +1,12 @@
 package org.nibiru.mobile.mgwt.ioc;
 
+import com.googlecode.mgwt.mvp.client.AnimationMapper;
+
 import org.nibiru.mobile.core.api.ui.AlertManager;
 import org.nibiru.mobile.gwt.app.AppWidgetBootstrap;
 import org.nibiru.mobile.mgwt.app.MgwtAppWidgetBootstrap;
 import org.nibiru.mobile.mgwt.ui.MgwtAlertManager;
 import org.nibiru.mobile.mgwt.ui.place.DefaultAnimationMapper;
-
-import com.googlecode.mgwt.mvp.client.AnimationMapper;
 
 import dagger.Module;
 import dagger.Provides;

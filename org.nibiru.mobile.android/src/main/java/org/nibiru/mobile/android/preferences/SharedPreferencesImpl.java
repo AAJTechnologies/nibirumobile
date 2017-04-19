@@ -1,14 +1,14 @@
 package org.nibiru.mobile.android.preferences;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import javax.inject.Inject;
+import android.content.Context;
+import android.content.SharedPreferences;
 
 import org.nibiru.mobile.core.api.preferences.Preferences;
 import org.nibiru.mobile.core.impl.preferences.AbstractPreferences;
 
-import android.content.Context;
-import android.content.SharedPreferences;
+import javax.inject.Inject;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class SharedPreferencesImpl extends AbstractPreferences {
 	private final SharedPreferences sharedPreferences;

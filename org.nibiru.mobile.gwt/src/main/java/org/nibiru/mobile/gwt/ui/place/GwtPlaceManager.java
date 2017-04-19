@@ -1,14 +1,14 @@
 package org.nibiru.mobile.gwt.ui.place;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import javax.inject.Inject;
+import com.google.gwt.place.shared.PlaceController;
+import com.google.gwt.user.client.History;
 
 import org.nibiru.mobile.core.api.ui.place.Place;
 import org.nibiru.mobile.core.api.ui.place.PlaceManager;
 
-import com.google.gwt.place.shared.PlaceController;
-import com.google.gwt.user.client.History;
+import javax.inject.Inject;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class GwtPlaceManager implements PlaceManager {
 	private final PlaceController placeController;

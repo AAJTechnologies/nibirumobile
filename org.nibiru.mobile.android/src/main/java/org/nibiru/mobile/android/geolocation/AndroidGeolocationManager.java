@@ -1,18 +1,18 @@
 package org.nibiru.mobile.android.geolocation;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import javax.inject.Inject;
-
-import org.nibiru.mobile.core.api.async.Deferred;
-import org.nibiru.mobile.core.api.async.Promise;
-import org.nibiru.mobile.core.api.geolocation.GeolocationManager;
-import org.nibiru.mobile.core.api.geolocation.Position;
-
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+
+import org.nibiru.async.core.api.promise.Deferred;
+import org.nibiru.async.core.api.promise.Promise;
+import org.nibiru.mobile.core.api.geolocation.GeolocationManager;
+import org.nibiru.mobile.core.api.geolocation.Position;
+
+import javax.inject.Inject;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class AndroidGeolocationManager implements GeolocationManager {
     private final LocationManager locationManager;

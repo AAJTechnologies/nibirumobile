@@ -2,7 +2,7 @@ package org.nibiru.mobile.core.api.service;
 
 import com.google.common.net.MediaType;
 
-import org.nibiru.mobile.core.api.async.Promise;
+import org.nibiru.async.core.api.promise.Promise;
 import org.nibiru.mobile.core.api.http.HttpException;
 import org.nibiru.mobile.core.api.http.HttpMethod;
 

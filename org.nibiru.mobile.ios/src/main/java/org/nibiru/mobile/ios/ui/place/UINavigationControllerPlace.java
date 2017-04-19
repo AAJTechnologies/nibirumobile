@@ -1,11 +1,6 @@
 package org.nibiru.mobile.ios.ui.place;
 
-import static com.google.common.base.Preconditions.checkNotNull;
-
-import java.util.Deque;
-import java.util.Map;
-
-import javax.inject.Provider;
+import com.google.common.collect.Maps;
 
 import org.nibiru.mobile.core.api.common.Identifiable;
 import org.nibiru.mobile.core.api.ui.mvp.Presenter;
@@ -14,7 +9,10 @@ import org.nibiru.mobile.core.api.ui.mvp.View;
 import org.nibiru.mobile.core.api.ui.place.Place;
 import org.nibiru.mobile.core.impl.common.BaseConfigurable;
 
-import com.google.common.collect.Maps;
+import java.util.Deque;
+import java.util.Map;
+
+import javax.inject.Provider;
 
 import apple.coregraphics.struct.CGPoint;
 import apple.coregraphics.struct.CGRect;
@@ -23,6 +21,8 @@ import apple.uikit.UINavigationController;
 import apple.uikit.UIView;
 import apple.uikit.UIViewController;
 import apple.uikit.UIWindow;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class UINavigationControllerPlace extends BaseConfigurable<Place>
 		implements Place, Identifiable<String> {

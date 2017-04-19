@@ -1,6 +1,5 @@
 package org.nibiru.mobile.android.ui.mvp;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
@@ -8,6 +7,8 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Base class for Android based views.

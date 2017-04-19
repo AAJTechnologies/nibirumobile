@@ -1,8 +1,7 @@
 package org.nibiru.mobile.core.api.http;
 
-import org.nibiru.mobile.core.api.async.Promise;
 
-import java.util.function.Supplier;
+import org.nibiru.async.core.api.promise.Promise;
 
 /**
  * Manager for performing requests over HTTP.

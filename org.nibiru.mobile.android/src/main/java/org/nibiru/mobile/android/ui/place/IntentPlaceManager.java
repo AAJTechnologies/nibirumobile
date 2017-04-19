@@ -1,16 +1,14 @@
 package org.nibiru.mobile.android.ui.place;
 
-import static com.google.common.base.Preconditions.checkNotNull;
+import android.app.Activity;
 
-import javax.inject.Inject;
-
-import org.nibiru.mobile.android.common.BaseIntentAdapter;
 import org.nibiru.mobile.core.api.config.AppName;
 import org.nibiru.mobile.core.api.ui.place.Place;
 import org.nibiru.mobile.core.api.ui.place.PlaceManager;
 
-import android.app.Activity;
-import android.content.Intent;
+import javax.inject.Inject;
+
+import static com.google.common.base.Preconditions.checkNotNull;
 
 public class IntentPlaceManager implements PlaceManager {
     private final Activity context;

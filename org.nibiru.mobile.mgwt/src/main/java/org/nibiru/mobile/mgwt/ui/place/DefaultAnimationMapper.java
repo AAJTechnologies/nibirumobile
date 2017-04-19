@@ -1,11 +1,11 @@
 package org.nibiru.mobile.mgwt.ui.place;
 
-import org.nibiru.mobile.gwt.ui.place.SimplePlace;
-
 import com.google.gwt.place.shared.Place;
 import com.googlecode.mgwt.mvp.client.AnimationMapper;
 import com.googlecode.mgwt.ui.client.widget.animation.Animation;
 import com.googlecode.mgwt.ui.client.widget.animation.Animations;
+
+import org.nibiru.mobile.gwt.ui.place.SimplePlace;
 
 public class DefaultAnimationMapper implements AnimationMapper {
 

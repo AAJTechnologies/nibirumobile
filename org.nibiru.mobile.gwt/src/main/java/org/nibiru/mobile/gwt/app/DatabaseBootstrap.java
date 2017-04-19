@@ -1,6 +1,6 @@
 package org.nibiru.mobile.gwt.app;
 
-import org.nibiru.mobile.core.api.async.Promise;
+import org.nibiru.async.core.api.promise.Promise;
 
 /**
  * Interface representing database creation process.
