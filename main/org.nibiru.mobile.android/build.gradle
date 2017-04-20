@@ -1,8 +1,0 @@
-apply plugin: 'me.tatarka.retrolambda'
-
-dependencies {
-    compile project(":org.nibiru.mobile.java")
-    compile "com.google.android:android:${androidVersion}"
-	compile "com.j256.ormlite:ormlite-core:4.47"
-	compile "com.j256.ormlite:ormlite-android:4.47"
-}

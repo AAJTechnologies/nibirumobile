@@ -1,8 +1,0 @@
-jar {
-   from sourceSets.main.java.srcDirs 
-}
-
-dependencies {
-    compile project(":ar.com.oxen.nibiru.mobile.security.gwt")
-	compile "ar.com.oxen.nibiru.mobile:ar.com.oxen.nibiru.mobile.wp:${version}"
-}
