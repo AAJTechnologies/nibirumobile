@@ -9,7 +9,7 @@ project.ext {
 
 allprojects {
 	version = '0.4-SNAPSHOT'
-	group = 'com.aajtech.nibiru.mobile'
+	group = 'io.github.nibiruos.mobile'
 
 	repositories {
 	    mavenCentral()
