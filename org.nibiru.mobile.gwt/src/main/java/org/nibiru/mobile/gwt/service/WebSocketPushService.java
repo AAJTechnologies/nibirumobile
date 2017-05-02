@@ -2,6 +2,8 @@ package org.nibiru.mobile.gwt.service;
 
 import com.google.common.collect.Sets;
 
+import org.nibiru.async.core.api.promise.Deferred;
+import org.nibiru.async.core.api.promise.Promise;
 import org.nibiru.mobile.core.api.common.Consumer;
 import org.nibiru.mobile.core.api.service.PushService;
 import org.nibiru.model.core.api.Registration;
@@ -14,14 +16,23 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * WebSocket implementation for {@link PushService}.
  */
 public class WebSocketPushService implements PushService<String> {
+    private final String url;
     private final Set<Consumer<String>> callbacks;
 
     public WebSocketPushService(String url) {
-        init(checkNotNull(url));
+        this.url = checkNotNull(url);
         callbacks = Sets.newHashSet();
     }
 
-    private native void init(String url) /*-{
+    @Override
+    public Promise<Void, Exception> connect() {
+        Deferred<Void, Exception> deferred = Deferred.defer();
+        connect(url);
+        deferred.resolve(null);
+        return deferred.promise();
+    }
+
+    private native void connect(String url) /*-{
         var $this = this;
         if ('WebSocket' in $wnd) {
             $this.ws = new WebSocket(url);
@@ -34,6 +45,12 @@ public class WebSocketPushService implements PushService<String> {
         this.ws.onmessage = function (event) {
             $this.@org.nibiru.mobile.gwt.service.WebSocketPushService::onMessage(Ljava/lang/String;)(event.data);
         };
+    }-*/;
+
+    @Override
+    public native void disconnect() /*-{
+        var $this = this;
+        this.ws.close();
     }-*/;
 
     @Override

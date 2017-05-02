@@ -1,5 +1,6 @@
 package org.nibiru.mobile.core.impl.service;
 
+import org.nibiru.async.core.api.promise.Promise;
 import org.nibiru.mobile.core.api.common.Consumer;
 import org.nibiru.mobile.core.api.serializer.Serializer;
 import org.nibiru.mobile.core.api.service.PushService;
@@ -21,6 +22,16 @@ public class SerializablePushService<T> implements PushService<T> {
         this.pushService = checkNotNull(pushService);
         this.serializer = checkNotNull(serializer);
         this.entityClass = checkNotNull(entityClass);
+    }
+
+    @Override
+    public Promise<Void, Exception> connect() {
+        return pushService.connect();
+    }
+
+    @Override
+    public void disconnect() {
+        pushService.disconnect();
     }
 
     @Override
