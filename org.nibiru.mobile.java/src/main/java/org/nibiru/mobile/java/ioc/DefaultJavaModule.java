@@ -2,7 +2,7 @@ package org.nibiru.mobile.java.ioc;
 
 import org.nibiru.mobile.core.api.http.HttpManager;
 import org.nibiru.mobile.core.api.serializer.Serializer;
-import org.nibiru.mobile.core.api.service.BasicPushServiceFactory;
+import org.nibiru.mobile.core.api.service.PushServiceFactory;
 import org.nibiru.mobile.java.http.okhttp.OkHttpHttpManager;
 import org.nibiru.mobile.java.serializer.jackson.JacksonSerializer;
 import org.nibiru.mobile.java.service.WebSocketPushServiceFactory;
@@ -29,7 +29,7 @@ public class DefaultJavaModule {
 	}
 
 	@Provides
-	public BasicPushServiceFactory getBasicPushServiceFactory(WebSocketPushServiceFactory webSocketPushServiceFactory) {
+	public PushServiceFactory getPushServiceFactory(WebSocketPushServiceFactory webSocketPushServiceFactory) {
 		return webSocketPushServiceFactory;
 	}
 }

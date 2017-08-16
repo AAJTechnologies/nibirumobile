@@ -7,6 +7,9 @@ import org.nibiru.async.core.api.promise.Promise;
 import org.nibiru.mobile.core.api.common.Consumer;
 import org.nibiru.mobile.core.api.service.PushService;
 import org.nibiru.model.core.api.Registration;
+import org.nibiru.model.core.api.Value;
+import org.nibiru.model.core.impl.java.JavaType;
+import org.nibiru.model.core.impl.java.JavaValue;
 
 import java.util.Set;
 
@@ -15,13 +18,14 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * WebSocket implementation for {@link PushService}.
  */
-public class WebSocketPushService implements PushService<String> {
+public class WebSocketPushService implements PushService {
     private final String url;
-    private final Set<Consumer<String>> callbacks;
+    private final Value<String> value;
 
     public WebSocketPushService(String url) {
         this.url = checkNotNull(url);
-        callbacks = Sets.newHashSet();
+        value = JavaValue.of(JavaType.STRING);
+        value.addObserver(() -> sendNative(value.get()));
     }
 
     @Override
@@ -54,25 +58,15 @@ public class WebSocketPushService implements PushService<String> {
     }-*/;
 
     @Override
-    public void send(String message) {
-        checkNotNull(message);
-        sendNative(message);
+    public Value<String> getValue() {
+        return value;
     }
 
     private native void sendNative(String message) /*-{
        this.ws.send(message);
     }-*/;
 
-    @Override
-    public Registration receive(Consumer<String> callback) {
-        checkNotNull(callback);
-        callbacks.add(callback);
-        return () -> callbacks.remove(callback);
-    }
-
     private void onMessage(String message) {
-        for (Consumer<String> callback : callbacks) {
-            callback.accept(message);
-        }
+        value.set(message);
     }
 }
