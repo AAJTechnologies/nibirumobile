@@ -1,5 +1,7 @@
 package org.nibiru.mobile.ios.app;
 
+import org.nibiru.async.core.api.promise.Deferred;
+import org.nibiru.async.core.api.promise.Promise;
 import org.nibiru.mobile.core.api.app.Bootstrap;
 import org.nibiru.mobile.core.api.app.EntryPoint;
 
@@ -13,26 +15,27 @@ import apple.uikit.UIWindow;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class IOSBootstrap implements Bootstrap {
-	private final EntryPoint entryPoint;
-	private final UIWindow mainWindow;
-	private final Provider<UINavigationController> navigationControllerProvider;
+    private final EntryPoint entryPoint;
+    private final UIWindow mainWindow;
+    private final Provider<UINavigationController> navigationControllerProvider;
 
-	@Inject
-	public IOSBootstrap(EntryPoint entryPoint, UIWindow mainWindow,
+    @Inject
+    public IOSBootstrap(EntryPoint entryPoint, UIWindow mainWindow,
                         Provider<UINavigationController> navigationControllerProvider) {
-		this.entryPoint = checkNotNull(entryPoint);
-		this.mainWindow = checkNotNull(mainWindow);
-		this.navigationControllerProvider = checkNotNull(navigationControllerProvider);
-	}
+        this.entryPoint = checkNotNull(entryPoint);
+        this.mainWindow = checkNotNull(mainWindow);
+        this.navigationControllerProvider = checkNotNull(navigationControllerProvider);
+    }
 
-	@Override
-	public void onBootstrap() {
-		// TODO: Background color should be application-specific?
-		mainWindow.setBackgroundColor(UIColor.lightGrayColor());
-		mainWindow.makeKeyAndVisible();
-		UINavigationController navigationController = navigationControllerProvider
-				.get();
-		mainWindow.setRootViewController(navigationController);
-		entryPoint.onApplicationStart();
-	}
+    @Override
+    public Promise<Void, Exception> onBootstrap() {
+        // TODO: Background color should be application-specific?
+        mainWindow.setBackgroundColor(UIColor.lightGrayColor());
+        mainWindow.makeKeyAndVisible();
+        UINavigationController navigationController = navigationControllerProvider
+                .get();
+        mainWindow.setRootViewController(navigationController);
+        entryPoint.onApplicationStart();
+        return Deferred.<Void, Exception>defer().promise();
+    }
 }

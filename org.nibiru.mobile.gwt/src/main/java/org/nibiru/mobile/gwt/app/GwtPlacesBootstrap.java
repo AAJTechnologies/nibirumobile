@@ -6,6 +6,8 @@ import com.google.gwt.place.shared.PlaceHistoryMapper;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.web.bindery.event.shared.EventBus;
 
+import org.nibiru.async.core.api.promise.Deferred;
+import org.nibiru.async.core.api.promise.Promise;
 import org.nibiru.mobile.core.api.app.Bootstrap;
 import org.nibiru.mobile.core.api.app.EntryPoint;
 import org.nibiru.mobile.gwt.ui.place.SimplePlace;
@@ -35,7 +37,7 @@ public class GwtPlacesBootstrap implements Bootstrap {
     }
 
     @Override
-    public void onBootstrap() {
+    public Promise<Void, Exception> onBootstrap() {
         PlaceHistoryHandler historyHandler = new PlaceHistoryHandler(
                 placeHistoryMapper);
 
@@ -47,5 +49,6 @@ public class GwtPlacesBootstrap implements Bootstrap {
         historyHandler.handleCurrentHistory();
 
         entryPoint.onApplicationStart();
+        return Deferred.<Void, Exception>defer().promise();
     }
 }
