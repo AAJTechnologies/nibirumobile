@@ -6,6 +6,5 @@ dependencies {
 	compile project(":org.nibiru.mobile.core")
 	compile "com.google.gwt:gwt-user:${gwtVersion}"
 	compile "com.google.guava:guava-gwt:${guavaVersion}"
-	compile "com.aajtech.gwtmobile:persistence:1.0-SNAPSHOT"
 	compile "org.json:json:20090211"
 }

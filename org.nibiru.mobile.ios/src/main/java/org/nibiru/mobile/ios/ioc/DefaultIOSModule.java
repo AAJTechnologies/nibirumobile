@@ -6,7 +6,7 @@ import org.nibiru.mobile.core.api.preferences.Preferences;
 import org.nibiru.mobile.core.api.ui.AlertManager;
 import org.nibiru.mobile.core.api.ui.DisplayInfo;
 import org.nibiru.mobile.core.api.ui.place.PlaceManager;
-import org.nibiru.mobile.ios.app.IosBootstrap;
+import org.nibiru.mobile.ios.app.IOSBootstrap;
 import org.nibiru.mobile.ios.preferences.DummyPreferences;
 import org.nibiru.mobile.ios.ui.IOSDisplayInfo;
 import org.nibiru.mobile.ios.ui.UIAlertControllerAlertManager;
@@ -25,9 +25,9 @@ import dagger.Provides;
 
 
 @Module
-public class DefaultIosModule {
+public class DefaultIOSModule {
 	@Provides
-	public Bootstrap getBootstrap(IosBootstrap bootstrap) {
+	public Bootstrap getBootstrap(IOSBootstrap bootstrap) {
 		return bootstrap;
 	}
 

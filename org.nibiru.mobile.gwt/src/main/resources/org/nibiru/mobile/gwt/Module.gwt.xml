@@ -5,7 +5,6 @@
 	<inherits name="com.google.gwt.user.User" />
 	<inherits name='com.google.gwt.activity.Activity' />
 	<inherits name='com.google.gwt.place.Place' />
-	<inherits name='com.gwtmobile.persistence.gwtmobile_persistence' />
 	<inherits name="com.google.gwt.http.HTTP" />
 	<inherits name="com.google.web.bindery.autobean.AutoBean" />
 	<inherits name="com.google.common.base.Base" />

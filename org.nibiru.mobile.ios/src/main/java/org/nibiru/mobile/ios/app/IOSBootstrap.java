@@ -12,14 +12,14 @@ import apple.uikit.UIWindow;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class IosBootstrap implements Bootstrap {
+public class IOSBootstrap implements Bootstrap {
 	private final EntryPoint entryPoint;
 	private final UIWindow mainWindow;
 	private final Provider<UINavigationController> navigationControllerProvider;
 
 	@Inject
-	public IosBootstrap(EntryPoint entryPoint, UIWindow mainWindow,
-			Provider<UINavigationController> navigationControllerProvider) {
+	public IOSBootstrap(EntryPoint entryPoint, UIWindow mainWindow,
+                        Provider<UINavigationController> navigationControllerProvider) {
 		this.entryPoint = checkNotNull(entryPoint);
 		this.mainWindow = checkNotNull(mainWindow);
 		this.navigationControllerProvider = checkNotNull(navigationControllerProvider);
