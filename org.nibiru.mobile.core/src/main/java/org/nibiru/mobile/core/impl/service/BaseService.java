@@ -7,6 +7,7 @@ import org.nibiru.async.core.api.promise.Promise;
 import org.nibiru.mobile.core.api.http.HttpException;
 import org.nibiru.mobile.core.api.http.HttpManager;
 import org.nibiru.mobile.core.api.http.HttpMethod;
+import org.nibiru.mobile.core.api.http.HttpRequest;
 import org.nibiru.mobile.core.api.http.HttpRequest.Builder;
 import org.nibiru.mobile.core.api.http.HttpResponse;
 import org.nibiru.mobile.core.api.serializer.Serializer;
@@ -54,18 +55,27 @@ abstract class BaseService implements RemoteService {
         checkNotNull(httpMethod);
         checkNotNull(mediaType);
 
-        return httpManager
-                .send(builder(method, requestDto)
+        return invoke(requestBuilder(method, requestDto)
                         .method(httpMethod)
                         .accept(mediaType)
                         .contentType(mediaType)
-                        .build())
+                        .build(),
+                responseClass);
+    }
+
+    @Override
+    public <T> Promise<T, HttpException> invoke(HttpRequest request,
+                                                Class<T> responseClass) {
+        checkNotNull(request);
+        checkNotNull(responseClass);
+        return httpManager
+                .send(request)
                 .map(this::extractResult)
                 .map(parse(responseClass));
     }
 
-    protected abstract Builder builder(String method,
-                                       @Nullable Object requestDto);
+    public abstract Builder requestBuilder(String method,
+                                           @Nullable Object requestDto);
 
     protected abstract String extractResult(HttpResponse response);
 

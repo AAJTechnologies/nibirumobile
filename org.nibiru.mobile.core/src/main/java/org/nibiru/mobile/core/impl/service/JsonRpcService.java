@@ -2,6 +2,7 @@ package org.nibiru.mobile.core.impl.service;
 
 import org.nibiru.mobile.core.api.http.HttpManager;
 import org.nibiru.mobile.core.api.http.HttpRequest;
+import org.nibiru.mobile.core.api.http.HttpRequest.Builder;
 import org.nibiru.mobile.core.api.http.HttpResponse;
 import org.nibiru.mobile.core.api.serializer.Serializer;
 
@@ -16,8 +17,8 @@ public class JsonRpcService extends BaseService {
     }
 
     @Override
-    protected HttpRequest.Builder builder(String method,
-                                          @Nullable Object requestDto) {
+    public Builder requestBuilder(String method,
+                                  @Nullable Object requestDto) {
         StringBuilder request = new StringBuilder();
         request.append("{\"id\":1,\"jsonrpc\":\"jsonrpc\",\"method\":\"");
         request.append(method);

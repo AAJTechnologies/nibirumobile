@@ -17,8 +17,8 @@ public class RestService extends BaseService {
     }
 
     @Override
-    protected Builder builder(String method,
-                              @Nullable Object requestDto) {
+    public Builder requestBuilder(String method,
+                                  @Nullable Object requestDto) {
         return HttpRequest.builder(getBaseUrl() + getServiceName() + "/" + method)
                 .body(requestDto != null
                         ? getSerializer().serialize(requestDto)
