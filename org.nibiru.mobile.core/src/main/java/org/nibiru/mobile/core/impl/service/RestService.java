@@ -22,7 +22,7 @@ public class RestService extends BaseService {
         return HttpRequest.builder(getBaseUrl() + getServiceName() + "/" + method)
                 .body(requestDto != null
                         ? getSerializer().serialize(requestDto)
-                        : "");
+                        : null);
     }
 
     @Override

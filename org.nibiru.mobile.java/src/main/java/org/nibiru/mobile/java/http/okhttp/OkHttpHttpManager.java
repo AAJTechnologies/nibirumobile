@@ -50,7 +50,9 @@ public class OkHttpHttpManager implements HttpManager {
             Request.Builder requestBuilder = new Request.Builder()
                     .url(request.getUrl())
                     .method(request.getMethod().getMethod(),
-                            RequestBody.create(MediaType.parse(contentType), request.getBody()));
+                            request.getBody() != null
+                                    ? RequestBody.create(MediaType.parse(contentType), request.getBody())
+                                    : null);
             for (Map.Entry<String, String> entry : request.getHeaders().entrySet()) {
                 requestBuilder.header(entry.getKey(), entry.getValue());
             }
@@ -61,9 +63,9 @@ public class OkHttpHttpManager implements HttpManager {
             }
 
             HttpResponse.Builder responseBuilder = HttpResponse.builder(HttpStatus.valueOf(response.code()))
-                   .body(response.body().string());
+                    .body(response.body().string());
 
-            for (Map.Entry<String, List<String>> header: response.headers().toMultimap().entrySet()) {
+            for (Map.Entry<String, List<String>> header : response.headers().toMultimap().entrySet()) {
                 responseBuilder.header(header.getKey(), header.getValue().get(0));
             }
 

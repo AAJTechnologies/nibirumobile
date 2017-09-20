@@ -7,6 +7,8 @@ import com.google.common.net.MediaType;
 
 import java.util.Map;
 
+import javax.annotation.Nullable;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
@@ -52,7 +54,7 @@ public class HttpRequest {
         private final String url;
         private HttpMethod method = HttpMethod.GET;
         private final Map<String, String> headers;
-        private String body = "";
+        private String body;
 
         private Builder(String url) {
             this.url = checkNotNull(url);
@@ -79,8 +81,8 @@ public class HttpRequest {
             return header(HttpHeaders.ACCEPT, type.toString());
         }
 
-        public Builder body(String body) {
-            this.body = checkNotNull(body);
+        public Builder body(@Nullable String body) {
+            this.body = body;
             return this;
         }
 
