@@ -1,6 +1,8 @@
 package org.nibiru.mobile.core.api.http;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.net.HttpHeaders;
 import com.google.common.net.MediaType;
@@ -54,11 +56,13 @@ public class HttpRequest {
         private final String url;
         private HttpMethod method = HttpMethod.GET;
         private final Map<String, String> headers;
+        private final Map<String, String> queryParams;
         private String body;
 
         private Builder(String url) {
             this.url = checkNotNull(url);
             headers = Maps.newHashMap();
+            queryParams = Maps.newHashMap();
         }
 
         public Builder method(HttpMethod method) {
@@ -70,6 +74,13 @@ public class HttpRequest {
             checkNotNull(header);
             checkNotNull(value);
             headers.put(header, value);
+            return this;
+        }
+
+        public Builder querryParam(String param, String value) {
+            checkNotNull(param);
+            checkNotNull(value);
+            queryParams.put(param, value);
             return this;
         }
 
@@ -87,7 +98,17 @@ public class HttpRequest {
         }
 
         public HttpRequest build() {
-            return new HttpRequest(url,
+            String fullUrl;
+            if (queryParams.isEmpty()) {
+                fullUrl = url;
+            } else {
+                String params = Joiner.on('&').join(Iterables
+                        .transform(queryParams.entrySet(), (entry) -> entry.getKey() + "=" + entry.getValue()));
+                fullUrl = url.indexOf('?') >= 0
+                        ? url + "&" + params
+                        : url + "?" + params;
+            }
+            return new HttpRequest(fullUrl,
                     method,
                     ImmutableMap.copyOf(headers),
                     body);

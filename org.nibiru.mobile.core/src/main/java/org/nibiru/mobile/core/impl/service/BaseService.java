@@ -34,10 +34,10 @@ abstract class BaseService implements RemoteService {
     }
 
     @Override
-    public <T> Promise<T, HttpException> invoke(String method,
+    public <T> Promise<T, HttpException> invoke(String path,
                                                 @Nullable Object requestDto,
                                                 Class<T> responseClass) {
-        return invoke(method,
+        return invoke(path,
                 requestDto,
                 responseClass,
                 HttpMethod.POST,
@@ -45,17 +45,17 @@ abstract class BaseService implements RemoteService {
     }
 
     @Override
-    public <T> Promise<T, HttpException> invoke(String method,
+    public <T> Promise<T, HttpException> invoke(String path,
                                                 @Nullable Object requestDto,
                                                 Class<T> responseClass,
                                                 HttpMethod httpMethod,
                                                 MediaType mediaType) {
-        checkNotNull(method);
+        checkNotNull(path);
         checkNotNull(responseClass);
         checkNotNull(httpMethod);
         checkNotNull(mediaType);
 
-        return invoke(requestBuilder(method, requestDto)
+        return invoke(requestBuilder(path, requestDto)
                         .method(httpMethod)
                         .accept(mediaType)
                         .contentType(mediaType)

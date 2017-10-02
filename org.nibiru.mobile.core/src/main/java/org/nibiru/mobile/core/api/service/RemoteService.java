@@ -17,24 +17,24 @@ public interface RemoteService {
     /**
      * Invokes a method on a remote service using POST/JSON content type.
      *
-     * @param method        The name of the method
+     * @param path          The service path
      * @param requestDto    The DTO used for creating request data
      * @param responseClass The expected response class
      */
-    <T> Promise<T, HttpException> invoke(String method,
+    <T> Promise<T, HttpException> invoke(String path,
                                          @Nullable Object requestDto,
                                          Class<T> responseClass);
 
     /**
      * Invokes a method on a remote service allowing full parameterization;
      *
-     * @param method        The name of the method
+     * @param path          The service path
      * @param requestDto    The DTO used for creating request data
      * @param responseClass The expected response class
      * @param httpMethod    The HTTP method
      * @param mediaType     The media type for request and response
      */
-    <T> Promise<T, HttpException> invoke(String method,
+    <T> Promise<T, HttpException> invoke(String path,
                                          @Nullable Object requestDto,
                                          Class<T> responseClass,
                                          HttpMethod httpMethod,
@@ -44,11 +44,11 @@ public interface RemoteService {
      * Creates an HTTP request builder object,
      * configured according to service type.
      *
-     * @param method     The service method
+     * @param path       The service path
      * @param requestDto The DTO object
      * @return The builder
      */
-    Builder requestBuilder(String method, @Nullable Object requestDto);
+    Builder requestBuilder(String path, @Nullable Object requestDto);
 
     /**
      * Geenric invoke method, allowing full control on HTTP request object.
