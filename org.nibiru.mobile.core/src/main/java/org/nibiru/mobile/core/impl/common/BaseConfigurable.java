@@ -2,6 +2,8 @@ package org.nibiru.mobile.core.impl.common;
 
 import org.nibiru.mobile.core.api.common.Configurable;
 
+import javax.annotation.Nullable;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public abstract class BaseConfigurable<C> implements Configurable<C> {
@@ -12,9 +14,8 @@ public abstract class BaseConfigurable<C> implements Configurable<C> {
 	}
 
 	@Override
-	public C addParameter(Enum<?> key, Object value) {
+	public C addParameter(Enum<?> key, @Nullable Object value) {
 		checkNotNull(key);
-		checkNotNull(value);
 		return addParameter(key.toString(), value);
 	}
 }
