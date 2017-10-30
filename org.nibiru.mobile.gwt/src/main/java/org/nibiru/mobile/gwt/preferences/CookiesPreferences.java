@@ -7,9 +7,14 @@ import org.nibiru.mobile.core.impl.preferences.AbstractPreferences;
 
 import java.util.Date;
 
+import javax.inject.Inject;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class CookiesPreferences extends AbstractPreferences {
+    @Inject
+    public CookiesPreferences() {
+    }
 
     @Override
     public <T> T getParameter(String key) {
