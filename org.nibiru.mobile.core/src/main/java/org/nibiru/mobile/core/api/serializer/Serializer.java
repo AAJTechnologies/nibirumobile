@@ -15,7 +15,7 @@ public interface Serializer {
 
 	/**
 	 * Converts from string to object
-	 * 
+	 *
 	 * @param data
 	 *            The string
 	 * @param returnType
@@ -23,6 +23,17 @@ public interface Serializer {
 	 * @return The object
 	 */
 	<T> T deserialize(String data, Class<T> returnType);
+
+	/**
+	 * Converts from string to object
+	 *
+	 * @param data
+	 *            The string
+	 * @param returnType
+	 *            The expected return type type literal
+	 * @return The object
+	 */
+	<T> T deserialize(String data, TypeLiteral<T> returnType);
 
 	/**
 	 * @return The encoding (json, xml, etc.)

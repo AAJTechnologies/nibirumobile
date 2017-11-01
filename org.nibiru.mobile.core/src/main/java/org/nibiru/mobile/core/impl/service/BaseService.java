@@ -11,6 +11,7 @@ import org.nibiru.mobile.core.api.http.HttpRequest;
 import org.nibiru.mobile.core.api.http.HttpRequest.Builder;
 import org.nibiru.mobile.core.api.http.HttpResponse;
 import org.nibiru.mobile.core.api.serializer.Serializer;
+import org.nibiru.mobile.core.api.serializer.TypeLiteral;
 import org.nibiru.mobile.core.api.service.RemoteService;
 
 import javax.annotation.Nullable;
@@ -39,6 +40,15 @@ abstract class BaseService implements RemoteService {
                                                 Class<T> responseClass) {
         return invoke(path,
                 requestDto,
+                TypeLiteral.create(responseClass));
+    }
+
+    @Override
+    public <T> Promise<T, HttpException> invoke(String path,
+                                                @Nullable Object requestDto,
+                                                TypeLiteral<T> responseClass) {
+        return invoke(path,
+                requestDto,
                 responseClass,
                 HttpMethod.POST,
                 MediaType.JSON_UTF_8);
@@ -48,6 +58,24 @@ abstract class BaseService implements RemoteService {
     public <T> Promise<T, HttpException> invoke(String path,
                                                 @Nullable Object requestDto,
                                                 Class<T> responseClass,
+                                                HttpMethod httpMethod,
+                                                MediaType mediaType) {
+        checkNotNull(path);
+        checkNotNull(responseClass);
+        checkNotNull(httpMethod);
+        checkNotNull(mediaType);
+
+        return invoke(path,
+                requestDto,
+                TypeLiteral.create(responseClass),
+                httpMethod,
+                mediaType);
+    }
+
+    @Override
+    public <T> Promise<T, HttpException> invoke(String path,
+                                                @Nullable Object requestDto,
+                                                TypeLiteral<T> responseClass,
                                                 HttpMethod httpMethod,
                                                 MediaType mediaType) {
         checkNotNull(path);
@@ -68,6 +96,17 @@ abstract class BaseService implements RemoteService {
                                                 Class<T> responseClass) {
         checkNotNull(request);
         checkNotNull(responseClass);
+
+        return invoke(request,
+                TypeLiteral.create(responseClass));
+    }
+
+    @Override
+    public <T> Promise<T, HttpException> invoke(HttpRequest request,
+                                                TypeLiteral<T> responseClass) {
+        checkNotNull(request);
+        checkNotNull(responseClass);
+
         return httpManager
                 .send(request)
                 .map(this::extractResult)
@@ -91,7 +130,7 @@ abstract class BaseService implements RemoteService {
         return serializer;
     }
 
-    protected <V> Function<String, V> parse(Class<V> responseClass) {
+    protected <V> Function<String, V> parse(TypeLiteral<V> responseClass) {
         return (response) -> response != null
                 ? serializer.deserialize(response, responseClass)
                 : null;
