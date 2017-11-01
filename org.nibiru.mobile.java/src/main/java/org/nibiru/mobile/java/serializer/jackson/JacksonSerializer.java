@@ -2,13 +2,13 @@ package org.nibiru.mobile.java.serializer.jackson;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.type.TypeBindings;
 
 import org.nibiru.mobile.core.api.serializer.TypeLiteral;
 import org.nibiru.mobile.core.impl.serializer.BaseSerializer;
 
 import java.io.IOException;
 
+import javax.annotation.Nullable;
 import javax.inject.Inject;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -32,12 +32,12 @@ public class JacksonSerializer extends BaseSerializer {
     }
 
     @Override
-    public <T> T deserialize(String data, TypeLiteral<T> returnType) {
-        checkNotNull(data);
-        checkNotNull(returnType);
+    protected <T> T perfomrDeserialization(@Nullable String data,
+                                           TypeLiteral<T> returnType) {
         try {
             return mapper.readValue(data, mapper.getTypeFactory()
-                    .constructParametricType(returnType.getType(), returnType.getParameters()));
+                    .constructParametricType(returnType.getType(),
+                            returnType.getParameters()));
         } catch (IOException e) {
             throw exception(data, e);
         }

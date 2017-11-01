@@ -10,6 +10,8 @@ import org.nibiru.mobile.core.impl.serializer.BaseSerializer;
 
 import java.util.Map;
 
+import javax.annotation.Nullable;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class AutoBeanSerializer extends BaseSerializer {
@@ -29,10 +31,8 @@ public class AutoBeanSerializer extends BaseSerializer {
     }
 
     @Override
-    public <T> T deserialize(String data, TypeLiteral<T> returnType) {
-        checkNotNull(data);
-        checkNotNull(returnType);
-        if (data != null && !data.trim().equalsIgnoreCase("null")) {
+    protected <T> T perfomrDeserialization(@Nullable String data,
+                                           TypeLiteral<T> returnType) {
             Class<? extends CustomSerializer<?>> customSerializer = customSerializers.get(returnType);
             if (customSerializer != null) {
                 return (T) AutoBeanCodex.decode(autoBeanFactory,
@@ -45,9 +45,6 @@ public class AutoBeanSerializer extends BaseSerializer {
                         data)
                         .as();
             }
-        } else {
-            return null;
-        }
     }
 
     @Override

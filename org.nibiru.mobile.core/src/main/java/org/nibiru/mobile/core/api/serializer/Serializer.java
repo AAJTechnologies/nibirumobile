@@ -1,5 +1,7 @@
 package org.nibiru.mobile.core.api.serializer;
 
+import javax.annotation.Nullable;
+
 /**
  * Interface for serializing from/to object to/from String.
  */
@@ -22,7 +24,7 @@ public interface Serializer {
 	 *            The expected return type
 	 * @return The object
 	 */
-	<T> T deserialize(String data, Class<T> returnType);
+	<T> T deserialize(@Nullable String data, Class<T> returnType);
 
 	/**
 	 * Converts from string to object
@@ -33,7 +35,7 @@ public interface Serializer {
 	 *            The expected return type type literal
 	 * @return The object
 	 */
-	<T> T deserialize(String data, TypeLiteral<T> returnType);
+	<T> T deserialize(@Nullable String data, TypeLiteral<T> returnType);
 
 	/**
 	 * @return The encoding (json, xml, etc.)
