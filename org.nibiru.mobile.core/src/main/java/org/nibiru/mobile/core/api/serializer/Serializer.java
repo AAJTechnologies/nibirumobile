@@ -13,7 +13,7 @@ public interface Serializer {
 	 *            The object
 	 * @return The string
 	 */
-	String serialize(Object object);
+	String serialize(@Nullable Object object);
 
 	/**
 	 * Converts from string to object
@@ -36,9 +36,4 @@ public interface Serializer {
 	 * @return The object
 	 */
 	<T> T deserialize(@Nullable String data, TypeLiteral<T> returnType);
-
-	/**
-	 * @return The encoding (json, xml, etc.)
-	 */
-	String getEncoding();
 }

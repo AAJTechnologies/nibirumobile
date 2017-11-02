@@ -24,8 +24,7 @@ public class AutoBeanSerializer extends BaseSerializer {
     }
 
     @Override
-    public String serialize(Object object) {
-        checkNotNull(object);
+    protected String perfomrSerialization(Object object) {
         return AutoBeanCodex.encode(AutoBeanUtils.getAutoBean(object))
                 .getPayload();
     }
@@ -45,11 +44,6 @@ public class AutoBeanSerializer extends BaseSerializer {
                         data)
                         .as();
             }
-    }
-
-    @Override
-    public String getEncoding() {
-        return "json";
     }
 
     public AutoBeanSerializer addCustomSerializer(TypeLiteral<?> type,

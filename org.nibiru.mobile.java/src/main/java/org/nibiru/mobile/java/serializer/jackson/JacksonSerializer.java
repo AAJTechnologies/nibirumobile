@@ -22,8 +22,7 @@ public class JacksonSerializer extends BaseSerializer {
     }
 
     @Override
-    public String serialize(Object object) {
-        checkNotNull(object);
+    protected String perfomrSerialization(Object object) {
         try {
             return mapper.writeValueAsString(object);
         } catch (JsonProcessingException e) {
@@ -41,11 +40,6 @@ public class JacksonSerializer extends BaseSerializer {
         } catch (IOException e) {
             throw exception(data, e);
         }
-    }
-
-    @Override
-    public String getEncoding() {
-        return "json";
     }
 
     private RuntimeException exception(Object argument, Exception cause) {
