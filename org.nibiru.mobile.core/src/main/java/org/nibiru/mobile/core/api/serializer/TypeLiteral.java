@@ -45,4 +45,12 @@ public class TypeLiteral<T> {
     public int hashCode() {
         return Objects.hashCode(type, parameters.length);
     }
+
+    @Override
+    public String toString() {
+        return "TypeLiteral{" +
+                "type=" + type +
+                ", parameters=" + Arrays.toString(parameters) +
+                '}';
+    }
 }
