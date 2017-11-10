@@ -71,5 +71,6 @@ subprojects {
 		testCompile "junit:junit:4.12"
 		compile "com.google.dagger:dagger:${daggerVersion}"
 		provided "com.google.dagger:dagger-compiler:${daggerVersion}"
+		compile "com.squareup:javapoet:1.9.0"
 	}
 }

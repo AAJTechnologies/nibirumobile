@@ -1,7 +1,7 @@
 package org.nibiru.mobile.gwt.serializer;
 
 
-public interface CustomSerializer<T> {
+public interface CustomAutobeanSerializer<T> {
     T getData();
     void setData(T data);
 }

@@ -16,7 +16,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public class AutoBeanSerializer extends BaseSerializer {
     private final AutoBeanFactory autoBeanFactory;
-    private final Map<TypeLiteral<?>, Class<? extends CustomSerializer<?>>> customSerializers;
+    private final Map<TypeLiteral<?>, Class<? extends CustomAutobeanSerializer<?>>> customSerializers;
 
     public AutoBeanSerializer(AutoBeanFactory autoBeanFactory) {
         this.autoBeanFactory = checkNotNull(autoBeanFactory);
@@ -32,7 +32,7 @@ public class AutoBeanSerializer extends BaseSerializer {
     @Override
     protected <T> T perfomrDeserialization(@Nullable String data,
                                            TypeLiteral<T> returnType) {
-            Class<? extends CustomSerializer<?>> customSerializer = customSerializers.get(returnType);
+            Class<? extends CustomAutobeanSerializer<?>> customSerializer = customSerializers.get(returnType);
             if (customSerializer != null) {
                 return (T) AutoBeanCodex.decode(autoBeanFactory,
                         customSerializer,
@@ -47,7 +47,7 @@ public class AutoBeanSerializer extends BaseSerializer {
     }
 
     public AutoBeanSerializer addCustomSerializer(TypeLiteral<?> type,
-                                                  Class<? extends CustomSerializer<?>> serializerClass) {
+                                                  Class<? extends CustomAutobeanSerializer<?>> serializerClass) {
         customSerializers.put(type, serializerClass);
         return this;
     }
