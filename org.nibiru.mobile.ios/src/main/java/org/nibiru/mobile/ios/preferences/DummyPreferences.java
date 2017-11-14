@@ -2,7 +2,12 @@ package org.nibiru.mobile.ios.preferences;
 
 import org.nibiru.mobile.core.api.preferences.Preferences;
 
+import javax.inject.Inject;
+
 public class DummyPreferences implements Preferences {
+    @Inject
+    public DummyPreferences() {
+    }
 
 	@Override
 	public <T> T getParameter(String key) {

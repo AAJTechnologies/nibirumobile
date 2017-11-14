@@ -49,6 +49,11 @@ public class DefaultIOSModule {
 	}
 
 	@Provides
+	@Singleton
+	public com.google.common.eventbus.EventBus getGuavaEventBus() {
+		return new com.google.common.eventbus.EventBus();
+	}
+	@Provides
 	public Preferences getPreferences(DummyPreferences preferences) {
 		return preferences;
 	}
