@@ -139,7 +139,7 @@ public abstract class AbstractPreferences extends
 
     private static final char SEPARATOR = ':';
 
-    protected <T> T objectFromString(@Nullable String data) {
+    protected <T> T stringToObject(@Nullable String data) {
         if (data != null && data.length() > 0) {
             int separator = data.indexOf(SEPARATOR);
             if (separator >= 0) {
@@ -153,7 +153,7 @@ public abstract class AbstractPreferences extends
         }
     }
 
-    protected String stringFromObject(@Nullable Object object) {
+    protected String objectToString(@Nullable Object object) {
         if (object != null) {
             for (Type type : Type.values()) {
                 if (type.accept(object)) {

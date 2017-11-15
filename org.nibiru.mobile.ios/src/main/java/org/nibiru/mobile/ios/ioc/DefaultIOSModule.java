@@ -7,7 +7,7 @@ import org.nibiru.mobile.core.api.ui.AlertManager;
 import org.nibiru.mobile.core.api.ui.DisplayInfo;
 import org.nibiru.mobile.core.api.ui.place.PlaceManager;
 import org.nibiru.mobile.ios.app.IOSBootstrap;
-import org.nibiru.mobile.ios.preferences.DummyPreferences;
+import org.nibiru.mobile.ios.preferences.NSUserDefaultsPreferences;
 import org.nibiru.mobile.ios.ui.IOSDisplayInfo;
 import org.nibiru.mobile.ios.ui.UIAlertControllerAlertManager;
 import org.nibiru.mobile.ios.ui.place.UINavigationControllerPlaceManager;
@@ -54,7 +54,7 @@ public class DefaultIOSModule {
 		return new com.google.common.eventbus.EventBus();
 	}
 	@Provides
-	public Preferences getPreferences(DummyPreferences preferences) {
+	public Preferences getPreferences(NSUserDefaultsPreferences preferences) {
 		return preferences;
 	}
 

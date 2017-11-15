@@ -19,7 +19,7 @@ public class CookiesPreferences extends AbstractPreferences {
 
     @Override
     public <T> T getParameter(String key) {
-        return objectFromString(Cookies.getCookie(key));
+        return stringToObject(Cookies.getCookie(key));
     }
 
     @Override
@@ -27,7 +27,7 @@ public class CookiesPreferences extends AbstractPreferences {
         checkNotNull(key);
         if (value != null) {
             long expirationTime = new Date().getTime() + 10l * 365l * 24l * 60l * 60l * 1000l;
-            Cookies.setCookie(key, stringFromObject(value), new Date(expirationTime));
+            Cookies.setCookie(key, objectToString(value), new Date(expirationTime));
         } else {
             Cookies.removeCookie(key);
         }

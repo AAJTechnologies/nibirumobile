@@ -24,14 +24,14 @@ public class SharedPreferencesImpl extends AbstractPreferences {
     @Override
     public <T> T getParameter(String key) {
         checkNotNull(key);
-        return objectFromString(sharedPreferences.getString(key, null));
+        return stringToObject(sharedPreferences.getString(key, null));
     }
 
     @Override
     public Preferences addParameter(String key, @Nullable Object value) {
         checkNotNull(key);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(key, stringFromObject(value));
+        editor.putString(key, objectToString(value));
         editor.commit();
         return this;
     }
