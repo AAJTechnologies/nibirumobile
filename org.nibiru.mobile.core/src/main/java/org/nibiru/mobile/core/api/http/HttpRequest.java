@@ -77,7 +77,7 @@ public class HttpRequest {
             return this;
         }
 
-        public Builder querryParam(String param, String value) {
+        public Builder queryParam(String param, String value) {
             checkNotNull(param);
             checkNotNull(value);
             queryParams.put(param, value);
