@@ -7,9 +7,8 @@ import com.google.common.collect.Maps;
 import com.google.common.net.HttpHeaders;
 import com.google.common.net.MediaType;
 
-import java.util.Map;
-
 import javax.annotation.Nullable;
+import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -70,25 +69,36 @@ public class HttpRequest {
             return this;
         }
 
-        public Builder header(String header, String value) {
+        public Builder header(String header,
+                              @Nullable String value) {
             checkNotNull(header);
-            checkNotNull(value);
             headers.put(header, value);
+            if (value != null) {
+                headers.put(header, value);
+            } else {
+                headers.remove(header);
+            }
             return this;
         }
 
-        public Builder queryParam(String param, String value) {
+        public Builder queryParam(String param,
+                                  @Nullable String value) {
             checkNotNull(param);
-            checkNotNull(value);
-            queryParams.put(param, value);
+            if (value != null) {
+                queryParams.put(param, value);
+            } else {
+                queryParams.remove(param);
+            }
             return this;
         }
 
         public Builder contentType(MediaType type) {
+            checkNotNull(type);
             return header(HttpHeaders.CONTENT_TYPE, type.toString());
         }
 
         public Builder accept(MediaType type) {
+            checkNotNull(type);
             return header(HttpHeaders.ACCEPT, type.toString());
         }
 
