@@ -10,6 +10,7 @@ import org.nibiru.mobile.ios.app.IOSBootstrap;
 import org.nibiru.mobile.ios.preferences.NSUserDefaultsPreferences;
 import org.nibiru.mobile.ios.ui.IOSDisplayInfo;
 import org.nibiru.mobile.ios.ui.UIAlertControllerAlertManager;
+import org.nibiru.mobile.ios.ui.UINavigationControllerHelper;
 import org.nibiru.mobile.ios.ui.place.UINavigationControllerPlaceManager;
 import org.nibiru.mobile.java.async.AsyncManager;
 import org.nibiru.mobile.java.async.ThreadAsyncManager;
@@ -69,17 +70,15 @@ public class DefaultIOSModule {
 	}
 
 	@Provides
+	public UINavigationController getUINavigationController(UINavigationControllerHelper helper) {
+		return helper.current();
+	}
+
+    @Provides
 	@Singleton
 	public UIWindow getWindow() {
 		UIWindow mainWindow = UIWindow.alloc().init();
 		mainWindow.setBounds(UIScreen.mainScreen().bounds());
 		return mainWindow;
-	}
-
-	@Provides
-	public UINavigationController getUINavigationController() {
-		UINavigationController controller = UINavigationController.alloc().init();
-		controller.setTitle("CHANGE ME");
-		return controller;
 	}
 }
