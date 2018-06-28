@@ -6,10 +6,11 @@ import org.nibiru.mobile.core.api.preferences.Preferences;
 import org.nibiru.mobile.core.api.ui.AlertManager;
 import org.nibiru.mobile.core.api.ui.DisplayInfo;
 import org.nibiru.mobile.core.api.ui.place.PlaceManager;
-import org.nibiru.mobile.ios.app.IosBootstrap;
-import org.nibiru.mobile.ios.preferences.DummyPreferences;
+import org.nibiru.mobile.ios.app.IOSBootstrap;
+import org.nibiru.mobile.ios.preferences.NSUserDefaultsPreferences;
 import org.nibiru.mobile.ios.ui.IOSDisplayInfo;
 import org.nibiru.mobile.ios.ui.UIAlertControllerAlertManager;
+import org.nibiru.mobile.ios.ui.UINavigationControllerHelper;
 import org.nibiru.mobile.ios.ui.place.UINavigationControllerPlaceManager;
 import org.nibiru.mobile.java.async.AsyncManager;
 import org.nibiru.mobile.java.async.ThreadAsyncManager;
@@ -25,9 +26,9 @@ import dagger.Provides;
 
 
 @Module
-public class DefaultIosModule {
+public class DefaultIOSModule {
 	@Provides
-	public Bootstrap getBootstrap(IosBootstrap bootstrap) {
+	public Bootstrap getBootstrap(IOSBootstrap bootstrap) {
 		return bootstrap;
 	}
 
@@ -49,7 +50,12 @@ public class DefaultIosModule {
 	}
 
 	@Provides
-	public Preferences getPreferences(DummyPreferences preferences) {
+	@Singleton
+	public com.google.common.eventbus.EventBus getGuavaEventBus() {
+		return new com.google.common.eventbus.EventBus();
+	}
+	@Provides
+	public Preferences getPreferences(NSUserDefaultsPreferences preferences) {
 		return preferences;
 	}
 
@@ -64,17 +70,15 @@ public class DefaultIosModule {
 	}
 
 	@Provides
+	public UINavigationController getUINavigationController(UINavigationControllerHelper helper) {
+		return helper.current();
+	}
+
+    @Provides
 	@Singleton
 	public UIWindow getWindow() {
 		UIWindow mainWindow = UIWindow.alloc().init();
 		mainWindow.setBounds(UIScreen.mainScreen().bounds());
 		return mainWindow;
-	}
-
-	@Provides
-	public UINavigationController getUINavigationController() {
-		UINavigationController controller = UINavigationController.alloc().init();
-		controller.setTitle("CHANGE ME");
-		return controller;
 	}
 }

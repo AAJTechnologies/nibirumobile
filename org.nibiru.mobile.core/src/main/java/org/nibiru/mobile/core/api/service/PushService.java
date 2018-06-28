@@ -1,25 +1,28 @@
 package org.nibiru.mobile.core.api.service;
 
+import org.nibiru.async.core.api.promise.Promise;
 import org.nibiru.mobile.core.api.common.Consumer;
 import org.nibiru.model.core.api.Registration;
+import org.nibiru.model.core.api.Value;
 
 /**
  * A push service.
- *
- * @param <T> The message data type.
  */
-// TODO: Should this have a disconnect method?
-public interface PushService<T> {
+public interface PushService {
     /**
-     * Sends a message.
+     * Connects to the service.
      *
-     * @param message The message.
+     * @return A promise to be called when the connection is established.
      */
-    void send(T message);
+    Promise<Void, Exception> connect();
 
     /**
-     * Receives a message
-     * @param callback
+     * Disconects from the service.
      */
-    Registration receive(Consumer<T> callback);
+    void disconnect();
+
+    /**
+     * Value for sending/receving data.
+     */
+    Value<String> getValue();
 }

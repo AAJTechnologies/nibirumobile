@@ -3,10 +3,11 @@ package org.nibiru.mobile.gwt.app;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceHistoryHandler;
 import com.google.gwt.place.shared.PlaceHistoryMapper;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.web.bindery.event.shared.EventBus;
 
+import org.nibiru.async.core.api.promise.Deferred;
+import org.nibiru.async.core.api.promise.Promise;
 import org.nibiru.mobile.core.api.app.Bootstrap;
 import org.nibiru.mobile.core.api.app.EntryPoint;
 import org.nibiru.mobile.gwt.ui.place.SimplePlace;
@@ -21,25 +22,22 @@ public class GwtPlacesBootstrap implements Bootstrap {
     private final PlaceController placeController;
     private final PlaceHistoryMapper placeHistoryMapper;
     private final AppWidgetBootstrap appWidgetBootstrap;
-    private final DatabaseBootstrap databaseBootstrap;
 
     @Inject
     public GwtPlacesBootstrap(EntryPoint entryPoint,
                               EventBus eventBus,
                               PlaceController placeController,
                               PlaceHistoryMapper placeHistoryMapper,
-                              AppWidgetBootstrap appWidgetBootstrap,
-                              DatabaseBootstrap databaseBootstrap) {
+                              AppWidgetBootstrap appWidgetBootstrap) {
         this.entryPoint = checkNotNull(entryPoint);
         this.eventBus = checkNotNull(eventBus);
         this.placeController = checkNotNull(placeController);
         this.placeHistoryMapper = checkNotNull(placeHistoryMapper);
         this.appWidgetBootstrap = checkNotNull(appWidgetBootstrap);
-        this.databaseBootstrap = checkNotNull(databaseBootstrap);
     }
 
     @Override
-    public void onBootstrap() {
+    public Promise<Void, Exception> onBootstrap() {
         PlaceHistoryHandler historyHandler = new PlaceHistoryHandler(
                 placeHistoryMapper);
 
@@ -50,8 +48,7 @@ public class GwtPlacesBootstrap implements Bootstrap {
 
         historyHandler.handleCurrentHistory();
 
-        databaseBootstrap.createDatabase()
-                .then((result) -> entryPoint.onApplicationStart())
-                .capture((reason) -> Window.alert("Database error: " + reason.getMessage()));
+        entryPoint.onApplicationStart();
+        return Deferred.<Void, Exception>defer().promise();
     }
 }

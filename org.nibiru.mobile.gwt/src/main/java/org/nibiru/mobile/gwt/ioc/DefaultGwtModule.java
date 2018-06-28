@@ -5,7 +5,7 @@ import com.google.web.bindery.event.shared.SimpleEventBus;
 import org.nibiru.mobile.core.api.event.EventBus;
 import org.nibiru.mobile.core.api.http.HttpManager;
 import org.nibiru.mobile.core.api.preferences.Preferences;
-import org.nibiru.mobile.core.api.service.BasicPushServiceFactory;
+import org.nibiru.mobile.core.api.service.PushServiceFactory;
 import org.nibiru.mobile.core.api.ui.DisplayInfo;
 import org.nibiru.mobile.gwt.event.GwtEventBus;
 import org.nibiru.mobile.gwt.http.RequestBuilderHttpManager;
@@ -48,7 +48,7 @@ public class DefaultGwtModule {
 	}
 
 	@Provides
-	public BasicPushServiceFactory getBasicPushServiceFactory(WebSocketPushServiceFactory webSocketPushServiceFactory) {
+	public PushServiceFactory getPushServiceFactory(WebSocketPushServiceFactory webSocketPushServiceFactory) {
 		return webSocketPushServiceFactory;
 	}
 }

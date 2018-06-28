@@ -1,10 +1,13 @@
 package org.nibiru.mobile.core.api.http;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.net.HttpHeaders;
 import com.google.common.net.MediaType;
 
+import javax.annotation.Nullable;
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -52,11 +55,13 @@ public class HttpRequest {
         private final String url;
         private HttpMethod method = HttpMethod.GET;
         private final Map<String, String> headers;
-        private String body = "";
+        private final Map<String, String> queryParams;
+        private String body;
 
         private Builder(String url) {
             this.url = checkNotNull(url);
             headers = Maps.newHashMap();
+            queryParams = Maps.newHashMap();
         }
 
         public Builder method(HttpMethod method) {
@@ -64,28 +69,56 @@ public class HttpRequest {
             return this;
         }
 
-        public Builder header(String header, String value) {
+        public Builder header(String header,
+                              @Nullable String value) {
             checkNotNull(header);
-            checkNotNull(value);
             headers.put(header, value);
+            if (value != null) {
+                headers.put(header, value);
+            } else {
+                headers.remove(header);
+            }
+            return this;
+        }
+
+        public Builder queryParam(String param,
+                                  @Nullable String value) {
+            checkNotNull(param);
+            if (value != null) {
+                queryParams.put(param, value);
+            } else {
+                queryParams.remove(param);
+            }
             return this;
         }
 
         public Builder contentType(MediaType type) {
+            checkNotNull(type);
             return header(HttpHeaders.CONTENT_TYPE, type.toString());
         }
 
         public Builder accept(MediaType type) {
+            checkNotNull(type);
             return header(HttpHeaders.ACCEPT, type.toString());
         }
 
-        public Builder body(String body) {
-            this.body = checkNotNull(body);
+        public Builder body(@Nullable String body) {
+            this.body = body;
             return this;
         }
 
         public HttpRequest build() {
-            return new HttpRequest(url,
+            String fullUrl;
+            if (queryParams.isEmpty()) {
+                fullUrl = url;
+            } else {
+                String params = Joiner.on('&').join(Iterables
+                        .transform(queryParams.entrySet(), (entry) -> entry.getKey() + "=" + entry.getValue()));
+                fullUrl = url.indexOf('?') >= 0
+                        ? url + "&" + params
+                        : url + "?" + params;
+            }
+            return new HttpRequest(fullUrl,
                     method,
                     ImmutableMap.copyOf(headers),
                     body);
