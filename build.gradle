@@ -1,76 +1,125 @@
 project.ext {
-	nibiruModelVersion = '0.1-SNAPSHOT'
-	nibiruAsyncVersion = '0.1-SNAPSHOT'
-	androidVersion = '2.1.2'
-	gwtVersion = '2.8.0'
-	guavaVersion = '20.0'
-	daggerVersion = '2.7'
+    nibiruId = 'mobile'
+    nibiruModelVersion = '1.0.0'
+    nibiruAsyncVersion = '1.0.0'
+    androidVersion = '2.1.2'
+    gwtVersion = '2.8.0'
+    guavaVersion = '20.0'
+    daggerVersion = '2.7'
 }
 
 allprojects {
-	version = '0.4-SNAPSHOT'
-	group = 'io.github.nibiruos.mobile'
+    version = '1.0.0'
+    group = 'io.github.nibiruos.mobile'
 
-	repositories {
-	    mavenCentral()
-	    jcenter()
-		mavenLocal()
-	    maven {
-	        url "https://oss.sonatype.org/content/repositories/snapshots/"
-	    }
-	    maven {
-	        url "https://oss.sonatype.org/content/repositories/google-snapshots/"
-	    }
-	}
-	buildscript {
-    	repositories {
-        	mavenCentral()
-    	}
-    	dependencies {
-	        classpath 'me.tatarka:gradle-retrolambda:3.3.0-beta4'
-	    }
-	}
+    repositories {
+        mavenCentral()
+        jcenter()
+        mavenLocal()
+        maven {
+            url "https://oss.sonatype.org/content/groups/staging/"
+        }
+        maven {
+            url "https://oss.sonatype.org/content/repositories/snapshots/"
+        }
+        maven {
+            url "https://oss.sonatype.org/content/repositories/google-snapshots/"
+        }
+    }
+    buildscript {
+        repositories {
+            mavenCentral()
+        }
+        dependencies {
+            classpath 'me.tatarka:gradle-retrolambda:3.3.0-beta4'
+        }
+    }
 }
 
 subprojects {
-	apply plugin: 'java'
-	apply plugin: 'eclipse'
-	apply plugin: 'maven'
-	apply plugin: 'maven-publish'
-	
-	publishing {
-	    publications {
-	        mavenJava(MavenPublication) {
-	            from components.java
-	        }
-	    }
-	    repositories {
-        	maven {
-				credentials {
-					username = sonatypeUser
-					password = sonatypePassword
-				}
-	            url "https://oss.sonatype.org/content/repositories/snapshots"
-    	    }
-    	}
-	}
+    apply plugin: 'java'
+    apply plugin: 'eclipse'
+    apply plugin: 'maven'
+    apply plugin: 'maven-publish'
+    apply plugin: 'signing'
 
-	sourceCompatibility = 1.8
+    task javadocJar(type: Jar, dependsOn: javadoc) {
+        classifier = 'javadoc'
+        from javadoc.destinationDir
+    }
 
-	configurations {
-	    provided
-	}
+    task sourcesJar(type: Jar, dependsOn: classes) {
+        classifier = 'sources'
+        from sourceSets.main.allSource
+    }
 
-	sourceSets {
-	    main {
-	        compileClasspath += configurations.provided
-	    }
-	}
+    tasks.withType(Javadoc) {
+        // Workaround for https://github.com/gradle/gradle/issues/5630
+        (options as CoreJavadocOptions).addStringOption("sourcepath", "")
+    }
 
-	dependencies {
-		testCompile "junit:junit:4.12"
-		compile "com.google.dagger:dagger:${daggerVersion}"
-		provided "com.google.dagger:dagger-compiler:${daggerVersion}"
-		compile "com.squareup:javapoet:1.9.0"
-	}
+    publishing {
+        publications {
+            mavenJava(MavenPublication) {
+                from components.java
+                artifact sourcesJar
+                artifact javadocJar
+                pom {
+                    name = 'Nibiru ' + project.name
+                    description = 'Nibiru UI is an abstraction layer for building generic user interfaces using a typed DSL.'
+                    url = 'https://github.com/NibiruOS/' + nibiruId + '/tree/master/' + project.name
+                    licenses {
+                        license {
+                            name = 'The Apache Software License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = 'lbrasseur'
+                            name = 'Lautaro Brasseur'
+                            email = 'lbrasseur@gmail.com'
+                        }
+                    }
+                    scm {
+                        connection = 'https://github.com/NibiruOS/' + nibiruId + '.git'
+                        developerConnection = 'https://github.com/NibiruOS/' + nibiruId + '.git'
+                        url = 'https://github.com/NibiruOS/' + nibiruId
+                    }
+                }
+            }
+        }
+        repositories {
+            maven {
+                credentials {
+                    username = sonatypeUser
+                    password = sonatypePassword
+                }
+                url version.endsWith('SNAPSHOT') ? 'https://oss.sonatype.org/content/repositories/snapshots' : 'https://oss.sonatype.org/service/local/staging/deploy/maven2'
+            }
+        }
+    }
+
+    signing {
+        sign publishing.publications.mavenJava
+    }
+
+    sourceCompatibility = 1.8
+
+    configurations {
+        provided
+    }
+
+    sourceSets {
+        main {
+            compileClasspath += configurations.provided
+        }
+    }
+
+    dependencies {
+        testCompile "junit:junit:4.12"
+        compile "com.google.dagger:dagger:${daggerVersion}"
+        provided "com.google.dagger:dagger-compiler:${daggerVersion}"
+        compile "com.squareup:javapoet:1.9.0"
+    }
 }
