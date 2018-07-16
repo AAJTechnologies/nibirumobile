@@ -8,4 +8,5 @@ dependencies {
 	compile "com.google.guava:guava-gwt:${guavaVersion}"
 	compile "org.json:json:20090211"
 	compile "com.github.nmorel.gwtjackson:gwt-jackson:0.14.2"
+	compile "com.squareup:javapoet:1.11.1"
 }
