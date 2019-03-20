@@ -19,7 +19,13 @@ public class WindowsPhoneBootstrap implements Bootstrap {
 
     @Override
     public Promise<Void, Exception> onBootstrap() {
-        entryPoint.onApplicationStart();
-        return Deferred.<Void, Exception>defer().promise();
+        Deferred<Void, Exception> deferred = Deferred.defer();
+        try {
+            entryPoint.onApplicationStart();
+            deferred.resolve(null);
+        } catch (Exception e) {
+            deferred.reject(e);
+        }
+        return deferred.promise();
     }
 }

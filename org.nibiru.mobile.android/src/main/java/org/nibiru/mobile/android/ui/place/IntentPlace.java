@@ -59,9 +59,4 @@ public class IntentPlace extends BaseIntentAdapter<Place> implements Place {
             activity.finish();
         }
     }
-
-    @Override
-    public void go() {
-        go(false, true);
-    }
 }

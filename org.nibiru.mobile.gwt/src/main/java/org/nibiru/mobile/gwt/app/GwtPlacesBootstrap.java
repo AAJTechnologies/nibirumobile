@@ -38,17 +38,23 @@ public class GwtPlacesBootstrap implements Bootstrap {
 
     @Override
     public Promise<Void, Exception> onBootstrap() {
-        PlaceHistoryHandler historyHandler = new PlaceHistoryHandler(
-                placeHistoryMapper);
+        Deferred<Void, Exception> deferred = Deferred.defer();
+        try {
+            PlaceHistoryHandler historyHandler = new PlaceHistoryHandler(
+                    placeHistoryMapper);
 
-        historyHandler.register(placeController, eventBus,
-                new SimplePlace(null, 0, placeController));
+            historyHandler.register(placeController, eventBus,
+                    new SimplePlace(null, 0, placeController));
 
-        RootPanel.get().add(appWidgetBootstrap.createAppWidget());
+            RootPanel.get().add(appWidgetBootstrap.createAppWidget());
 
-        historyHandler.handleCurrentHistory();
+            historyHandler.handleCurrentHistory();
 
-        entryPoint.onApplicationStart();
-        return Deferred.<Void, Exception>defer().promise();
+            entryPoint.onApplicationStart();
+            deferred.resolve(null);
+        } catch (Exception e) {
+            deferred.reject(e);
+        }
+        return deferred.promise();
     }
 }

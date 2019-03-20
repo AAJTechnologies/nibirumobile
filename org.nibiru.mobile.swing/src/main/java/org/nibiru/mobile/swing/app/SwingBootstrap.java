@@ -1,5 +1,6 @@
-package org.nibiru.mobile.android.app;
+package org.nibiru.mobile.swing.app;
 
+import org.nibiru.async.core.api.loop.Looper;
 import org.nibiru.async.core.api.promise.Deferred;
 import org.nibiru.async.core.api.promise.Promise;
 import org.nibiru.mobile.core.api.app.Bootstrap;
@@ -9,23 +10,28 @@ import javax.inject.Inject;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class AndroidBootstrap implements Bootstrap {
+public class SwingBootstrap implements Bootstrap {
     private final EntryPoint entryPoint;
+    private final Looper looper;
 
     @Inject
-    public AndroidBootstrap(EntryPoint entryPoint) {
+    public SwingBootstrap(EntryPoint entryPoint,
+                          Looper looper) {
         this.entryPoint = checkNotNull(entryPoint);
+        this.looper = checkNotNull(looper);
     }
 
     @Override
     public Promise<Void, Exception> onBootstrap() {
         Deferred<Void, Exception> deferred = Deferred.defer();
-        try {
-            entryPoint.onApplicationStart();
-            deferred.resolve(null);
-        } catch (Exception e) {
-            deferred.reject(e);
-        }
+        looper.post(()->{
+            try {
+                entryPoint.onApplicationStart();
+                deferred.resolve(null);
+            } catch (Exception e) {
+                deferred.reject(e);
+            }
+        });
         return deferred.promise();
     }
 }

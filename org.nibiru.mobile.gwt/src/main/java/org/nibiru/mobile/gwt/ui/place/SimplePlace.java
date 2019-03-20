@@ -66,11 +66,6 @@ public class SimplePlace extends com.google.gwt.place.shared.Place implements
         placeController.goTo(this);
     }
 
-    @Override
-    public void go() {
-        go(false, true);
-    }
-
     public static class Tokenizer implements PlaceTokenizer<SimplePlace> {
         // TODO: No entiendo bien como es el tema de la tokenizacion. Por
         // ejemplo, no le estoy pasando los parametros, pero sin embargo

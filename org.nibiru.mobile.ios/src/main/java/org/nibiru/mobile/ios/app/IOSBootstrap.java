@@ -29,11 +29,17 @@ public class IOSBootstrap implements Bootstrap {
 
     @Override
     public Promise<Void, Exception> onBootstrap() {
-        // TODO: Background color should be application-specific?
-        mainWindow.setBackgroundColor(UIColor.lightGrayColor());
-        mainWindow.makeKeyAndVisible();
-        navigationControllerHelper.reset();
-        entryPoint.onApplicationStart();
-        return Deferred.<Void, Exception>defer().promise();
+        Deferred<Void, Exception> deferred = Deferred.defer();
+        try {
+            // TODO: Background color should be application-specific?
+            mainWindow.setBackgroundColor(UIColor.lightGrayColor());
+            mainWindow.makeKeyAndVisible();
+            navigationControllerHelper.reset();
+            entryPoint.onApplicationStart();
+            deferred.resolve(null);
+        } catch (Exception e) {
+            deferred.reject(e);
+        }
+        return deferred.promise();
     }
 }

@@ -80,11 +80,6 @@ public class WindowsPhonePlace extends BaseConfigurable<Place> implements
         navigate(id.toLowerCase());
     }
 
-    @Override
-    public void go() {
-        go(false, true);
-    }
-
     public boolean forwardFrom(WindowsPhonePlace other) {
         checkNotNull(other);
         return order > other.order;

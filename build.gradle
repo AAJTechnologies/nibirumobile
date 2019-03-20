@@ -5,11 +5,11 @@ project.ext {
     androidVersion = '2.1.2'
     gwtVersion = '2.8.0'
     guavaVersion = '20.0'
-    daggerVersion = '2.16'
+    daggerVersion = '2.22.1'
 }
 
 allprojects {
-    version = '1.0.1'
+    version = '1.0.2-SNAPSHOT'
     group = 'io.github.nibiruos.mobile'
 
     repositories {
@@ -29,9 +29,6 @@ allprojects {
     buildscript {
         repositories {
             mavenCentral()
-        }
-        dependencies {
-            classpath 'me.tatarka:gradle-retrolambda:3.3.0-beta4'
         }
     }
 }
@@ -106,21 +103,11 @@ subprojects {
 
     sourceCompatibility = 1.8
 
-    configurations {
-        provided
-    }
-
-    sourceSets {
-        main {
-            compileClasspath += configurations.provided
-        }
-    }
-
     javadoc.classpath = sourceSets.main.compileClasspath
 
     dependencies {
         testCompile "junit:junit:4.12"
         compile "com.google.dagger:dagger:${daggerVersion}"
-        provided "com.google.dagger:dagger-compiler:${daggerVersion}"
+        annotationProcessor "com.google.dagger:dagger-compiler:${daggerVersion}"
     }
 }
