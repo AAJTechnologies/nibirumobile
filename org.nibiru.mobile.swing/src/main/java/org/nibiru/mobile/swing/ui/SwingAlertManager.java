@@ -32,7 +32,7 @@ public class SwingAlertManager implements AlertManager {
     public void showException(Exception exception) {
         checkNotNull(exception);
         JOptionPane.showMessageDialog(null,
-                exception.getMessage(),
+                Strings.nullToEmpty(exception.getMessage()),
                 exception.getClass().getName(),
                 JOptionPane.ERROR_MESSAGE);
     }

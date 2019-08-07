@@ -5,6 +5,8 @@ import android.content.Context;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.common.base.Strings;
+
 import org.nibiru.mobile.core.api.common.Consumer;
 import org.nibiru.mobile.core.api.ui.AlertManager;
 
@@ -28,13 +30,16 @@ public class DialogAlertManager implements AlertManager {
 
     @Override
     public void showNotification(String message) {
+        checkNotNull(message);
         Toast.makeText(context, message, Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void showException(Exception exception) {
         checkNotNull(exception);
-        builder(exception.getClass().getName(), exception.getMessage()).show();
+        builder(exception.getClass().getName(),
+                Strings.nullToEmpty(exception.getMessage()))
+                .show();
     }
 
     @Override
@@ -54,7 +59,8 @@ public class DialogAlertManager implements AlertManager {
     }
 
     @Override
-    public void confirm(String title, String message,
+    public void confirm(String title,
+                        String message,
                         Consumer<Boolean> callback) {
         checkNotNull(title);
         checkNotNull(message);

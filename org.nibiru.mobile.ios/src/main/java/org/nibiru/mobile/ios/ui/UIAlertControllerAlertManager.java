@@ -42,7 +42,8 @@ public class UIAlertControllerAlertManager implements AlertManager {
     @Override
     public void showException(Exception exception) {
         checkNotNull(exception);
-        show(messageAlertController(exception.getClass().getName(), exception.getMessage()));
+        show(messageAlertController(exception.getClass().getName(),
+                Strings.nullToEmpty(exception.getMessage())));
     }
 
     @Override
