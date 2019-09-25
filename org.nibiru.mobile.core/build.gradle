@@ -1,5 +1,5 @@
 jar {
-   from sourceSets.main.java.srcDirs 
+	from sourceSets.main.java.srcDirs, file("${buildDir}/generated/sources/annotationProcessor/java/main")
 }
 
 dependencies {
