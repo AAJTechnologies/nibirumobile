@@ -1,30 +1,27 @@
 package org.nibiru.mobile.ios.ui.place;
 
-import com.google.common.collect.Maps;
-
-import org.nibiru.mobile.core.api.common.Identifiable;
-import org.nibiru.mobile.core.api.ui.mvp.Presenter;
-import org.nibiru.mobile.core.api.ui.mvp.PresenterMapper;
-import org.nibiru.mobile.core.api.ui.mvp.View;
-import org.nibiru.mobile.core.api.ui.place.Place;
-import org.nibiru.mobile.core.impl.common.BaseConfigurable;
-import org.nibiru.mobile.ios.ui.UINavigationControllerHelper;
-
-import java.util.Deque;
-import java.util.Map;
-
-import javax.annotation.Nullable;
-
 import apple.coregraphics.struct.CGPoint;
 import apple.coregraphics.struct.CGRect;
 import apple.coregraphics.struct.CGSize;
 import apple.uikit.UIView;
 import apple.uikit.UIViewController;
+import com.google.common.collect.Maps;
+import org.nibiru.mobile.core.api.common.Configurable;
+import org.nibiru.mobile.core.api.common.Identifiable;
+import org.nibiru.mobile.core.api.ui.mvp.Presenter;
+import org.nibiru.mobile.core.api.ui.mvp.PresenterMapper;
+import org.nibiru.mobile.core.api.ui.mvp.View;
+import org.nibiru.mobile.core.api.ui.place.Place;
+import org.nibiru.mobile.ios.ui.UINavigationControllerHelper;
+
+import javax.annotation.Nullable;
+import java.util.Deque;
+import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class UINavigationControllerPlace extends BaseConfigurable<Place>
-        implements Place, Identifiable<String> {
+public class UINavigationControllerPlace
+        implements Configurable<Place>, Place, Identifiable<String> {
     private final UINavigationControllerHelper navigationControllerHelper;
     private final PresenterMapper presenterMapper;
     private final Deque<Presenter<?>> presenterStack;

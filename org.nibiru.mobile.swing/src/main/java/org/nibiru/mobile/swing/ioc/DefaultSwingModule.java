@@ -1,28 +1,25 @@
 package org.nibiru.mobile.swing.ioc;
 
+import dagger.Module;
+import dagger.Provides;
 import org.nibiru.mobile.core.api.app.Bootstrap;
 import org.nibiru.mobile.core.api.event.EventBus;
 import org.nibiru.mobile.core.api.preferences.Preferences;
 import org.nibiru.mobile.core.api.ui.AlertManager;
 import org.nibiru.mobile.core.api.ui.DisplayInfo;
 import org.nibiru.mobile.core.api.ui.place.PlaceManager;
-import org.nibiru.mobile.swing.app.SwingBootstrap;
-import org.nibiru.mobile.swing.preferences.DummyPreferences;
-import org.nibiru.mobile.swing.ui.SwingDisplayInfo;
-import org.nibiru.mobile.swing.ui.SwingAlertManager;
-import org.nibiru.mobile.swing.ui.place.SwingPlaceManager;
 import org.nibiru.mobile.java.async.AsyncManager;
 import org.nibiru.mobile.java.async.ThreadAsyncManager;
 import org.nibiru.mobile.java.event.guava.GuavaEventBus;
-
-import java.awt.Dimension;
-import java.awt.Toolkit;
+import org.nibiru.mobile.java.preferences.JavaPreferences;
+import org.nibiru.mobile.swing.app.SwingBootstrap;
+import org.nibiru.mobile.swing.ui.SwingAlertManager;
+import org.nibiru.mobile.swing.ui.SwingDisplayInfo;
+import org.nibiru.mobile.swing.ui.place.SwingPlaceManager;
 
 import javax.inject.Singleton;
-import javax.swing.JFrame;
-
-import dagger.Module;
-import dagger.Provides;
+import javax.swing.*;
+import java.awt.*;
 
 
 @Module
@@ -56,7 +53,7 @@ public class DefaultSwingModule {
     }
 
     @Provides
-    public Preferences getPreferences(DummyPreferences preferences) {
+    public Preferences getPreferences(JavaPreferences preferences) {
         return preferences;
     }
 

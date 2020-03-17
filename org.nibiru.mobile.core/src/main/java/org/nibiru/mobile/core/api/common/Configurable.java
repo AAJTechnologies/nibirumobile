@@ -2,6 +2,8 @@ package org.nibiru.mobile.core.api.common;
 
 import javax.annotation.Nullable;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 /**
  * Anything that can be configured.
  *
@@ -22,7 +24,10 @@ public interface Configurable<C> {
      * @param key The parameter key
      * @return The parameter value
      */
-    <T> T getParameter(Enum<?> key);
+    default <T> T getParameter(Enum<?> key) {
+        checkNotNull(key);
+        return getParameter(key.toString());
+    }
 
     /**
      * Add/sets a parameter.
@@ -40,5 +45,8 @@ public interface Configurable<C> {
      * @param value The parameter value
      * @return The same configurable instance, for method chaining.
      */
-    C addParameter(Enum<?> key, @Nullable Object value);
+    default C addParameter(Enum<?> key, @Nullable Object value) {
+        checkNotNull(key);
+        return addParameter(key.toString(), value);
+    }
 }

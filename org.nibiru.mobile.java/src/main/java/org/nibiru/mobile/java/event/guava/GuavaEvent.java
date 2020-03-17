@@ -2,17 +2,15 @@ package org.nibiru.mobile.java.event.guava;
 
 import com.google.common.collect.Maps;
 import com.google.common.eventbus.EventBus;
-
+import org.nibiru.mobile.core.api.common.Configurable;
 import org.nibiru.mobile.core.api.event.Event;
-import org.nibiru.mobile.core.impl.common.BaseConfigurable;
-
-import java.util.Map;
 
 import javax.annotation.Nullable;
+import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-class GuavaEvent extends BaseConfigurable<Event> implements Event {
+class GuavaEvent implements Configurable<Event>, Event {
     private final String id;
     private final EventBus eventBus;
     private final Map<String, Object> parameters;

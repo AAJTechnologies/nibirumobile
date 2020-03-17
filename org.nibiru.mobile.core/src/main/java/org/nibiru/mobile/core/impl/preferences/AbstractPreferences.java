@@ -1,15 +1,14 @@
 package org.nibiru.mobile.core.impl.preferences;
 
+import org.nibiru.mobile.core.api.common.Configurable;
 import org.nibiru.mobile.core.api.preferences.Preferences;
-import org.nibiru.mobile.core.impl.common.BaseConfigurable;
-
-import java.util.Date;
 
 import javax.annotation.Nullable;
+import java.util.Date;
 
 
-public abstract class AbstractPreferences extends
-        BaseConfigurable<Preferences> implements Preferences {
+public abstract class AbstractPreferences
+        implements Configurable<Preferences>, Preferences {
 
     private enum Type {
         STRING {

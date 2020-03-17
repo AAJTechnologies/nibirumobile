@@ -2,8 +2,8 @@ package org.nibiru.mobile.android.common;
 
 import android.content.Intent;
 
+import org.nibiru.mobile.core.api.common.Configurable;
 import org.nibiru.mobile.core.api.common.Identifiable;
-import org.nibiru.mobile.core.impl.common.BaseConfigurable;
 
 import java.io.Serializable;
 
@@ -11,8 +11,8 @@ import javax.annotation.Nullable;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public abstract class BaseIntentAdapter<T> extends BaseConfigurable<T>
-        implements Identifiable<String> {
+public abstract class BaseIntentAdapter<T>
+        implements Configurable<T>, Identifiable<String> {
     public final static String PREFIX = "org.nibiru.mobile.";
     private final String ID_KEY = "nibiruId";
     private final Intent intent;

@@ -2,12 +2,12 @@ package org.nibiru.mobile.swing.ui.place;
 
 import com.google.common.collect.Maps;
 
+import org.nibiru.mobile.core.api.common.Configurable;
 import org.nibiru.mobile.core.api.common.Identifiable;
 import org.nibiru.mobile.core.api.ui.mvp.Presenter;
 import org.nibiru.mobile.core.api.ui.mvp.PresenterMapper;
 import org.nibiru.mobile.core.api.ui.mvp.View;
 import org.nibiru.mobile.core.api.ui.place.Place;
-import org.nibiru.mobile.core.impl.common.BaseConfigurable;
 
 import java.util.Deque;
 import java.util.Map;
@@ -18,8 +18,8 @@ import javax.swing.JFrame;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class SwingPlace extends BaseConfigurable<Place>
-        implements Place, Identifiable<String> {
+public class SwingPlace
+        implements Configurable<Place>, Place, Identifiable<String> {
     private final JFrame jFrame;
     private final PresenterMapper presenterMapper;
     private final Deque<Presenter<?>> presenterStack;
