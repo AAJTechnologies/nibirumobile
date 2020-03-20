@@ -10,7 +10,8 @@ import java.util.prefs.BackingStoreException;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class JavaPreferences extends AbstractPreferences {
+public class JavaPreferences
+        extends AbstractPreferences {
     private final java.util.prefs.Preferences javaPreferences;
 
     @Inject
@@ -26,7 +27,8 @@ public class JavaPreferences extends AbstractPreferences {
     }
 
     @Override
-    public Preferences addParameter(String key, @Nullable Object value) {
+    public Preferences addParameter(String key,
+                                    @Nullable Object value) {
         checkNotNull(key);
         try {
             javaPreferences.put(key, objectToString(value));

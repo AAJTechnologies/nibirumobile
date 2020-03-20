@@ -6,8 +6,6 @@ import apple.coregraphics.struct.CGSize;
 import apple.uikit.UIView;
 import apple.uikit.UIViewController;
 import com.google.common.collect.Maps;
-import org.nibiru.mobile.core.api.common.Configurable;
-import org.nibiru.mobile.core.api.common.Identifiable;
 import org.nibiru.mobile.core.api.ui.mvp.Presenter;
 import org.nibiru.mobile.core.api.ui.mvp.PresenterMapper;
 import org.nibiru.mobile.core.api.ui.mvp.View;
@@ -15,13 +13,14 @@ import org.nibiru.mobile.core.api.ui.place.Place;
 import org.nibiru.mobile.ios.ui.UINavigationControllerHelper;
 
 import javax.annotation.Nullable;
+import java.io.Serializable;
 import java.util.Deque;
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class UINavigationControllerPlace
-        implements Configurable<Place>, Place, Identifiable<String> {
+        implements Place {
     private final UINavigationControllerHelper navigationControllerHelper;
     private final PresenterMapper presenterMapper;
     private final Deque<Presenter<?>> presenterStack;
@@ -47,20 +46,22 @@ public class UINavigationControllerPlace
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T> T getParameter(String key) {
+    public <T extends Serializable> T getParameter(String key) {
         checkNotNull(key);
         return (T) parameters.get(key);
     }
 
     @Override
-    public Place addParameter(String key, @Nullable Object value) {
+    public Place addParameter(String key,
+                              @Nullable Serializable value) {
         checkNotNull(key);
         parameters.put(key, value);
         return this;
     }
 
     @Override
-    public void go(boolean push, boolean animated) {
+    public void go(boolean push,
+                   boolean animated) {
         Presenter<? extends View> presenter = presenterMapper.getPresenter(id);
         UIView view = (UIView) presenter.getView().asNative();
 
@@ -70,8 +71,9 @@ public class UINavigationControllerPlace
 
         UIViewController viewController = UIViewController.alloc().init();
 
-        view.setFrame(new CGRect(new CGPoint(0, 0), new CGSize(view.frame().size().width(),
-                view.frame().size().height())));
+        view.setFrame(new CGRect(new CGPoint(0, 0),
+                new CGSize(view.frame().size().width(),
+                        view.frame().size().height())));
         viewController.setView(view);
         if (!push) {
             navigationControllerHelper.reset();

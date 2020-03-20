@@ -12,7 +12,8 @@ import javax.annotation.Nullable;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public abstract class BaseIntentAdapter<T>
-        implements Configurable<T>, Identifiable<String> {
+        implements Configurable<T, Serializable>,
+        Identifiable<String> {
     public final static String PREFIX = "org.nibiru.mobile.";
     private final String ID_KEY = "nibiruId";
     private final Intent intent;
@@ -21,7 +22,8 @@ public abstract class BaseIntentAdapter<T>
         this.intent = checkNotNull(intent);
     }
 
-    public BaseIntentAdapter(String id, Intent intent) {
+    public BaseIntentAdapter(String id,
+                             Intent intent) {
         this(intent);
         this.intent.putExtra(ID_KEY, checkNotNull(id));
     }
@@ -33,14 +35,15 @@ public abstract class BaseIntentAdapter<T>
 
     @SuppressWarnings("unchecked")
     @Override
-    public <K> K getParameter(String key) {
+    public <K extends Serializable> K getParameter(String key) {
         checkNotNull(key);
         return (K) intent.getExtras().get(key);
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public T addParameter(String key, @Nullable Object value) {
+    public T addParameter(String key,
+                          @Nullable Serializable value) {
         checkNotNull(key);
         intent.putExtra(key, (Serializable) value);
         return (T) this;

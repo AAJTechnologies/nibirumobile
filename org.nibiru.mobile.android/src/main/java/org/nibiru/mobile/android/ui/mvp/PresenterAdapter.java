@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import org.nibiru.mobile.android.ui.place.IntentPlaceManager;
 import org.nibiru.mobile.core.api.ui.mvp.Presenter;
 import org.nibiru.mobile.core.api.ui.mvp.PresenterMapper;
 import org.nibiru.mobile.core.api.ui.place.Place;
@@ -15,9 +16,9 @@ import javax.inject.Inject;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * An adapter for delegating methdos from activities.
- * It allows composition whlie inheriting from
- * different activiy classes (app compat, for example)
+ * An adapter for delegating methods from activities.
+ * It allows composition while inheriting from
+ * different activity classes (app compat, for example)
  */
 public class PresenterAdapter {
     private final PresenterMapper presenterMapper;
@@ -61,7 +62,7 @@ public class PresenterAdapter {
 
     public void onCreateContextMenu(ContextMenu menu,
                                     View v,
-                             ContextMenu.ContextMenuInfo menuInfo) {
+                                    ContextMenu.ContextMenuInfo menuInfo) {
         androidView.onCreateContextMenu(menu, v, menuInfo);
     }
 
@@ -91,5 +92,9 @@ public class PresenterAdapter {
                                  int resultCode,
                                  Intent data) {
         androidView.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == IntentPlaceManager.NIBIRU_REQUEST_CODE
+                && resultCode == IntentPlaceManager.NIBIRU_RESULT_CODE) {
+            presenter.onResult(data.getSerializableExtra(IntentPlaceManager.NIBIRU_RESULT_KEY));
+        }
     }
 }

@@ -11,7 +11,8 @@ import javax.inject.Inject;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class SharedPreferencesImpl extends AbstractPreferences {
+public class SharedPreferencesImpl
+        extends AbstractPreferences {
     private final SharedPreferences sharedPreferences;
 
     @Inject
@@ -28,10 +29,12 @@ public class SharedPreferencesImpl extends AbstractPreferences {
     }
 
     @Override
-    public Preferences addParameter(String key, @Nullable Object value) {
+    public Preferences addParameter(String key,
+                                    @Nullable Object value) {
         checkNotNull(key);
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(key, objectToString(value));
+        editor.putString(key,
+                objectToString(value));
         editor.commit();
         return this;
     }

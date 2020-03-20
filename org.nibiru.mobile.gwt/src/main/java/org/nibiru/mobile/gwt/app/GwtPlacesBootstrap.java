@@ -44,7 +44,7 @@ public class GwtPlacesBootstrap implements Bootstrap {
                     placeHistoryMapper);
 
             historyHandler.register(placeController, eventBus,
-                    new SimplePlace(null, 0, placeController));
+                    SimplePlace.initial(placeController));
 
             RootPanel.get().add(appWidgetBootstrap.createAppWidget());
 

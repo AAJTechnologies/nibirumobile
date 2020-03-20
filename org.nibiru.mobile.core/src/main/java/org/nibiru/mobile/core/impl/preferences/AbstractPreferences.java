@@ -1,6 +1,5 @@
 package org.nibiru.mobile.core.impl.preferences;
 
-import org.nibiru.mobile.core.api.common.Configurable;
 import org.nibiru.mobile.core.api.preferences.Preferences;
 
 import javax.annotation.Nullable;
@@ -8,7 +7,7 @@ import java.util.Date;
 
 
 public abstract class AbstractPreferences
-        implements Configurable<Preferences>, Preferences {
+        implements Preferences {
 
     private enum Type {
         STRING {
@@ -134,7 +133,6 @@ public abstract class AbstractPreferences
             return object.toString();
         }
     }
-
 
     private static final char SEPARATOR = ':';
 

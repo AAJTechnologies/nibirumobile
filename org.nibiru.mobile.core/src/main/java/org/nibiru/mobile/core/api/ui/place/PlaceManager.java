@@ -1,5 +1,8 @@
 package org.nibiru.mobile.core.api.ui.place;
 
+import javax.annotation.Nonnull;
+import java.io.Serializable;
+
 /**
  * A manager for handling places.
  */
@@ -26,4 +29,9 @@ public interface PlaceManager {
 	 * Backs to previous place.
 	 */
 	void back();
+
+	/**
+	 * Backs to previous place, returning a result.
+	 */
+	void back(@Nonnull Serializable result);
 }

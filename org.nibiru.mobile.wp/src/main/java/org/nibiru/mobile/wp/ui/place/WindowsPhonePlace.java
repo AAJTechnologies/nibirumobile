@@ -1,20 +1,19 @@
 package org.nibiru.mobile.wp.ui.place;
 
 import com.google.common.collect.Maps;
-import org.nibiru.mobile.core.api.common.Configurable;
-import org.nibiru.mobile.core.api.common.Identifiable;
 import org.nibiru.mobile.core.api.ui.mvp.Presenter;
 import org.nibiru.mobile.core.api.ui.mvp.PresenterMapper;
 import org.nibiru.mobile.core.api.ui.place.Place;
 
 import javax.annotation.Nullable;
+import java.io.Serializable;
 import java.util.Deque;
 import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class WindowsPhonePlace
-        implements Configurable<Place>, Place, Identifiable<String> {
+        implements Place {
     private final String id;
     private final Map<String, Object> parameters;
     private final int order;
@@ -42,28 +41,17 @@ public class WindowsPhonePlace
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T> T getParameter(String key) {
+    public <T extends Serializable> T getParameter(String key) {
         checkNotNull(key);
         return (T) parameters.get(key);
     }
 
     @Override
-    public <T> T getParameter(Enum<?> key) {
-        checkNotNull(key);
-        return getParameter(key.toString());
-    }
-
-    @Override
-    public Place addParameter(String key, @Nullable Object value) {
+    public Place addParameter(String key,
+                              @Nullable Serializable value) {
         checkNotNull(key);
         parameters.put(key, value);
         return this;
-    }
-
-    @Override
-    public Place addParameter(Enum<?> key, @Nullable Object value) {
-        checkNotNull(key);
-        return addParameter(key.toString(), value);
     }
 
     @Override

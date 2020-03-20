@@ -23,7 +23,8 @@ public class CookiesPreferences extends AbstractPreferences {
     }
 
     @Override
-    public Preferences addParameter(String key, @Nullable Object value) {
+    public Preferences addParameter(String key,
+                                    @Nullable Object value) {
         checkNotNull(key);
         if (value != null) {
             long expirationTime = new Date().getTime() + 10l * 365l * 24l * 60l * 60l * 1000l;

@@ -9,6 +9,7 @@ import org.nibiru.mobile.core.api.ui.mvp.PresenterMapper;
 import org.nibiru.mobile.core.api.ui.mvp.View;
 import org.nibiru.mobile.core.api.ui.place.Place;
 
+import java.io.Serializable;
 import java.util.Deque;
 import java.util.Map;
 
@@ -19,7 +20,7 @@ import javax.swing.JFrame;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 public class SwingPlace
-        implements Configurable<Place>, Place, Identifiable<String> {
+        implements Place {
     private final JFrame jFrame;
     private final PresenterMapper presenterMapper;
     private final Deque<Presenter<?>> presenterStack;
@@ -44,25 +45,29 @@ public class SwingPlace
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T> T getParameter(String key) {
+    public <T extends Serializable> T getParameter(String key) {
         checkNotNull(key);
         return (T) parameters.get(key);
     }
 
     @Override
-    public Place addParameter(String key, @Nullable Object value) {
+    public Place addParameter(String key,
+                              @Nullable Serializable value) {
         checkNotNull(key);
         parameters.put(key, value);
         return this;
     }
 
     @Override
-    public void go(boolean push, boolean animated) {
+    public void go(boolean push,
+                   boolean animated) {
         Presenter<? extends View> presenter = presenterMapper.getPresenter(id);
-        JComponent view = (JComponent) presenter.getView().asNative();
+        JComponent view = (JComponent) presenter.getView()
+                .asNative();
 
         if (!presenterStack.isEmpty()) {
-            presenterStack.peek().onDeactivate();
+            presenterStack.peek()
+                    .onDeactivate();
         }
 
         if (!push) {

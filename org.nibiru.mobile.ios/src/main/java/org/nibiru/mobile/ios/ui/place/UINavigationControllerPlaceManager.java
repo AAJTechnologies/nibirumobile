@@ -8,16 +8,22 @@ import org.nibiru.mobile.core.api.ui.place.Place;
 import org.nibiru.mobile.core.api.ui.place.PlaceManager;
 import org.nibiru.mobile.ios.ui.UINavigationControllerHelper;
 
+import java.io.Serializable;
 import java.util.Deque;
 
+import javax.annotation.Nonnull;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class UINavigationControllerPlaceManager implements PlaceManager {
+@Singleton
+public class UINavigationControllerPlaceManager
+        implements PlaceManager {
     private final UINavigationControllerHelper navigationControllerHelper;
     private final PresenterMapper presenterMapper;
     private final Deque<Presenter<?>> presenterStack;
+    private Serializable result;
 
     @Inject
     public UINavigationControllerPlaceManager(UINavigationControllerHelper navigationControllerHelper,
@@ -46,7 +52,17 @@ public class UINavigationControllerPlaceManager implements PlaceManager {
         navigationControllerHelper.current()
                 .popViewControllerAnimated(true);
         if (!presenterStack.isEmpty()) {
-            presenterStack.peek().onActivate();
+            Presenter<?> parent = presenterStack.peek();
+            if (result != null) {
+                parent.onResult(result);
+            }
+            parent.onActivate();
         }
+    }
+
+    @Override
+    public void back(@Nonnull Serializable result) {
+        this.result = checkNotNull(result);
+        back();
     }
 }

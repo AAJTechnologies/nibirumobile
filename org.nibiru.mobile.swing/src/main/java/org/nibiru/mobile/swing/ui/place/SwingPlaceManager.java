@@ -8,17 +8,23 @@ import org.nibiru.mobile.core.api.ui.place.Place;
 import org.nibiru.mobile.core.api.ui.place.PlaceManager;
 
 import java.awt.Container;
+import java.io.Serializable;
 import java.util.Deque;
 
+import javax.annotation.Nonnull;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 import javax.swing.JFrame;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class SwingPlaceManager implements PlaceManager {
+@Singleton
+public class SwingPlaceManager
+        implements PlaceManager {
     private final JFrame jFrame;
     private final PresenterMapper presenterMapper;
     private final Deque<Presenter<?>> presenterStack;
+    private Serializable result;
 
     @Inject
     public SwingPlaceManager(JFrame jFrame,
@@ -44,13 +50,24 @@ public class SwingPlaceManager implements PlaceManager {
     @Override
     public void back() {
         presenterStack.pop().onDeactivate();
+        Serializable result = this.result;
+        this.result = null;
         if (presenterStack.isEmpty()) {
             jFrame.dispose();
         } else {
-            Presenter<?> presenter = presenterStack.peek();
-            jFrame.setContentPane((Container) presenter.getView().asNative());
+            Presenter<?> parent = presenterStack.peek();
+            jFrame.setContentPane((Container) parent.getView().asNative());
             jFrame.validate();
-            presenter.onActivate();
+            if (result != null) {
+                parent.onResult(result);
+            }
+            parent.onActivate();
         }
+    }
+
+    @Override
+    public void back(@Nonnull Serializable result) {
+        this.result = checkNotNull(result);
+        back();
     }
 }

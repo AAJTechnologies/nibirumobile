@@ -5,6 +5,7 @@ import org.nibiru.mobile.core.api.common.Configurable;
 /**
  * User preferences.
  */
-public interface Preferences extends Configurable<Preferences> {
+public interface Preferences
+        extends Configurable<Preferences, Object> {
 
 }

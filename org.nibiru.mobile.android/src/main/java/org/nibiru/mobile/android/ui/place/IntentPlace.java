@@ -3,14 +3,15 @@ package org.nibiru.mobile.android.ui.place;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
-
 import org.nibiru.mobile.android.common.BaseIntentAdapter;
 import org.nibiru.mobile.core.api.ui.place.Place;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 
-public class IntentPlace extends BaseIntentAdapter<Place> implements Place {
+public class IntentPlace
+        extends BaseIntentAdapter<Place>
+        implements Place {
     private final Activity activity;
     private final String category;
     private final String defaultCategory;
@@ -33,26 +34,31 @@ public class IntentPlace extends BaseIntentAdapter<Place> implements Place {
     }
 
     @Override
-    public void go(boolean push, boolean animated) {
-        checkState(activity != null, "This place was not instantied form place manager and it can't navigate.");
+    public void go(boolean push,
+                   boolean animated) {
+        checkState(activity != null,
+                "This place was not instantiated form place manager and it can't navigate.");
         Intent intent = getIntent();
         if (!animated) {
             intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         }
         try {
-            // Try with specific inten category
+            // Try with specific intent category
             intent.addCategory(category);
-            activity.startActivity(intent);
+            activity.startActivityForResult(intent,
+                    IntentPlaceManager.NIBIRU_REQUEST_CODE);
         } catch (ActivityNotFoundException e) {
             try {
                 // Try with default Nibiru category
                 intent.removeCategory(category);
                 intent.addCategory(defaultCategory);
-                activity.startActivity(intent);
+                activity.startActivityForResult(intent,
+                        IntentPlaceManager.NIBIRU_REQUEST_CODE);
             } catch (ActivityNotFoundException e1) {
-                // Try with no catecory
+                // Try with no category
                 intent.removeCategory(defaultCategory);
-                activity.startActivity(intent);
+                activity.startActivityForResult(intent,
+                        IntentPlaceManager.NIBIRU_REQUEST_CODE);
             }
         }
         if (!push) {

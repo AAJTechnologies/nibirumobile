@@ -3,10 +3,14 @@ package org.nibiru.mobile.core.api.ui.place;
 import org.nibiru.mobile.core.api.common.Configurable;
 import org.nibiru.mobile.core.api.common.Identifiable;
 
+import java.io.Serializable;
+
 /**
  * A place.
  */
-public interface Place extends Identifiable<String>, Configurable<Place> {
+public interface Place
+        extends Identifiable<String>,
+        Configurable<Place, Serializable> {
     /**
      * Navigates to a place (no push, animated).
      */

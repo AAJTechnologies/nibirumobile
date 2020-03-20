@@ -7,23 +7,39 @@ import com.google.gwt.place.shared.PlaceTokenizer;
 
 import org.nibiru.mobile.core.api.ui.place.Place;
 
+import java.io.Serializable;
 import java.util.Map;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class SimplePlace extends com.google.gwt.place.shared.Place implements
-        Place {
+public class SimplePlace
+        extends com.google.gwt.place.shared.Place
+        implements Place {
+
+    public static SimplePlace initial(@Nonnull  PlaceController placeController) {
+        checkNotNull(placeController);
+        return new SimplePlace(null, 0, placeController);
+    }
+
+    public static SimplePlace create(@Nonnull  String id,
+                                         int order,
+                                     @Nonnull PlaceController placeController) {
+        checkNotNull(id);
+        checkNotNull(placeController);
+        return new SimplePlace(id, order, placeController);
+    }
+
     private final String id;
     private final PlaceController placeController;
     private final Map<String, Object> parameters;
     private final int order;
 
-    //TODO: No esta bueno que el ID sea nullable, pero en
-    // org.nibiru.mobile.gwt.app.GwtPlacesBootstrap.onBootstrap()
-    // le estoy pasando null. Lo mismo para el place controller.
-    public SimplePlace(@Nullable String id, int order, @Nullable PlaceController placeController) {
+    private SimplePlace(String id,
+                       int order,
+                       PlaceController placeController) {
         this.id = id;
         this.placeController = placeController;
         this.parameters = Maps.newHashMap();
@@ -37,28 +53,17 @@ public class SimplePlace extends com.google.gwt.place.shared.Place implements
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T> T getParameter(String key) {
+    public <T extends Serializable> T getParameter(String key) {
         checkNotNull(key);
         return (T) parameters.get(key);
     }
 
     @Override
-    public <T> T getParameter(Enum<?> key) {
-        checkNotNull(key);
-        return getParameter(key.toString());
-    }
-
-    @Override
-    public Place addParameter(String key, @Nullable Object value) {
+    public Place addParameter(String key,
+                              @Nullable Serializable value) {
         checkNotNull(key);
         parameters.put(key, value);
         return this;
-    }
-
-    @Override
-    public Place addParameter(Enum<?> key, @Nullable Object value) {
-        checkNotNull(key);
-        return addParameter(key.toString(), value);
     }
 
     @Override
