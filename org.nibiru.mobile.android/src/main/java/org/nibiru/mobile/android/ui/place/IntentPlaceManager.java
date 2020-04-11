@@ -16,8 +16,8 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public class IntentPlaceManager
         implements PlaceManager {
-    public static final int NIBIRU_REQUEST_CODE = 10261985;
-    public static final int NIBIRU_RESULT_CODE = 10212015;
+    public static final int NIBIRU_REQUEST_CODE = 12685;
+    public static final int NIBIRU_RESULT_CODE = 12115;
     public static final String NIBIRU_RESULT_KEY = "NIBIRU_RESULT_KEY";
     private final Activity context;
     private final String appName;
