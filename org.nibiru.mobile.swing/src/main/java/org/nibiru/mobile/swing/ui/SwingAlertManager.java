@@ -38,7 +38,12 @@ public class SwingAlertManager implements AlertManager {
     }
 
     @Override
-    public void prompt(String title, String message, Consumer<String> callback) {
+    public void prompt(String title,
+                       String message,
+                       Consumer<String> callback) {
+        checkNotNull(title);
+        checkNotNull(message);
+        checkNotNull(callback);
         String result = (String) JOptionPane.showInputDialog(
                 null,
                 message,
@@ -51,7 +56,12 @@ public class SwingAlertManager implements AlertManager {
     }
 
     @Override
-    public void confirm(String title, String message, Consumer<Boolean> callback) {
+    public void confirm(String title,
+                        String message,
+                        Consumer<Boolean> callback) {
+        checkNotNull(title);
+        checkNotNull(message);
+        checkNotNull(callback);
         int result = JOptionPane.showConfirmDialog(
                 null,
                 message,
