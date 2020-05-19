@@ -1,9 +1,0 @@
-jar {
-	from sourceSets.main.java.srcDirs, file("${buildDir}/generated/sources/annotationProcessor/java/main")
-}
-
-dependencies {
-	compile project(":org.nibiru.mobile.gwt")
-	compile 'org.timepedia.exporter:gwtexporter:2.5.1'
-	compile "com.aajtech.gwtmobile:persistence:1.0-SNAPSHOT"
-}

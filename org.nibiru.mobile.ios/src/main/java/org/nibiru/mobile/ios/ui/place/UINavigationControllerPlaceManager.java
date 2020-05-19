@@ -1,19 +1,23 @@
 package org.nibiru.mobile.ios.ui.place;
 
+import apple.coregraphics.struct.CGPoint;
+import apple.coregraphics.struct.CGRect;
+import apple.coregraphics.struct.CGSize;
+import apple.uikit.UIView;
+import apple.uikit.UIViewController;
 import com.google.common.collect.Queues;
-
 import org.nibiru.mobile.core.api.ui.mvp.Presenter;
 import org.nibiru.mobile.core.api.ui.mvp.PresenterMapper;
+import org.nibiru.mobile.core.api.ui.mvp.View;
 import org.nibiru.mobile.core.api.ui.place.Place;
 import org.nibiru.mobile.core.api.ui.place.PlaceManager;
 import org.nibiru.mobile.ios.ui.UINavigationControllerHelper;
 
-import java.io.Serializable;
-import java.util.Deque;
-
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.io.Serializable;
+import java.util.Deque;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -34,16 +38,33 @@ public class UINavigationControllerPlaceManager
     }
 
     @Override
-    public Place createPlace(String id) {
-        return new UINavigationControllerPlace(navigationControllerHelper,
-                presenterMapper,
-                presenterStack,
-                id);
-    }
+    public void go(@Nonnull Place place,
+                   boolean push,
+                   boolean animated) {
+        checkNotNull(place);
+        Presenter<? extends View> presenter = presenterMapper.getPresenter(place.getId());
+        UIView view = (UIView) presenter.getView().asNative();
 
-    @Override
-    public Place createPlace(Enum<?> id) {
-        return createPlace(id.toString());
+        if (!presenterStack.isEmpty()) {
+            presenterStack.peek().onDeactivate();
+        }
+
+        UIViewController viewController = UIViewController.alloc().init();
+
+        view.setFrame(new CGRect(new CGPoint(0, 0),
+                new CGSize(view.frame().size().width(),
+                        view.frame().size().height())));
+        viewController.setView(view);
+        if (!push) {
+            navigationControllerHelper.reset();
+            presenterStack.clear();
+        }
+
+        navigationControllerHelper.current()
+                .pushViewControllerAnimated(viewController, true);
+        presenterStack.push(presenter);
+        presenter.go(place);
+        presenter.onActivate();
     }
 
     @Override

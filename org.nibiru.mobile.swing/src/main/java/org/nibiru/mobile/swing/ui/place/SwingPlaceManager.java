@@ -1,73 +1,42 @@
 package org.nibiru.mobile.swing.ui.place;
 
-import com.google.common.collect.Queues;
-
 import org.nibiru.mobile.core.api.ui.mvp.Presenter;
 import org.nibiru.mobile.core.api.ui.mvp.PresenterMapper;
-import org.nibiru.mobile.core.api.ui.place.Place;
-import org.nibiru.mobile.core.api.ui.place.PlaceManager;
-
-import java.awt.Container;
-import java.io.Serializable;
-import java.util.Deque;
+import org.nibiru.mobile.core.api.ui.place.BaseStackPlaceManager;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import javax.swing.JFrame;
+import javax.swing.*;
+import java.awt.*;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 @Singleton
 public class SwingPlaceManager
-        implements PlaceManager {
+        extends BaseStackPlaceManager<Container> {
     private final JFrame jFrame;
-    private final PresenterMapper presenterMapper;
-    private final Deque<Presenter<?>> presenterStack;
-    private Serializable result;
 
     @Inject
-    public SwingPlaceManager(JFrame jFrame,
-                             PresenterMapper presenterMapper) {
+    public SwingPlaceManager(@Nonnull PresenterMapper presenterMapper,
+                             @Nonnull JFrame jFrame) {
+        super(presenterMapper);
         this.jFrame = checkNotNull(jFrame);
-        this.presenterMapper = checkNotNull(presenterMapper);
-        presenterStack = Queues.newArrayDeque();
     }
 
     @Override
-    public Place createPlace(String id) {
-        return new SwingPlace(jFrame,
-                presenterMapper,
-                presenterStack,
-                id);
+    protected void close() {
+        jFrame.dispose();
     }
 
     @Override
-    public Place createPlace(Enum<?> id) {
-        return createPlace(id.toString());
+    protected void activateView(Container view) {
+        jFrame.setContentPane(view);
+        jFrame.validate();
     }
 
     @Override
-    public void back() {
-        presenterStack.pop().onDeactivate();
-        Serializable result = this.result;
-        this.result = null;
-        if (presenterStack.isEmpty()) {
-            jFrame.dispose();
-        } else {
-            Presenter<?> parent = presenterStack.peek();
-            jFrame.setContentPane((Container) parent.getView().asNative());
-            jFrame.validate();
-            if (result != null) {
-                parent.onResult(result);
-            }
-            parent.onActivate();
-        }
-    }
-
-    @Override
-    public void back(@Nonnull Serializable result) {
-        this.result = checkNotNull(result);
-        back();
+    protected Container getView(Presenter<?> presenter) {
+        return (Container) presenter.getView().asNative();
     }
 }

@@ -2,14 +2,12 @@ package org.nibiru.mobile.gwt.ui.place;
 
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.user.client.History;
-
 import org.nibiru.mobile.core.api.ui.place.Place;
 import org.nibiru.mobile.core.api.ui.place.PlaceManager;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
 import java.io.Serializable;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -35,9 +33,12 @@ public class GwtPlaceManager
     }
 
     @Override
-    public Place createPlace(Enum<?> id) {
-        checkNotNull(id);
-        return createPlace(id.toString());
+    public void go(@Nonnull Place place,
+                   boolean push,
+                   boolean animated) {
+        checkNotNull(place);
+        placeController.goTo((com.google.gwt.place.shared.Place) place);
+        // TODO: Result will not work
     }
 
     @Override

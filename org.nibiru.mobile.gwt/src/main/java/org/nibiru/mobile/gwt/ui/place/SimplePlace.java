@@ -4,14 +4,12 @@ import com.google.common.collect.Maps;
 import com.google.gwt.http.client.URL;
 import com.google.gwt.place.shared.PlaceController;
 import com.google.gwt.place.shared.PlaceTokenizer;
-
 import org.nibiru.mobile.core.api.ui.place.Place;
-
-import java.io.Serializable;
-import java.util.Map;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.io.Serializable;
+import java.util.Map;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -19,13 +17,13 @@ public class SimplePlace
         extends com.google.gwt.place.shared.Place
         implements Place {
 
-    public static SimplePlace initial(@Nonnull  PlaceController placeController) {
+    public static SimplePlace initial(@Nonnull PlaceController placeController) {
         checkNotNull(placeController);
         return new SimplePlace(null, 0, placeController);
     }
 
-    public static SimplePlace create(@Nonnull  String id,
-                                         int order,
+    public static SimplePlace create(@Nonnull String id,
+                                     int order,
                                      @Nonnull PlaceController placeController) {
         checkNotNull(id);
         checkNotNull(placeController);
@@ -38,8 +36,8 @@ public class SimplePlace
     private final int order;
 
     private SimplePlace(String id,
-                       int order,
-                       PlaceController placeController) {
+                        int order,
+                        PlaceController placeController) {
         this.id = id;
         this.placeController = placeController;
         this.parameters = Maps.newHashMap();

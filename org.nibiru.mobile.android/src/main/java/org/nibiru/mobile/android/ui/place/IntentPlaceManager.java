@@ -1,7 +1,6 @@
 package org.nibiru.mobile.android.ui.place;
 
 import android.app.Activity;
-
 import android.content.Intent;
 import org.nibiru.mobile.core.api.config.AppName;
 import org.nibiru.mobile.core.api.ui.place.Place;
@@ -9,7 +8,6 @@ import org.nibiru.mobile.core.api.ui.place.PlaceManager;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
-
 import java.io.Serializable;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -30,15 +28,19 @@ public class IntentPlaceManager
     }
 
     @Override
-    public Place createPlace(String id) {
+    public Place createPlace(@Nonnull String id) {
+        checkNotNull(id);
         return new IntentPlace(id,
                 context,
                 appName);
     }
 
     @Override
-    public Place createPlace(Enum<?> id) {
-        return createPlace(id.toString());
+    public void go(@Nonnull Place place,
+                   boolean push,
+                   boolean animated) {
+        checkNotNull(place);
+        place.go(push, animated);
     }
 
     @Override
