@@ -17,12 +17,15 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class FxPlaceManager
         extends BaseStackPlaceManager<Scene> {
     private final Stage primaryStage;
+    private final StyleSheetProvider styleSheetProvider;
 
     @Inject
     public FxPlaceManager(@Nonnull Stage primaryStage,
-                          @Nonnull PresenterMapper presenterMapper) {
+                          @Nonnull PresenterMapper presenterMapper,
+                          @Nonnull StyleSheetProvider styleSheetProvider) {
         super(presenterMapper);
         this.primaryStage = checkNotNull(primaryStage);
+        this.styleSheetProvider = checkNotNull(styleSheetProvider);
     }
 
     @Override
@@ -32,6 +35,8 @@ public class FxPlaceManager
 
     @Override
     protected void activateView(Scene view) {
+        view.getStylesheets()
+                .addAll(styleSheetProvider.get());
         primaryStage.setScene(view);
     }
 
