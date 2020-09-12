@@ -1,5 +1,6 @@
 package org.nibiru.mobile.core.api.common;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -16,7 +17,7 @@ public interface Configurable<C, V> {
      * @param key The parameter key
      * @return The parameter value
      */
-    <T extends V> T getParameter(String key);
+    <T extends V> T getParameter(@Nonnull String key);
 
     /**
      * Reads a parameter.
@@ -24,7 +25,7 @@ public interface Configurable<C, V> {
      * @param key The parameter key
      * @return The parameter value
      */
-    default <T extends V> T getParameter(Enum<?> key) {
+    default <T extends V> T getParameter(@Nonnull Enum<?> key) {
         checkNotNull(key);
         return getParameter(key.toString());
     }
@@ -36,7 +37,7 @@ public interface Configurable<C, V> {
      * @param value The parameter value
      * @return The same configurable instance, for method chaining.
      */
-    C addParameter(String key,
+    C addParameter(@Nonnull String key,
                    @Nullable V value);
 
     /**
@@ -46,7 +47,7 @@ public interface Configurable<C, V> {
      * @param value The parameter value
      * @return The same configurable instance, for method chaining.
      */
-    default C addParameter(Enum<?> key,
+    default C addParameter(@Nonnull Enum<?> key,
                            @Nullable V value) {
         checkNotNull(key);
         return addParameter(key.toString(), value);

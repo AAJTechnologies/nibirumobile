@@ -3,6 +3,7 @@ package org.nibiru.mobile.java.preferences;
 import org.nibiru.mobile.core.api.preferences.Preferences;
 import org.nibiru.mobile.core.impl.preferences.AbstractPreferences;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 
@@ -21,17 +22,21 @@ public class JavaPreferences
     }
 
     @Override
-    public <T> T getParameter(String key) {
+    public <T> T getParameter(@Nonnull String key) {
         checkNotNull(key);
         return stringToObject(javaPreferences.get(key, null));
     }
 
     @Override
-    public Preferences addParameter(String key,
+    public Preferences addParameter(@Nonnull String key,
                                     @Nullable Object value) {
         checkNotNull(key);
         try {
-            javaPreferences.put(key, objectToString(value));
+            if (value != null) {
+                javaPreferences.put(key, objectToString(value));
+            } else {
+                javaPreferences.remove(key);
+            }
             javaPreferences.flush();
             return this;
         } catch (BackingStoreException e) {
