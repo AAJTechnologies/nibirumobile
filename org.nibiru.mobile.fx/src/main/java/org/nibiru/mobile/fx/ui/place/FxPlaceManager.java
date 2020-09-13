@@ -1,5 +1,6 @@
 package org.nibiru.mobile.fx.ui.place;
 
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.nibiru.mobile.core.api.ui.mvp.Presenter;
@@ -15,9 +16,10 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 @Singleton
 public class FxPlaceManager
-        extends BaseStackPlaceManager<Scene> {
+        extends BaseStackPlaceManager<Parent> {
     private final Stage primaryStage;
     private final StyleSheetProvider styleSheetProvider;
+    private boolean first = true;
 
     @Inject
     public FxPlaceManager(@Nonnull Stage primaryStage,
@@ -34,15 +36,20 @@ public class FxPlaceManager
     }
 
     @Override
-    protected void activateView(Scene view) {
+    protected void activateView(Parent view) {
         view.getStylesheets()
                 .addAll(styleSheetProvider.get());
-        primaryStage.setScene(view);
+        if (first) {
+            first = false;
+            primaryStage.setScene(new Scene(view));
+        } else {
+            primaryStage.getScene().setRoot(view);
+        }
     }
 
     @Override
-    protected Scene getView(Presenter<?> presenter) {
+    protected Parent getView(Presenter<?> presenter) {
         FxView view = (FxView) presenter.getView();
-        return new Scene(view.asNative());
+        return view.asNative();
     }
 }
